@@ -25,6 +25,11 @@ func _ready() -> void:
 	populate_deck(player2.deck)
 	for i in player1.deck.deck:
 		print(i.quip)
+	
+	var testCard = Card.new()
+	add_child(testCard)
+	testCard.cardData = player1.deck.drawCard()
+	print(testCard.cardData.quip)
 
 func populate_deck(deck:Deck) -> void:
 	# Probably add a check for the amount of cards of each topic type

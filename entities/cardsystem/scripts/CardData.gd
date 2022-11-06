@@ -25,6 +25,7 @@ var status_effect: String = "Probably don't want this to be a string"
 #func loadJSON(cardJSON: String) -> bool:
 #	return false
 
+# Loads DB data into all the fields
 func loadDataFromDB(data: Dictionary) -> bool:
 	id = data["ID"]
 #	topic = data["Topic"]
