@@ -5,7 +5,7 @@ hand visible inherited class. basically the same thing as Hand except
 it shows the cards and animations.
 """
 
-const cardPath: String = "res://Card.tscn"
+const cardPath: String = "res://entities/cardsystem/Card.tscn"
 
 #instantiate a new Card as a child based on the cardData
 func addCard(newCardData: CardData) -> void:
