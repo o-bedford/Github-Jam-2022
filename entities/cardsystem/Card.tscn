@@ -3,7 +3,6 @@
 [ext_resource path="res://entities/cardsystem/scripts/Card.gd" type="Script" id=1]
 [ext_resource path="res://entities/cardsystem/CardData.tscn" type="PackedScene" id=2]
 
-
 [node name="Card" type="Node2D"]
 script = ExtResource( 1 )
 

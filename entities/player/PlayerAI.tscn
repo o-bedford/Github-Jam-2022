@@ -4,7 +4,6 @@
 [ext_resource path="res://entities/cardsystem/scripts/HandVisible.gd" type="Script" id=2]
 [ext_resource path="res://entities/cardsystem/scripts/Deck.gd" type="Script" id=3]
 
-
 [node name="PlayerAI" type="Node2D"]
 script = ExtResource( 1 )
 
