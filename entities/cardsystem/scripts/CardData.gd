@@ -25,7 +25,15 @@ var status_effect: String = "Probably don't want this to be a string"
 #func loadJSON(cardJSON: String) -> bool:
 #	return false
 
-# Loads DB data into all the fields
+func deepCopy(otherCardData: CardData) -> void:
+	id = otherCardData.id
+	topic = otherCardData.topic
+	SP = otherCardData.SP
+	quip = otherCardData.quip
+	description = otherCardData.description
+	actions = otherCardData.actions
+	status_effect = otherCardData.status_effect
+
 func loadDataFromDB(data: Dictionary) -> bool:
 	id = data["ID"]
 #	topic = data["Topic"]
