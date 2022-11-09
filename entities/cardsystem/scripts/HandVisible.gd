@@ -6,11 +6,14 @@ it shows the cards and animations.
 """
 
 onready var path: Path2D = $Path
-onready var curve: Curve2D = path.get_curve()
+#onready var curve: Curve2D = path.get_curve()
+var curve:Curve2D
 
 const cardPath: String = "res://entities/cardsystem/Card.tscn"
 
 func _ready() -> void:
+	print(path)
+	curve = path.get_curve()
 	#print(curve.get_baked_points())
 	pass
 

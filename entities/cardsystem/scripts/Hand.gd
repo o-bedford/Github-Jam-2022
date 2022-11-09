@@ -26,3 +26,5 @@ func activateCard(cardIndex: int) -> void:
 func disCard(cardIndex: int) -> void:
 	removeCard(cardIndex)
 
+func size() -> int:
+	return cardsInHand.size()
