@@ -29,7 +29,6 @@ func _ready():
 #call update() whenever something changes.
 func _draw():
 	if cardData:
-		print("draw")
 		spLabel.text = str(cardData.SP)
 		
 		topicIcon.texture = load("res://icon.png") #TODO add pictures lmao
