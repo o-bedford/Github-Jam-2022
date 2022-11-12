@@ -1,14 +1,24 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://entities/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://entities/cardsystem/scripts/HandVisible.gd" type="Script" id=2]
 [ext_resource path="res://entities/cardsystem/scripts/Deck.gd" type="Script" id=3]
+
+[sub_resource type="Curve2D" id=1]
+bake_interval = 20.0
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 944, 608, 19.9444, 152.907, -19.9444, -152.907, 728, 488, 14.6259, -113.018, -14.6259, 113.018, 232, 488, 0, 0, 0, 0, 80, 600 )
+}
 
 [node name="PlayerAI" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="HandVisible" type="Node2D" parent="."]
 script = ExtResource( 2 )
+
+[node name="Path" type="Path2D" parent="HandVisible"]
+position = Vector2( 0, -347 )
+curve = SubResource( 1 )
 
 [node name="Deck" type="Node2D" parent="."]
 script = ExtResource( 3 )

@@ -30,7 +30,7 @@ func _ready():
 func _draw():
 	if cardData:
 		spLabel.text = str(cardData.SP)
-		
+
 		topicIcon.texture = load("res://icon.png") #TODO add pictures lmao
 		
 		illustration.texture = load("res://icon.png") #TODO add pictures
