@@ -18,6 +18,9 @@ func _ready() -> void:
 func _process(delta):
 	current_phase.update_phase(delta)
 
+func _unhandled_input(event):
+	current_phase.handle_input(event)
+
 # Changes current phase to new phase.
 func transition_to(new_phase_name: String) -> void:
 	current_phase = get_node(new_phase_name)

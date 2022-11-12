@@ -35,10 +35,10 @@ func _ready() -> void:
 	print(phase_manager.current_phase)
 	
 	#testing card rendering on screen
-	var testCard = card.instance()
-	testCard.cardData = player1.deck.drawCard()
-	add_child(testCard)
-	print(testCard.cardData.quip)
+#	var testCard = card.instance()
+#	testCard.cardData = player1.deck.drawCard()
+#	add_child(testCard)
+#	print(testCard.cardData.quip)
 
 func populate_deck(deck:Deck) -> void:
 	# Probably add a check for the amount of cards of each topic type

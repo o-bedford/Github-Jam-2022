@@ -9,7 +9,7 @@ HandVisible inherited class.
 """
 
 var cardsInHand: Array = []
-var cardSelected: int = 0
+var cardSelected: int = -1
 
 #instantiate a new Card as a child based on the cardData
 func addCard(newCardData: CardData) -> void:

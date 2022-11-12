@@ -19,3 +19,6 @@ func enter() -> void:
 # Basically _process
 func update_phase(_delta: float) -> void:
 	pass
+
+func handle_input(_event: InputEvent) -> void:
+	pass

@@ -14,6 +14,12 @@ const cardPath: String = "res://entities/cardsystem/Card.tscn"
 func _ready() -> void:
 	pass
 
+func _process(delta):
+	if !cardsInstances.empty():
+		for card in cardsInstances:
+			if card.isSelected:
+				cardSelected = cardsInstances.find(card, 0)
+
 #instantiate a new Card as a child based on the cardData
 func addCard(newCardData: CardData) -> void:
 	.addCard(newCardData)
