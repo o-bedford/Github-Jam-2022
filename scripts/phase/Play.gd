@@ -3,7 +3,9 @@ extends Phase
 var player: Player
 
 func enter():
+	print("Play!")
 	player = phase_manager.current_focused_player
+	player.hand.enabled = true
 
 func update_phase(delta: float) -> void:
 	#Moves to next phase once card has been selected

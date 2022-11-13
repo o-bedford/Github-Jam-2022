@@ -6,6 +6,8 @@ it shows the cards and animations.
 """
 var cardsInstances: Array = []
 
+var enabled: bool = false
+
 onready var path: Path2D = $Path
 onready var curve: Curve2D = path.get_curve()
 
@@ -19,6 +21,8 @@ func _process(delta):
 		for card in cardsInstances:
 			if card.isSelected:
 				cardSelected = cardsInstances.find(card, 0)
+	for card in cardsInstances:
+		card.isSelectable = enabled
 
 #instantiate a new Card as a child based on the cardData
 func addCard(newCardData: CardData) -> void:

@@ -5,6 +5,8 @@ var player: Player
 
 func enter():
 	player = phase_manager.current_focused_player
+	player.hand.enabled = false
+	
 	var selectedCard = player.hand.cardSelected
 	card = player.hand.cardsInHand[selectedCard]
 	print("Resolve")
