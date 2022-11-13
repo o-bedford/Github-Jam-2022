@@ -21,6 +21,7 @@ onready var phase_manager = $PhaseManager
 #big boi
 func _ready() -> void:
 	cardDB.path = "res://db/cards"
+	randomize()
 	#initializes both decks. 
 	populate_deck(player1.deck)
 	populate_deck(player2.deck)
@@ -48,3 +49,4 @@ func populate_deck(deck:Deck) -> void:
 		var newCard = CardData.new()
 		newCard.loadDataFromDB(cardDB.query_result[i])
 		deck.deck.append(newCard)
+	deck.shuffleDeck()

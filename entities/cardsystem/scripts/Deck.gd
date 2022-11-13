@@ -11,7 +11,7 @@ var graveyard: Array = []
 
 #shuffle the deck
 func shuffleDeck() -> void:
-	pass
+	deck.shuffle()
 
 #shuffle the graveyard
 func shuffleGraveyard() -> void:

@@ -17,6 +17,7 @@ var quip: String = "Test Quip"
 
 var description: String = "Test Description. This is a long one."
 
+var actions_str: String
 var actions: Array = []
 
 var status_effect: String = "Probably don't want this to be a string"
@@ -41,8 +42,12 @@ func loadDataFromDB(data: Dictionary) -> bool:
 	quip = data["Blurb"] # Or dialogue. Not sure
 	if data["Dialogue"] != null:
 		description = data["Dialogue"]
+	# Splits the action string up into a usable action array
 	if data["Action"] != null:
-		actions = data["Action"]
+		actions_str = data["Action"]
+		actions = actions_str.split(",")
+		for i in actions.size():
+			actions[i] = actions[i].split(" ")
 	if data["Status"] != null:
 		status_effect = data["Status"]
 	
