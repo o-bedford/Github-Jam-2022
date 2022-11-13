@@ -40,7 +40,7 @@ func loadDataFromDB(data: Dictionary) -> bool:
 #	topic = data["Topic"]
 	SP = data["SP"]
 	quip = data["Blurb"] # Or dialogue. Not sure
-	if data["Dialogue"] != null:
+	if data["Description"] != null:
 		description = data["Description"]
 	# Splits the action string up into a usable action array
 	if data["Action"] != null:
