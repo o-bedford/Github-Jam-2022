@@ -14,32 +14,35 @@ const db_table = "Cards"
 
 var cardDB:SQLite = SQLite.new()
 
+var current_player: Player
+var current_topic: String
+var SP_meter: int = 0
+
 onready var player1: Player = $Player
 onready var player2: Player = $PlayerAI
 onready var phase_manager = $PhaseManager
+onready var resolve_phase = $PhaseManager/Resolve
 
 #big boi
 func _ready() -> void:
+	resolve_phase.connect("change_topic", self, "_change_topic")
+	resolve_phase.connect("add_SP", self, "_add_SP")
+	
 	cardDB.path = "res://db/cards"
 	randomize()
 	#initializes both decks. 
 	populate_deck(player1.deck)
 	populate_deck(player2.deck)
 	
-	#testing stuff
-	for i in player1.deck.deck:
-		print(i.quip)
-	
 	#Testing phase manager. it works!
 	phase_manager.current_focused_player = player1
 	phase_manager.transition_to("Draw")
 	print(phase_manager.current_phase)
-	
-	#testing card rendering on screen
-#	var testCard = card.instance()
-#	testCard.cardData = player1.deck.drawCard()
-#	add_child(testCard)
-#	print(testCard.cardData.quip)
+
+func _process(delta) -> void:
+	if phase_manager.current_phase.name == "Resolve":
+		print("SP: " + str(SP_meter) + " | Current Player: " + phase_manager.current_focused_player.name + " | Topic: " + current_topic)
+#	pass
 
 func populate_deck(deck:Deck) -> void:
 	# Probably add a check for the amount of cards of each topic type
@@ -50,3 +53,9 @@ func populate_deck(deck:Deck) -> void:
 		newCard.loadDataFromDB(cardDB.query_result[i])
 		deck.deck.append(newCard)
 	deck.shuffleDeck()
+
+func _change_topic(topic: String) -> void:
+	current_topic = topic
+
+func _add_SP(amount: int) -> void:
+	SP_meter += amount

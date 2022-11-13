@@ -12,6 +12,6 @@ func update_phase(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		player.hand.addCard(player.deck.drawCard())
 		print(str(player.hand.cardsInHand[player.hand.size()-1]))
-	if player.hand.size() > 1:
+	if player.hand.size() > player.max_hand_size-1:
 		print("hell yea")
 		phase_manager.transition_to("Play")
