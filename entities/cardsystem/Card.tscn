@@ -72,6 +72,13 @@ align = 1
 valign = 1
 autowrap = true
 
-[connection signal="gui_input" from="Background" to="." method="_on_Background_gui_input"]
-[connection signal="mouse_entered" from="Background" to="." method="_on_Background_mouse_entered"]
-[connection signal="mouse_exited" from="Background" to="." method="_on_Background_mouse_exited"]
+[node name="SelectBox" type="ColorRect" parent="."]
+margin_left = -80.0
+margin_top = -200.0
+margin_right = 80.0
+margin_bottom = 300.0
+color = Color( 0.52549, 0.0627451, 0.0627451, 0 )
+
+[connection signal="gui_input" from="SelectBox" to="." method="_on_SelectBox_gui_input"]
+[connection signal="mouse_entered" from="SelectBox" to="." method="_on_SelectBox_mouse_entered"]
+[connection signal="mouse_exited" from="SelectBox" to="." method="_on_SelectBox_mouse_exited"]
