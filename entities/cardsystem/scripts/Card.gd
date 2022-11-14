@@ -12,6 +12,7 @@ signal card_unhovered(index)
 
 var cardData: CardData = null
 var isSelected: bool = false
+var isSelectable: bool = false
 
 onready var spLabel: Label = $Background/VBoxContainer/HBoxContainer/SPLabel
 onready var topicIcon: TextureRect = $Background/VBoxContainer/HBoxContainer/TopicIcon
@@ -45,20 +46,23 @@ func _draw():
 
 #used for emitting signals, when the mouse hovers over the card
 func _on_SelectBox_mouse_entered() -> void:
-	if !isSelected:
-		modulate = Color(1,1,1,0.5)
-	emit_signal("card_hovered")
-	z_index = 1
+	if isSelectable:
+		if !isSelected:
+			modulate = Color(1,1,1,0.5)
+		emit_signal("card_hovered")
+		z_index = 1
 
 #used for emitting signals, when the mouse stops hovering over the card
 func _on_SelectBox_mouse_exited() -> void:
-	if !isSelected:
-		modulate = Color(1,1,1,1)
-	emit_signal("card_unhovered")
-	z_index = 0
+	if isSelectable:
+		if !isSelected:
+			modulate = Color(1,1,1,1)
+		emit_signal("card_unhovered")
+		z_index = 0
 
 #used for emitting signals, tell the game to resolve the card actions
 func _on_SelectBox_gui_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("select"):
-		isSelected = true
-		modulate = Color(0.6,0.6,1,0.8)
+	if isSelectable:
+		if Input.is_action_just_pressed("select"):
+			isSelected = true
+			modulate = Color(0.6,0.6,1,0.8)

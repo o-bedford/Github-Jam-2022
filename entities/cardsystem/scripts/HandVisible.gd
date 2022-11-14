@@ -6,6 +6,7 @@ it shows the cards and animations.
 """
 var cardsInstances: Array = []
 
+var enabled: bool = false
 var cardHoveredIndex: int = -1
 var bufferCard: int = 2 #how many invisible cards the hovered card will have around it
 onready var path: Path2D = $Path
@@ -20,6 +21,7 @@ func _ready() -> void:
 func _process(delta):
 	if !cardsInstances.empty():
 		for card in cardsInstances:
+			card.isSelectable = enabled
 			if card.isSelected:
 				cardSelected = cardsInstances.find(card, 0)
 
