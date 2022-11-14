@@ -9,7 +9,7 @@ var cardDB:SQLite = SQLite.new()
 func _ready() -> void:
 	cardDB.path = "res://db/cards"
 	#initializes both decks. 
-	#add_card()
+	add_card()
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_left"):
@@ -22,10 +22,10 @@ func add_card() -> void:
 	for i in range(0, cardDB.query_result.size()):
 		var newCard = CardData.new()
 		newCard.loadDataFromDB(cardDB.query_result[i])
-		yield(get_tree().create_timer(1.0), "timeout")
+		yield(get_tree().create_timer(0.2), "timeout")
 		hand.addCard(newCard)
 	for i in range(0, cardDB.query_result.size()-1):
 		var newCard = CardData.new()
 		newCard.loadDataFromDB(cardDB.query_result[i])
-		yield(get_tree().create_timer(1.0), "timeout")
+		yield(get_tree().create_timer(0.2), "timeout")
 		hand.addCard(newCard)
