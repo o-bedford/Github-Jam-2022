@@ -57,6 +57,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Github-jam"
+run/main_scene="res://Examples/testHandVisible.tscn"
 config/icon="res://icon.png"
 
 [autoload]

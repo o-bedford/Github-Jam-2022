@@ -7,6 +7,9 @@ This Card class will be used when we want to show a card on screen.
 THIS IS NOT the class that will store the data. Refer to the CardData class instead.
 """
 
+signal card_hovered(index)
+signal card_unhovered(index)
+
 var cardData: CardData = null
 var isSelected: bool = false
 
@@ -41,17 +44,21 @@ func _draw():
 		descriptionLabel.text = cardData.description
 
 #used for emitting signals, when the mouse hovers over the card
-func _on_Background_mouse_entered() -> void:
+func _on_SelectBox_mouse_entered() -> void:
 	if !isSelected:
 		modulate = Color(1,1,1,0.5)
+	emit_signal("card_hovered")
+	z_index = 1
 
 #used for emitting signals, when the mouse stops hovering over the card
-func _on_Background_mouse_exited() -> void:
+func _on_SelectBox_mouse_exited() -> void:
 	if !isSelected:
 		modulate = Color(1,1,1,1)
+	emit_signal("card_unhovered")
+	z_index = 0
 
 #used for emitting signals, tell the game to resolve the card actions
-func _on_Background_gui_input(event: InputEvent) -> void:
+func _on_SelectBox_gui_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("select"):
 		isSelected = true
 		modulate = Color(0.6,0.6,1,0.8)

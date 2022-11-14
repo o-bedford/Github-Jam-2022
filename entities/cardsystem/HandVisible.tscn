@@ -5,12 +5,15 @@
 [sub_resource type="Curve2D" id=1]
 bake_interval = 50.0
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, -72, 96, -55.1088, 39.5614, 55.1088, -39.5614, 40, -24, 0, 0, 0, 0, 216, -64, -74.2125, -45.6233, 74.2125, 45.6233, 408, -24, 0, 0, 0, 0, 536, 112 )
+"points": PoolVector2Array( 0, 0, 0, 0, -152, 32, -41.6057, 19.1211, 41.6057, -19.1211, -24, -32, -91.6943, -1.99335, 91.6943, 1.99335, 168, -80, -50.9163, -19.6516, 50.9163, 19.6516, 360, -32, 0, 0, 0, 0, 488, 32 )
 }
 
 [node name="HandVisible" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="Path" type="Path2D" parent="."]
-position = Vector2( 264, 584 )
+position = Vector2( 280, 736 )
 curve = SubResource( 1 )
+
+[node name="CardHoverHeight" type="Position2D" parent="."]
+position = Vector2( 288, 536 )
