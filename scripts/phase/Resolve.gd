@@ -9,7 +9,8 @@ var player: Player
 func enter():
 	print("Resolve")
 	player = phase_manager.current_focused_player
-	player.hand.enabled = false
+	if player.name == "Player":
+		player.hand.enabled = false
 	
 	var selectedCard = player.hand.cardSelected
 	card = player.hand.cardsInHand[selectedCard]
@@ -24,6 +25,11 @@ func enter():
 					if card.topic == action[1]:
 						card.SP += action[2]
 #			if action[0] == "swap":
+	
+	player.hand.disCard(player.hand.cardSelected)
+	player.hand.cardSelected = -1
+	
+	phase_manager.transition_to("End")
 
 func update_phase(delta: float) -> void:
 	pass

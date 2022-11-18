@@ -4,7 +4,8 @@ var player: Player
 
 func enter() -> void:
 	player = phase_manager.current_focused_player
-	player.hand.enabled = false
+	if player.name == "Player":
+		player.hand.enabled = false
 	print("Draw ur cards!")
 
 func update_phase(delta: float) -> void:
