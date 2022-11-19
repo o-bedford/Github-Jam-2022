@@ -17,3 +17,11 @@ curve = SubResource( 1 )
 
 [node name="CardHoverHeight" type="Position2D" parent="."]
 position = Vector2( 288, 536 )
+
+[node name="CardActivate" type="Position2D" parent="."]
+position = Vector2( 456, 296 )
+
+[node name="DeckPosition" type="Position2D" parent="."]
+position = Vector2( 992, 440 )
+
+[node name="GraveyardPosition" type="Position2D" parent="."]

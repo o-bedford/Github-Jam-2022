@@ -12,9 +12,9 @@ func enter():
 	if player.name == "Player":
 		player.hand.enabled = false
 	
-	var selectedCard = player.hand.cardSelected
-	card = player.hand.cardsInHand[selectedCard]
+	card = player.hand.activateCard()
 	emit_signal("add_SP", card.SP)
+	
 #	print(card.actions)
 	if !card.actions.empty():
 		for action in card.actions:
@@ -25,9 +25,6 @@ func enter():
 					if card.topic == action[1]:
 						card.SP += action[2]
 #			if action[0] == "swap":
-	
-	player.hand.disCard(player.hand.cardSelected)
-	player.hand.cardSelected = -1
 	
 	phase_manager.transition_to("End")
 

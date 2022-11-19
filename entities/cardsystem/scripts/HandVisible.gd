@@ -12,6 +12,9 @@ var bufferCard: int = 2 #how many invisible cards the hovered card will have aro
 onready var path: Path2D = $Path
 onready var curve: Curve2D = path.get_curve()
 onready var cardHoverHeight: float = $CardHoverHeight.position.y
+onready var cardActivatePos: Vector2 = $CardActivate.position
+onready var deckPos: Vector2 = $DeckPosition.position
+onready var graveyardPos: Vector2 = $GraveyardPosition.position
 
 const cardPath: String = "res://entities/cardsystem/Card.tscn"
 
@@ -33,7 +36,7 @@ func addCard(newCardData: CardData) -> void:
 	var newCard = newCardPackedScene.instance()
 	newCard.cardData = newCardData
 	
-	newCard.position = Vector2.ZERO
+	newCard.position = deckPos
 	
 	newCard.connect("card_hovered", self, "_onCardHovered", [cardsInHand.size()-1])
 	newCard.connect("card_unhovered", self, "_onCardUnhovered", [cardsInHand.size()-1])
@@ -71,7 +74,6 @@ func _getCardRotation(index: int, relative: int = 0) -> float:
 	var pointRatio = _getPointRatio(index, relative)
 	var point1 = curve.interpolate(pointRatio[0], pointRatio[1])
 	var point2 = curve.interpolate(pointRatio[0], pointRatio[1]+0.001)
-	print(point2-point1)
 	return (point2-point1).angle()/2
 
 func _getCardPosition(index: int, relative: int = 0) -> Vector2:
@@ -110,14 +112,31 @@ func _draw() ->void:
 			0.2)
 
 #plays the activation animation based on the card selected
-func activateCard(cardIndex: int) -> void:
-	#TODO card animation
-	removeCard(cardIndex)
+func activateCard() -> CardData:
+	_cardActivationAnimation(cardsInstances[cardSelected])
+	return .activateCard()
+
+func _cardActivationAnimation(cardInstance: Card) -> void:
+	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT)
+	
+	tween.tween_property(cardInstance, "position", cardActivatePos, 0.2)
+	tween.tween_property(cardInstance, "position", cardActivatePos, 1.3)
+	yield(tween, "finished")
+	_cardDiscardAnimation(cardInstance)
+
+func _cardDiscardAnimation(cardInstance: Card) -> void:
+	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT)
+	
+	tween.tween_property(cardInstance, "position", graveyardPos, 0.2)
+	yield(tween, "finished")
+	cardInstance.queue_free()
 
 #plays the discard animation based on the card selected
-func disCard(cardIndex: int) -> void:
-	#TODO card animation
-	removeCard(cardIndex)
+func disCard(cardIndex: int) -> CardData:
+	update()
+	cardsInstances.pop_at(cardIndex)
+	return .disCard(cardIndex)
+	
 
 #do whatever animation you need to do if a card is selected
 func cardSelected(card: Card) -> void:

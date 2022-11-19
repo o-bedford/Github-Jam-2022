@@ -15,16 +15,20 @@ var cardSelected: int = -1
 func addCard(newCardData: CardData) -> void:
 	cardsInHand.push_back(newCardData)
 
-func removeCard(cardIndex: int) -> void:
-	cardsInHand.pop_at(cardIndex)
+func removeCard(cardIndex: int) -> CardData:
+	return cardsInHand.pop_at(cardIndex)
 
 #plays the activation animation based on the card selected
-func activateCard(cardIndex: int) -> void:
-	removeCard(cardIndex)
+func activateCard() -> CardData:
+	print("activateCard Hand")
+	var cardDiscarded = disCard(cardSelected)
+	cardSelected = -1
+	print(cardDiscarded)
+	return cardDiscarded
 
 #plays the discard animation based on the card selected
-func disCard(cardIndex: int) -> void:
-	removeCard(cardIndex)
+func disCard(cardIndex: int) -> CardData:
+	return removeCard(cardIndex)
 
 func size() -> int:
 	return cardsInHand.size()

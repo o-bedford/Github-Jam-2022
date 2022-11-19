@@ -23,5 +23,14 @@ curve = SubResource( 1 )
 [node name="CardHoverHeight" type="Position2D" parent="Hand"]
 position = Vector2( 288, 536 )
 
+[node name="CardActivate" type="Position2D" parent="Hand"]
+position = Vector2( 463, 492 )
+
+[node name="DeckPosition" type="Position2D" parent="Hand"]
+position = Vector2( 992, 440 )
+
+[node name="GraveyardPosition" type="Position2D" parent="Hand"]
+
 [node name="Deck" type="Node2D" parent="."]
+position = Vector2( -124, 399 )
 script = ExtResource( 3 )
