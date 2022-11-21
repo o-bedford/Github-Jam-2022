@@ -30,6 +30,8 @@ func _ready() -> void:
 	
 	cardDB.path = "res://db/cards"
 	randomize()
+	
+	_change_topic("Any")
 	#initializes both decks. 
 	populate_deck(player1.deck)
 	populate_deck(player2.deck)
@@ -55,9 +57,10 @@ func populate_deck(deck:Deck) -> void:
 	deck.shuffleDeck()
 
 func _change_topic(topic: String) -> void:
-	current_topic = topic
-	player1.current_hand_topic = topic
-	player2.current_hand_topic = topic
+	current_topic = topic.to_lower()
+	player1.current_hand_topic = topic.to_lower()
+	player2.current_hand_topic = topic.to_lower()
+	print("Current topic: " + topic)
 
 func _add_SP(amount: int) -> void:
 	SP_meter += amount

@@ -22,6 +22,7 @@ var actions_str: String
 var actions: Array = []
 
 var status_effect: String = "Probably don't want this to be a string"
+var weight: float = 0.0
 
 ##Loads a JSON into all the fields
 #func loadJSON(cardJSON: String) -> bool:
@@ -41,6 +42,7 @@ func loadDataFromDB(data: Dictionary) -> bool:
 #	topic = data["Topic"]
 	SP = data["SP"]
 	quip = data["Blurb"] # Or dialogue. Not sure
+	topic = data["Topic"]
 	if data["Description"] != null:
 		description = data["Description"]
 	# Splits the action string up into a usable action array
