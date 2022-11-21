@@ -28,7 +28,7 @@ func ai_play() -> void:
 	var cards_in_topic: Array = []
 	for card in player.hand.cardsInHand:
 		print(card.topic + " " + player.current_hand_topic)
-		if player.current_hand_topic in card.topic.to_lower() || player.current_hand_topic == "Any":
+		if player.current_hand_topic in card.topic.to_lower() || player.current_hand_topic == "any":
 			cards_in_topic.append(card)
 #			print(card.quip)
 	
