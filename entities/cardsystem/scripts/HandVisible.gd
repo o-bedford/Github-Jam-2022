@@ -6,7 +6,9 @@ it shows the cards and animations.
 """
 var cardsInstances: Array = []
 
-var enabled: bool = false
+var cardInstanceSelected: Card
+
+var enabled: bool = true
 var cardHoveredIndex: int = -1
 var bufferCard: int = 2 #how many invisible cards the hovered card will have around it
 onready var path: Path2D = $Path
@@ -21,12 +23,20 @@ const cardPath: String = "res://entities/cardsystem/Card.tscn"
 func _ready() -> void:
 	pass
 
-func _process(delta):
-	if !cardsInstances.empty():
-		for card in cardsInstances:
-			card.isSelectable = enabled
-			if card.isSelected:
-				cardSelected = cardsInstances.find(card, 0)
+func changeState(SP: int, topic: String) -> void:
+	for i in range(cardsInHand.size()):
+#		if cardsInHand[i].topic != topic:
+#			cardsInstances[i].isSelectable = false
+#			cardsInstances[i].set_modulate(Color(0.5,0.5,0.5,1))
+#		else:
+#			cardsInstances[i].isSelectable = true
+#			cardsInstances[i].set_modulate(Color(1,1,1,1))
+		if topic == "" and i!=cardSelected:
+			cardsInstances[i].isSelectable = false
+			cardsInstances[i].set_modulate(Color(0.5,0.5,0.5,1))
+		else:
+			cardsInstances[i].isSelectable = true
+			cardsInstances[i].set_modulate(Color(1,1,1,1))
 
 #instantiate a new Card as a child based on the cardData
 func addCard(newCardData: CardData) -> void:
@@ -38,23 +48,30 @@ func addCard(newCardData: CardData) -> void:
 	
 	newCard.position = deckPos
 	
-	newCard.connect("card_hovered", self, "_onCardHovered", [cardsInHand.size()-1])
-	newCard.connect("card_unhovered", self, "_onCardUnhovered", [cardsInHand.size()-1])
+	newCard.connect("card_hovered", self, "_onCardHovered", [newCard])
+	newCard.connect("card_unhovered", self, "_onCardUnhovered", [newCard])
+	newCard.connect("card_selected", self, "_onCardSelected", [newCard])
 	
 	.call_deferred("add_child", newCard)
 	cardsInstances.append(newCard)
 	
 	update()
 
-func _onCardHovered(index: int) -> void:
-	cardHoveredIndex = index
+func _onCardHovered(cardNum: Card) -> void:
+	cardHoveredIndex = cardsInstances.find(cardNum, 0)
 	update()
 	pass
 
-func _onCardUnhovered(index: int) -> void:
+func _onCardUnhovered(cardNum: Card) -> void:
 	cardHoveredIndex = -1
 	update()
 	pass
+
+
+func _onCardSelected(cardNum: Card) -> void:
+	cardSelected = cardsInstances.find(cardNum, 0)
+	cardInstanceSelected = cardNum
+
 
 func _getPointRatio(index:int, relative: int = 0) -> Array:
 	var point_count = curve.get_point_count()-1
@@ -87,6 +104,10 @@ func _getCardPosition(index: int, relative: int = 0) -> Vector2:
 
 #places all the cards in the right place.
 func _draw() ->void:
+	
+	#for i in range(cardsInHand.size()):
+	#	print(cardsInstances[i].quipLabel.text, cardsInHand[i].quip)
+	
 	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_parallel(true)
 
 	for i in range(cardsInHand.size()):
@@ -113,7 +134,7 @@ func _draw() ->void:
 
 #plays the activation animation based on the card selected
 func activateCard() -> CardData:
-	_cardActivationAnimation(cardsInstances[cardSelected])
+	_cardActivationAnimation(cardInstanceSelected)
 	return .activateCard()
 
 func _cardActivationAnimation(cardInstance: Card) -> void:

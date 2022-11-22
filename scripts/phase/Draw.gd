@@ -6,7 +6,7 @@ var is_human: bool = false
 func enter() -> void:
 	player = phase_manager.current_focused_player
 	if player.name == "Player":
-		player.hand.enabled = false
+		player.hand.changeState(0, "")
 		is_human = true
 	else:
 		is_human = false

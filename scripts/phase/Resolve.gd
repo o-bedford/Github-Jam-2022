@@ -10,7 +10,7 @@ func enter():
 	print("Resolve")
 	player = phase_manager.current_focused_player
 	if player.name == "Player":
-		player.hand.enabled = false
+		player.hand.changeState(0, "")
 	
 	card = player.hand.activateCard()
 	emit_signal("add_SP", card.SP)

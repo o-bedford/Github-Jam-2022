@@ -20,7 +20,6 @@ func removeCard(cardIndex: int) -> CardData:
 
 #plays the activation animation based on the card selected
 func activateCard() -> CardData:
-	print("activateCard Hand")
 	var cardDiscarded = disCard(cardSelected)
 	cardSelected = -1
 	print(cardDiscarded)

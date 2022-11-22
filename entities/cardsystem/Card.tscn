@@ -3,6 +3,7 @@
 [ext_resource path="res://entities/cardsystem/scripts/Card.gd" type="Script" id=1]
 
 [node name="Card" type="Node2D"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
