@@ -9,6 +9,7 @@ THIS IS NOT the class that will store the data. Refer to the CardData class inst
 
 signal card_hovered(index)
 signal card_unhovered(index)
+signal card_selected(index)
 
 var cardData: CardData = null
 var isSelected: bool = false
@@ -46,17 +47,13 @@ func _draw():
 
 #used for emitting signals, when the mouse hovers over the card
 func _on_SelectBox_mouse_entered() -> void:
-	if isSelectable:
-		if !isSelected:
-			modulate = Color(1,1,1,0.5)
+	if !isSelected:
 		emit_signal("card_hovered")
 		z_index = 1
 
 #used for emitting signals, when the mouse stops hovering over the card
 func _on_SelectBox_mouse_exited() -> void:
-	if isSelectable:
-		if !isSelected:
-			modulate = Color(1,1,1,1)
+	if !isSelected:
 		emit_signal("card_unhovered")
 		z_index = 0
 
@@ -65,4 +62,4 @@ func _on_SelectBox_gui_input(event: InputEvent) -> void:
 	if isSelectable:
 		if Input.is_action_just_pressed("select"):
 			isSelected = true
-			modulate = Color(0.6,0.6,1,0.8)
+			emit_signal("card_selected")

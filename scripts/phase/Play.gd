@@ -6,8 +6,9 @@ var is_human: bool
 func enter():
 	print("Play!")
 	player = phase_manager.current_focused_player
+	player.hand.changeState(phase_manager.whitelist)
+	
 	if player.name == "Player":
-		player.hand.enabled = true
 		is_human = true
 	else:
 		is_human = false
@@ -16,9 +17,8 @@ func update_phase(delta: float) -> void:
 	#Moves to next phase once card has been selected
 	#print(player.hand.cardSelected)
 	if is_human:
-		for card in player.hand.cardsInstances:
-			if card.isSelected:
-				phase_manager.transition_to("Resolve")
+		if player.hand.cardSelected != -1:
+			phase_manager.transition_to("Resolve")
 	else:
 		ai_play()
 		phase_manager.transition_to("Resolve")

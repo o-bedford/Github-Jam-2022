@@ -11,6 +11,9 @@ HandVisible inherited class.
 var cardsInHand: Array = []
 var cardSelected: int = -1
 
+func changeState(whitelist: CardWhitelist) -> void:
+	pass
+
 #instantiate a new Card as a child based on the cardData
 func addCard(newCardData: CardData) -> void:
 	cardsInHand.push_back(newCardData)
@@ -20,7 +23,6 @@ func removeCard(cardIndex: int) -> CardData:
 
 #plays the activation animation based on the card selected
 func activateCard() -> CardData:
-	print("activateCard Hand")
 	var cardDiscarded = disCard(cardSelected)
 	cardSelected = -1
 	print(cardDiscarded)
