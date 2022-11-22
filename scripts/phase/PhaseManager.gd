@@ -11,7 +11,14 @@ Some kind of phase manager, would keep the code simpler
 onready var current_phase: Phase = null
 onready var current_focused_player: Player = get_parent().get_node("Player")
 
+var whitelist: CardWhitelist
+var blacklist: CardWhitelist
+
 func _ready() -> void:
+	whitelist = CardWhitelist.new()
+	blacklist = CardWhitelist.new()
+	blacklist.blacklist = true
+	
 	for child in get_children():
 		child.phase_manager = self
 

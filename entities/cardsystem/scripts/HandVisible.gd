@@ -23,20 +23,14 @@ const cardPath: String = "res://entities/cardsystem/Card.tscn"
 func _ready() -> void:
 	pass
 
-func changeState(SP: int, topic: String) -> void:
+func changeState(whitelist: CardWhitelist) -> void:
 	for i in range(cardsInHand.size()):
-#		if cardsInHand[i].topic != topic:
-#			cardsInstances[i].isSelectable = false
-#			cardsInstances[i].set_modulate(Color(0.5,0.5,0.5,1))
-#		else:
-#			cardsInstances[i].isSelectable = true
-#			cardsInstances[i].set_modulate(Color(1,1,1,1))
-		if topic == "" and i!=cardSelected:
-			cardsInstances[i].isSelectable = false
-			cardsInstances[i].set_modulate(Color(0.5,0.5,0.5,1))
-		else:
+		if whitelist.checkCard(cardsInHand[i]):
 			cardsInstances[i].isSelectable = true
 			cardsInstances[i].set_modulate(Color(1,1,1,1))
+		else:
+			cardsInstances[i].isSelectable = false
+			cardsInstances[i].set_modulate(Color(0.5,0.5,0.5,1))
 
 #instantiate a new Card as a child based on the cardData
 func addCard(newCardData: CardData) -> void:
@@ -138,6 +132,8 @@ func activateCard() -> CardData:
 	return .activateCard()
 
 func _cardActivationAnimation(cardInstance: Card) -> void:
+	cardInstance.set_modulate(Color(1,1,1,1))
+	cardInstance.z_index = 2
 	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT)
 	
 	tween.tween_property(cardInstance, "position", cardActivatePos, 0.2)

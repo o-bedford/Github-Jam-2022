@@ -47,13 +47,15 @@ func _draw():
 
 #used for emitting signals, when the mouse hovers over the card
 func _on_SelectBox_mouse_entered() -> void:
-	emit_signal("card_hovered")
-	z_index = 1
+	if !isSelected:
+		emit_signal("card_hovered")
+		z_index = 1
 
 #used for emitting signals, when the mouse stops hovering over the card
 func _on_SelectBox_mouse_exited() -> void:
-	emit_signal("card_unhovered")
-	z_index = 0
+	if !isSelected:
+		emit_signal("card_unhovered")
+		z_index = 0
 
 #used for emitting signals, tell the game to resolve the card actions
 func _on_SelectBox_gui_input(event: InputEvent) -> void:

@@ -9,10 +9,11 @@ var player: Player
 func enter():
 	print("Resolve")
 	player = phase_manager.current_focused_player
-	if player.name == "Player":
-		player.hand.changeState(0, "")
+	player.hand.changeState(phase_manager.blacklist)
 	
 	card = player.hand.activateCard()
+	
+	####################################
 	emit_signal("add_SP", card.SP)
 	
 #	print(card.actions)
@@ -25,6 +26,11 @@ func enter():
 					if card.topic == action[1]:
 						card.SP += action[2]
 #			if action[0] == "swap":
+	#####################################
+	#Replace with changing the whitelist:
+	#For example: 
+	#   if action is changetopic:
+	#         phase_manager.whitelist.topic = action_result
 	
 	phase_manager.transition_to("End")
 

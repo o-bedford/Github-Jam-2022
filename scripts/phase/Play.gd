@@ -6,8 +6,9 @@ var is_human: bool
 func enter():
 	print("Play!")
 	player = phase_manager.current_focused_player
+	player.hand.changeState(phase_manager.whitelist)
+	
 	if player.name == "Player":
-		player.hand.changeState(0, "Family")
 		is_human = true
 	else:
 		is_human = false

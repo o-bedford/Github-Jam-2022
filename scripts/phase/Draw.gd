@@ -5,11 +5,13 @@ var is_human: bool = false
 
 func enter() -> void:
 	player = phase_manager.current_focused_player
+	player.hand.changeState(phase_manager.blacklist)
+	
 	if player.name == "Player":
-		player.hand.changeState(0, "")
 		is_human = true
 	else:
 		is_human = false
+
 	print("Draw ur cards " + player.name + "!")
 
 func update_phase(delta: float) -> void:

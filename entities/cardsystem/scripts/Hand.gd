@@ -11,6 +11,9 @@ HandVisible inherited class.
 var cardsInHand: Array = []
 var cardSelected: int = -1
 
+func changeState(whitelist: CardWhitelist) -> void:
+	pass
+
 #instantiate a new Card as a child based on the cardData
 func addCard(newCardData: CardData) -> void:
 	cardsInHand.push_back(newCardData)
