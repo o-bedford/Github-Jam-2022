@@ -4,6 +4,11 @@ var player: Player
 var is_human: bool = false
 
 func enter() -> void:
+	phase_manager.turn += 1
+	for timeout in phase_manager.whitelist.timeouts:
+		if timeout > 0:
+			timeout -= 1
+	
 	player = phase_manager.current_focused_player
 	player.hand.changeState(phase_manager.blacklist)
 	

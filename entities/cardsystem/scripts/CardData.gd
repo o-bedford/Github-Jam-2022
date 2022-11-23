@@ -11,8 +11,10 @@ var id: int = 1
 
 #var topic: int = Global.TOPICS.MONEY 
 var topic: String = ""
+var type: String = ""
 
 var SP: int = 1
+var min_SP: int = 0
 
 var quip: String = "Test Quip"
 
