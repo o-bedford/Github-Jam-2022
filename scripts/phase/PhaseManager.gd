@@ -10,6 +10,7 @@ Some kind of phase manager, would keep the code simpler
 
 onready var current_phase: Phase = null
 onready var current_focused_player: Player = get_parent().get_node("Player")
+onready var current_unfocused_player: Player = get_parent().get_node("PlayerAI")
 onready var resolve_phase: Phase = $Resolve
 
 var whitelist: CardWhitelist
