@@ -13,7 +13,7 @@ For now, use phase_manager.current_focused_player in phase scripts to access pla
 var phase_manager = null
 
 # Basically _ready
-func enter() -> void:
+func enter(_msg := {}) -> void:
 	pass
 
 # Basically _process

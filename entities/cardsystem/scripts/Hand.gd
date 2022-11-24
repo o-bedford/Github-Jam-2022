@@ -34,3 +34,8 @@ func disCard(cardIndex: int) -> CardData:
 
 func size() -> int:
 	return cardsInHand.size()
+
+func getSelectedCard() -> CardData:
+	if cardSelected == -1:
+		return null
+	return cardsInHand[cardSelected]

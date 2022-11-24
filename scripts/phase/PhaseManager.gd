@@ -15,11 +15,15 @@ onready var resolve_phase: Phase = $Resolve
 
 var whitelist: CardWhitelist
 var blacklist: CardWhitelist
+var trapList: CardWhitelist
+var allowAllCards: CardWhitelist
 var turn: int = 0
 
 func _ready() -> void:
 	whitelist = CardWhitelist.new()
 	blacklist = CardWhitelist.new()
+	trapList = CardWhitelist.new()
+	allowAllCards = CardWhitelist.new()
 	blacklist.blacklist = true
 	
 	resolve_phase.connect("add_SP", self, "_add_whitelist_SP")
@@ -35,9 +39,12 @@ func _unhandled_input(event):
 	current_phase.handle_input(event)
 
 # Changes current phase to new phase.
-func transition_to(new_phase_name: String) -> void:
+func transition_to(new_phase_name: String, msg: Dictionary = {}) -> void:
+	if not has_node(new_phase_name):
+		return
+	
 	current_phase = get_node(new_phase_name)
-	current_phase.enter()
+	current_phase.enter(msg)
 	emit_signal("transitioned", current_phase.name)
 
 func _add_whitelist_SP(value):

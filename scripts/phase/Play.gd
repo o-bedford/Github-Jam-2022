@@ -3,7 +3,12 @@ extends Phase
 var player: Player
 var is_human: bool
 
-func enter():
+# Saves card data (actions)
+# Add trap phase
+# - new whitelist (trapList)
+# - other player can play a card
+
+func enter(_msg := {}):
 	print("Play!")
 	player = phase_manager.current_focused_player
 	player.hand.changeState(phase_manager.whitelist)
@@ -14,14 +19,15 @@ func enter():
 		is_human = false
 
 func update_phase(delta: float) -> void:
+	#Able to draw card
 	#Moves to next phase once card has been selected
 	#print(player.hand.cardSelected)
 	if is_human:
 		if player.hand.cardSelected != -1:
-			phase_manager.transition_to("Resolve")
+			phase_manager.transition_to("Trap", {card = player.hand.getSelectedCard()})
 	else:
 		ai_play()
-		phase_manager.transition_to("Resolve")
+		phase_manager.transition_to("Trap")
 
 func ai_play() -> void:
 	var desirable_card: CardData
