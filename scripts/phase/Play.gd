@@ -15,6 +15,7 @@ func enter(_msg := {}):
 	has_drawn = false
 	player = phase_manager.current_focused_player
 	player.hand.changeState(phase_manager.whitelist)
+	player.hand.enableDrawing(true)
 	print("Play! " + player.name)
 	
 	if player.name == "Player":
@@ -27,6 +28,7 @@ func update_phase(delta: float) -> void:
 	if Input.is_action_pressed("ui_accept") && !has_drawn:
 		player.hand.addCard(player.deck.drawCard())
 		player.hand.changeState(phase_manager.whitelist)
+		player.hand.enableDrawing(false)
 		has_drawn = true
 		phase_manager.transition_to("End")
 	#Moves to next phase once card has been selected

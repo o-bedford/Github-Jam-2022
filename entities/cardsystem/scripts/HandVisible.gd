@@ -11,12 +11,18 @@ var cardInstanceSelected: Card
 var enabled: bool = true
 var cardHoveredIndex: int = -1
 var bufferCard: int = 2 #how many invisible cards the hovered card will have around it
-onready var path: Path2D = $Path
+onready var path: Path2D = $HandArea/Path
 onready var curve: Curve2D = path.get_curve()
 onready var cardHoverHeight: float = $CardHoverHeight.position.y
 onready var cardActivatePos: Vector2 = $CardActivate.position
 onready var deckPos: Vector2 = $DeckPosition.position
 onready var graveyardPos: Vector2 = $GraveyardPosition.position
+
+onready var handArea: Node2D = $HandArea
+onready var handAreaRect: CollisionShape2D = $HandArea/HoverArea/CollisionShape2D
+onready var handAreaPos: Vector2 = $HandArea.position
+
+onready var drawButton: Button = $DrawButton
 
 const cardPath: String = "res://entities/cardsystem/Card.tscn"
 
@@ -31,6 +37,16 @@ func changeState(whitelist: CardWhitelist) -> void:
 		else:
 			cardsInstances[i].isSelectable = false
 			cardsInstances[i].set_modulate(Color(0.5,0.5,0.5,1))
+
+func enableDrawing(enable: bool) ->void:
+	.enableDrawing(enable)
+	
+	if enable:
+		drawButton.modulate = Color(1, 1, 1, 1)
+		drawButton.disabled = false
+	else:
+		drawButton.modulate = Color(1, 1, 1, 0.5)
+		drawButton.disabled = true
 
 #instantiate a new Card as a child based on the cardData
 func addCard(newCardData: CardData) -> void:
@@ -90,11 +106,11 @@ func _getCardRotation(index: int, relative: int = 0) -> float:
 func _getCardPosition(index: int, relative: int = 0) -> Vector2:
 	var pointRatio = _getPointRatio(index, relative)
 	if index != cardHoveredIndex:
-		return curve.interpolate(pointRatio[0], pointRatio[1])+path.position
+		return curve.interpolate(pointRatio[0], pointRatio[1])+path.position+handArea.position
 	else:
 		var newPose = curve.interpolate(pointRatio[0], pointRatio[1])+path.position
 		newPose.y = cardHoverHeight
-		return newPose
+		return newPose+handArea.position
 
 #places all the cards in the right place.
 func _draw() ->void:
@@ -158,3 +174,21 @@ func disCard(cardIndex: int) -> CardData:
 #do whatever animation you need to do if a card is selected
 func cardSelected(card: Card) -> void:
 	pass
+
+
+func _on_HoverArea_mouse_entered() -> void:
+	handArea.position = Vector2.ZERO
+	update()
+
+
+func _on_HoverArea_mouse_exited() -> void:
+	var mouse_position = get_viewport().get_mouse_position()
+	var rect: Rect2 = Rect2(handAreaRect.position, handAreaRect.shape.extents)
+	if rect.has_point(mouse_position):
+		return
+	handArea.position = handAreaPos
+	update()
+
+
+func _on_DrawButton_pressed() -> void:
+	emit_signal("draw_card")

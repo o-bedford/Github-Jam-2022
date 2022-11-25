@@ -15,6 +15,7 @@ func enter(_msg := {}) -> void:
 	player = phase_manager.current_focused_player
 	opponent = phase_manager.current_unfocused_player
 	player.hand.changeState(phase_manager.blacklist)
+	player.hand.enableDrawing(false)
 	opponent.hand.changeState(phase_manager.blacklist)
 	print("Draw! " + player.name)
 	

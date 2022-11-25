@@ -11,8 +11,13 @@ HandVisible inherited class.
 var cardsInHand: Array = []
 var cardSelected: int = -1
 
+var drawCard: bool = false
+
 func changeState(whitelist: CardWhitelist) -> void:
 	pass
+
+func enableDrawing(enable: bool) ->void:
+	drawCard = enable
 
 #instantiate a new Card as a child based on the cardData
 func addCard(newCardData: CardData) -> void:

@@ -1,35 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://entities/player/scripts/Player.gd" type="Script" id=1]
-[ext_resource path="res://entities/cardsystem/scripts/HandVisible.gd" type="Script" id=2]
+[ext_resource path="res://entities/cardsystem/HandVisible.tscn" type="PackedScene" id=2]
 [ext_resource path="res://entities/cardsystem/scripts/Deck.gd" type="Script" id=3]
-
-[sub_resource type="Curve2D" id=1]
-bake_interval = 50.0
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, -152, 32, -41.6057, 19.1211, 41.6057, -19.1211, -24, -32, -91.6943, -1.99335, 91.6943, 1.99335, 168, -80, -50.9163, -19.6516, 50.9163, 19.6516, 360, -32, 0, 0, 0, 0, 488, 32 )
-}
 
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="Hand" type="Node2D" parent="."]
-script = ExtResource( 2 )
-
-[node name="Path" type="Path2D" parent="Hand"]
-position = Vector2( 280, 736 )
-curve = SubResource( 1 )
-
-[node name="CardHoverHeight" type="Position2D" parent="Hand"]
-position = Vector2( 288, 536 )
-
-[node name="CardActivate" type="Position2D" parent="Hand"]
-position = Vector2( 463, 492 )
-
-[node name="DeckPosition" type="Position2D" parent="Hand"]
-position = Vector2( 992, 440 )
-
-[node name="GraveyardPosition" type="Position2D" parent="Hand"]
+[node name="Hand" parent="." instance=ExtResource( 2 )]
 
 [node name="Deck" type="Node2D" parent="."]
 position = Vector2( -124, 399 )

@@ -1,6 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://entities/cardsystem/scripts/HandVisible.gd" type="Script" id=1]
+[ext_resource path="res://scenes/DrawButton.tscn" type="PackedScene" id=2]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 584, 444 )
 
 [sub_resource type="Curve2D" id=1]
 bake_interval = 50.0
@@ -11,8 +15,19 @@ _data = {
 [node name="HandVisible" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="Path" type="Path2D" parent="."]
-position = Vector2( 280, 736 )
+[node name="HandArea" type="Node2D" parent="."]
+position = Vector2( 0, 160 )
+
+[node name="HoverArea" type="Area2D" parent="HandArea"]
+position = Vector2( 0, 415 )
+z_index = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HandArea/HoverArea"]
+position = Vector2( 456, 342 )
+shape = SubResource( 2 )
+
+[node name="Path" type="Path2D" parent="HandArea"]
+position = Vector2( 280, 672 )
 curve = SubResource( 1 )
 
 [node name="CardHoverHeight" type="Position2D" parent="."]
@@ -25,3 +40,12 @@ position = Vector2( 456, 296 )
 position = Vector2( 992, 440 )
 
 [node name="GraveyardPosition" type="Position2D" parent="."]
+
+[node name="DrawButton" parent="." instance=ExtResource( 2 )]
+margin_left = 944.0
+margin_right = 988.0
+rect_scale = Vector2( 2.98876, 2.51989 )
+
+[connection signal="mouse_entered" from="HandArea/HoverArea" to="." method="_on_HoverArea_mouse_entered"]
+[connection signal="mouse_exited" from="HandArea/HoverArea" to="." method="_on_HoverArea_mouse_exited"]
+[connection signal="pressed" from="DrawButton" to="." method="_on_DrawButton_pressed"]
