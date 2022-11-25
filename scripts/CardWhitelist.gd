@@ -24,16 +24,14 @@ var canPlayHand: bool = true
 #var canPlayAny: bool = true
 
 # Timeout in turns
-var transitionTimeout: int = 0
 var trapTimeout: int = 0
 var actionTimeout: int = 0
 var futureTimeout: int = 0
 var intimacyTimeout: int = 0
 var socialTimeout: int = 0
-var hobbiesTimeout: int = 0
-var houseTimeout: int = 0
+var growthTimeout: int = 0
 
-var timeouts:Array = [transitionTimeout, trapTimeout, actionTimeout, futureTimeout, intimacyTimeout, socialTimeout, hobbiesTimeout, houseTimeout]
+var timeouts:Array = [trapTimeout, actionTimeout, futureTimeout, intimacyTimeout, socialTimeout, growthTimeout]
 
 func checkCard(card: CardData) -> bool:
 	if blacklist:
@@ -43,28 +41,37 @@ func checkCard(card: CardData) -> bool:
 		return true
 	
 	if trapList:
-		return "trap" in card.type
-		
+		if "trap" in card.type:
+			match card.topic:
+				"action":
+					return actionTimeout > 0
+				"future":
+					return futureTimeout > 0
+				"intimacy":
+					return intimacyTimeout > 0
+				"social":
+					return socialTimeout > 0
+				"growth":
+					return growthTimeout > 0
+				"any":
+					return trapTimeout > 0
+		return false
 	#check if the card has that topic, is in the right SP range, etc.
 	if !(topic in card.topic.to_lower()) && !(card.min_SP >= SP):
 		return false
 	
 	#check if the conditions are met
 	if canPlayHand:
-		if "action" in card.type && actionTimeout > 0:
-			return false
-		if "transition" in card.type:
+		if "action" in card.type:
+			if !actionTimeout > 0:
+				return false
 			if "future" in card.topic && futureTimeout > 0:
 				return false
 			if "intimacy" in card.topic && intimacyTimeout > 0:
 				return false
 			if "social" in card.topic && socialTimeout > 0:
 				return false
-			if "hobbies" in card.topic && hobbiesTimeout > 0:
-				return false
-			if "house" in card.topic && houseTimeout > 0:
-				return false
-			if !transitionTimeout > 0:
+			if "growth" in card.topic && growthTimeout > 0:
 				return false
 		if "trap" in card.type && trapTimeout > 0:
 			return false

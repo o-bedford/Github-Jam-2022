@@ -1,5 +1,7 @@
 extends Phase
 
+signal change_topic
+
 var player: Player
 var is_human: bool
 var has_drawn: bool = false
@@ -10,10 +12,10 @@ var has_drawn: bool = false
 # - other player can play a card
 
 func enter(_msg := {}):
-	print("Play!")
 	has_drawn = false
 	player = phase_manager.current_focused_player
 	player.hand.changeState(phase_manager.whitelist)
+	print("Play! " + player.name)
 	
 	if player.name == "Player":
 		is_human = true
@@ -30,7 +32,19 @@ func update_phase(delta: float) -> void:
 	#print(player.hand.cardSelected)
 	if is_human:
 		if player.hand.cardSelected != -1:
-			print(player.hand.cardsInHand[player.hand.cardSelected].quip)
+			print(player.hand.getSelectedCard().quip)
+			emit_signal("change_topic", player.hand.getSelectedCard().topic)
+			match player.hand.getSelectedCard().topic:
+				"action":
+					phase_manager.trapList.actionTimeout += 1
+				"future":
+					phase_manager.trapList.futureTimeout += 1
+				"intimacy":
+					phase_manager.trapList.intimacyTimeout += 1
+				"social":
+					phase_manager.trapList.socialTimeout += 1
+				"growth":
+					phase_manager.trapList.growthTimeout += 1
 			phase_manager.transition_to("Trap", {card = player.hand.getSelectedCard()})
 	else:
 		ai_play()

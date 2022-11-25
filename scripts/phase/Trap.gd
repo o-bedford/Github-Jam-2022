@@ -9,10 +9,10 @@ var opponent: Player
 onready var trapTimer: Timer = $TrapTimer
 
 func enter(_msg := {}):
-	print("Trap!")
 	trapTimer.start()
 	opponent = phase_manager.current_unfocused_player
 	opponent.hand.changeState(phase_manager.trapList)
+	print("Trap! " + opponent.name)
 	if _msg.has("card"):
 		selectedCard = _msg["card"]
 		modifiedCard = selectedCard

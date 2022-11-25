@@ -25,10 +25,14 @@ script = ExtResource( 4 )
 [node name="Draw" type="Node2D" parent="PhaseManager"]
 script = ExtResource( 8 )
 
+[node name="DrawTimer" type="Timer" parent="PhaseManager/Draw"]
+wait_time = 0.25
+one_shot = true
+
 [node name="Play" type="Node2D" parent="PhaseManager"]
 script = ExtResource( 7 )
 
-[node name="Timer" type="Timer" parent="PhaseManager/Play"]
+[node name="PlayTimer" type="Timer" parent="PhaseManager/Play"]
 
 [node name="Trap" type="Node2D" parent="PhaseManager"]
 script = ExtResource( 9 )
@@ -40,6 +44,9 @@ one_shot = true
 [node name="Resolve" type="Node2D" parent="PhaseManager"]
 script = ExtResource( 6 )
 
+[node name="ResolveTimer" type="Timer" parent="PhaseManager/Resolve"]
+wait_time = 0.3
+
 [node name="Dialogue" type="Node2D" parent="PhaseManager"]
 script = ExtResource( 10 )
 
@@ -48,4 +55,5 @@ script = ExtResource( 5 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+[connection signal="timeout" from="PhaseManager/Draw/DrawTimer" to="PhaseManager/Draw" method="_on_DrawTimer_timeout"]
 [connection signal="timeout" from="PhaseManager/Trap/TrapTimer" to="PhaseManager/Trap" method="_on_TrapTimer_timeout"]
