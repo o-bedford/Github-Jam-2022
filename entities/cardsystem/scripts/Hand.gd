@@ -25,7 +25,7 @@ func removeCard(cardIndex: int) -> CardData:
 func activateCard() -> CardData:
 	var cardDiscarded = disCard(cardSelected)
 	cardSelected = -1
-	print(cardDiscarded)
+#	print(cardDiscarded)
 	return cardDiscarded
 
 #plays the discard animation based on the card selected

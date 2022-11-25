@@ -2,6 +2,7 @@ extends Phase
 
 var player: Player
 var is_human: bool
+var has_drawn: bool = false
 
 # Saves card data (actions)
 # Add trap phase
@@ -10,6 +11,7 @@ var is_human: bool
 
 func enter(_msg := {}):
 	print("Play!")
+	has_drawn = false
 	player = phase_manager.current_focused_player
 	player.hand.changeState(phase_manager.whitelist)
 	
@@ -20,10 +22,15 @@ func enter(_msg := {}):
 
 func update_phase(delta: float) -> void:
 	#Able to draw card
+	if Input.is_action_pressed("ui_accept") && !has_drawn:
+		player.hand.addCard(player.deck.drawCard())
+		player.hand.changeState(phase_manager.whitelist)
+		has_drawn = true
 	#Moves to next phase once card has been selected
 	#print(player.hand.cardSelected)
 	if is_human:
 		if player.hand.cardSelected != -1:
+			print(player.hand.cardsInHand[player.hand.cardSelected].quip)
 			phase_manager.transition_to("Trap", {card = player.hand.getSelectedCard()})
 	else:
 		ai_play()
@@ -33,7 +40,7 @@ func ai_play() -> void:
 	var desirable_card: CardData
 	var cards_in_topic: Array = []
 	for card in player.hand.cardsInHand:
-		print(card.topic + " " + player.current_hand_topic)
+#		print(card.topic + " " + player.current_hand_topic)
 		if player.current_hand_topic in card.topic.to_lower() || player.current_hand_topic == "any":
 			cards_in_topic.append(card)
 #			print(card.quip)

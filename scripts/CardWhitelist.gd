@@ -4,6 +4,8 @@ class_name CardWhitelist
 
 #blacklist
 var blacklist: bool = false
+var allowAll: bool = true
+var trapList: bool = false
 
 #general game state
 var SP: int = 0
@@ -36,7 +38,13 @@ var timeouts:Array = [transitionTimeout, trapTimeout, actionTimeout, futureTimeo
 func checkCard(card: CardData) -> bool:
 	if blacklist:
 		return false
-
+	
+	if allowAll:
+		return true
+	
+	if trapList:
+		return "trap" in card.type
+		
 	#check if the card has that topic, is in the right SP range, etc.
 	if !(topic in card.topic.to_lower()) && !(card.min_SP >= SP):
 		return false

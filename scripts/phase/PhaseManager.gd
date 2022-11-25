@@ -25,6 +25,8 @@ func _ready() -> void:
 	trapList = CardWhitelist.new()
 	allowAllCards = CardWhitelist.new()
 	blacklist.blacklist = true
+	trapList.trapList = true
+	allowAllCards.allowAll = true
 	
 	resolve_phase.connect("add_SP", self, "_add_whitelist_SP")
 	resolve_phase.connect("change_topic", self, "_change_topic")

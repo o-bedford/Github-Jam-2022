@@ -42,6 +42,7 @@ func _ready() -> void:
 	print(phase_manager.current_phase)
 
 func _process(delta) -> void:
+#	print(phase_manager.current_focused_player.name + " " + phase_manager.current_phase.name)
 	if phase_manager.current_phase.name == "Resolve":
 		print("SP: " + str(SP_meter) + " | Current Player: " + phase_manager.current_focused_player.name + " | Topic: " + current_topic)
 #	pass
