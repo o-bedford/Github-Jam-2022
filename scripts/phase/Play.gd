@@ -28,6 +28,7 @@ func update_phase(delta: float) -> void:
 		player.hand.addCard(player.deck.drawCard())
 		player.hand.changeState(phase_manager.whitelist)
 		has_drawn = true
+		phase_manager.transition_to("End")
 	#Moves to next phase once card has been selected
 	#print(player.hand.cardSelected)
 	if is_human:
@@ -36,15 +37,25 @@ func update_phase(delta: float) -> void:
 			emit_signal("change_topic", player.hand.getSelectedCard().topic)
 			match player.hand.getSelectedCard().topic:
 				"action":
-					phase_manager.trapList.actionTimeout += 1
+					for timeout in phase_manager.trapList.timeouts:
+						if timeout != phase_manager.trapList.actionTimeout:
+							timeout += 1
 				"future":
-					phase_manager.trapList.futureTimeout += 1
+					for timeout in phase_manager.trapList.timeouts:
+						if timeout != phase_manager.trapList.futureTimeout:
+							timeout += 1
 				"intimacy":
-					phase_manager.trapList.intimacyTimeout += 1
+					for timeout in phase_manager.trapList.timeouts:
+						if timeout != phase_manager.trapList.intimacyTimeout:
+							timeout += 1
 				"social":
-					phase_manager.trapList.socialTimeout += 1
+					for timeout in phase_manager.trapList.timeouts:
+						if timeout != phase_manager.trapList.socialTimeout:
+							timeout += 1
 				"growth":
-					phase_manager.trapList.growthTimeout += 1
+					for timeout in phase_manager.trapList.timeouts:
+						if timeout != phase_manager.trapList.growthTimeout:
+							timeout += 1
 			phase_manager.transition_to("Trap", {card = player.hand.getSelectedCard()})
 	else:
 		ai_play()
