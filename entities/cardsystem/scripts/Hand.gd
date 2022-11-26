@@ -12,11 +12,13 @@ var cardsInHand: Array = []
 var cardSelected: int = -1
 
 var drawCard: bool = false
+var cardDrawn: bool = false
 
 func changeState(whitelist: CardWhitelist) -> void:
 	pass
 
 func enableDrawing(enable: bool) ->void:
+	cardDrawn = false
 	drawCard = enable
 
 #instantiate a new Card as a child based on the cardData

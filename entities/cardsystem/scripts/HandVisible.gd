@@ -192,3 +192,4 @@ func _on_HoverArea_mouse_exited() -> void:
 
 func _on_DrawButton_pressed() -> void:
 	emit_signal("draw_card")
+	cardDrawn = true
