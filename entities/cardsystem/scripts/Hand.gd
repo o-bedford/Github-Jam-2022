@@ -7,6 +7,7 @@ This is the hand class! each hand has a bunch of cards!
 THIS IS FOR THE LOGIC it will NOT be visible unless you use the 
 HandVisible inherited class.
 """
+signal discard_animation_finished
 
 var cardsInHand: Array = []
 var cardSelected: int = -1

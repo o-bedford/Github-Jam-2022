@@ -38,6 +38,10 @@ func _ready() -> void:
 	populate_deck(player1.deck)
 	populate_deck(player2.deck)
 	
+	for i in range(5):
+		player1.draw()
+		player2.draw()
+	
 	#Testing phase manager. it works!
 	phase_manager.current_focused_player = player1
 	phase_manager.transition_to("Draw")

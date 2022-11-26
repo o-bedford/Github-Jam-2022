@@ -11,6 +11,8 @@ Some kind of phase manager, would keep the code simpler
 onready var current_phase: Phase = null
 onready var current_focused_player: Player = get_parent().get_node("Player")
 onready var current_unfocused_player: Player = get_parent().get_node("PlayerAI")
+onready var board: Board = get_parent().get_node("Board")
+
 onready var resolve_phase: Phase = $Resolve
 onready var play_phase: Phase = $Play
 
@@ -19,6 +21,9 @@ var blacklist: CardWhitelist
 var trapList: CardWhitelist
 var allowAllCards: CardWhitelist
 var turn: int = 0
+
+var card: CardData
+var trap: CardData
 
 func _ready() -> void:
 	whitelist = CardWhitelist.new()

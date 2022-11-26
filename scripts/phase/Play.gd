@@ -26,39 +26,55 @@ func enter(_msg := {}):
 
 func update_phase(delta: float) -> void:
 	#Able to draw card
-	if Input.is_action_pressed("ui_accept") && !has_drawn:
-		player.hand.addCard(player.deck.drawCard())
+	if  player.hand.cardDrawn && !has_drawn:
+		player.draw()
 		player.hand.changeState(phase_manager.whitelist)
 		player.hand.enableDrawing(false)
 		has_drawn = true
 		phase_manager.transition_to("End")
+
 	#Moves to next phase once card has been selected
 	#print(player.hand.cardSelected)
-	if is_human:
-		if player.hand.cardSelected != -1:
-			print(player.hand.getSelectedCard().quip)
-			emit_signal("change_topic", player.hand.getSelectedCard().topic)
-			match player.hand.getSelectedCard().topic:
-				"future":
-					for timeout in phase_manager.trapList.topicTimeouts:
-						if timeout != phase_manager.trapList.futureTimeout:
-							timeout += 1
-				"intimacy":
-					for timeout in phase_manager.trapList.topicTimeouts:
-						if timeout != phase_manager.trapList.intimacyTimeout:
-							timeout += 1
-				"social":
-					for timeout in phase_manager.trapList.topicTimeouts:
-						if timeout != phase_manager.trapList.socialTimeout:
-							timeout += 1
-				"growth":
-					for timeout in phase_manager.trapList.topicTimeouts:
-						if timeout != phase_manager.trapList.growthTimeout:
-							timeout += 1
-			phase_manager.transition_to("Trap", {card = player.hand.getSelectedCard()})
-	else:
-		ai_play()
-		phase_manager.transition_to("Trap")
+	
+	if player.hand.cardSelected != -1:
+		
+		player.hand.enableDrawing(false)
+		phase_manager.card = player.hand.getSelectedCard()
+		print(phase_manager.card.quip)
+		#Change the topic in the resolve phase
+
+		player.hand.activateCard()
+		yield(player.hand, "discard_animation_finished")
+		phase_manager.transition_to("Trap", {card = player.hand.getSelectedCard()})
+		
+#	if is_human:
+#		if player.hand.cardSelected != -1:
+#			print(player.hand.getSelectedCard().quip)
+#			emit_signal("change_topic", player.hand.getSelectedCard().topic)
+#			match player.hand.getSelectedCard().topic:
+#				"future":
+#					for timeout in phase_manager.trapList.topicTimeouts:
+#						if timeout != phase_manager.trapList.futureTimeout:
+#							timeout += 1
+#				"intimacy":
+#					for timeout in phase_manager.trapList.topicTimeouts:
+#						if timeout != phase_manager.trapList.intimacyTimeout:
+#							timeout += 1
+#				"social":
+#					for timeout in phase_manager.trapList.topicTimeouts:
+#						if timeout != phase_manager.trapList.socialTimeout:
+#							timeout += 1
+#				"growth":
+#					for timeout in phase_manager.trapList.topicTimeouts:
+#						if timeout != phase_manager.trapList.growthTimeout:
+#							timeout += 1
+#
+#			player.hand.activateCard()
+#			yield(player.hand, "discard_animation_finished")
+#			phase_manager.transition_to("Trap", {card = player.hand.getSelectedCard()})
+#	else:
+#		ai_play()
+#		phase_manager.transition_to("Trap")
 
 func ai_play() -> void:
 	var desirable_card: CardData
@@ -75,9 +91,10 @@ func ai_play() -> void:
 		if card.weight > previous_card.weight:
 			desirable_card = card
 			previous_card = card
-	print(desirable_card.quip)
+	
 	
 	if desirable_card == null:
 		phase_manager.transition_to("End")
 	else:
+		print(desirable_card.quip)
 		player.hand.cardSelected = player.hand.cardsInHand.find(desirable_card, 0)

@@ -4,6 +4,7 @@ extends Hand
 hand visible inherited class. basically the same thing as Hand except
 it shows the cards and animations.
 """
+
 var cardsInstances: Array = []
 
 var cardInstanceSelected: Card
@@ -30,13 +31,19 @@ func _ready() -> void:
 	pass
 
 func changeState(whitelist: CardWhitelist) -> void:
+	var canPlay = false
 	for i in range(cardsInHand.size()):
 		if whitelist.checkCard(cardsInHand[i]):
+			canPlay = true
 			cardsInstances[i].isSelectable = true
 			cardsInstances[i].set_modulate(Color(1,1,1,1))
 		else:
 			cardsInstances[i].isSelectable = false
 			cardsInstances[i].set_modulate(Color(0.5,0.5,0.5,1))
+	
+	if !canPlay and drawCard:
+		cardDrawn = true
+		emit_signal("draw_card")
 
 func enableDrawing(enable: bool) ->void:
 	.enableDrawing(enable)
@@ -69,11 +76,13 @@ func addCard(newCardData: CardData) -> void:
 
 func _onCardHovered(cardNum: Card) -> void:
 	cardHoveredIndex = cardsInstances.find(cardNum, 0)
+	cardNum.z_index = 1
 	update()
 	pass
 
 func _onCardUnhovered(cardNum: Card) -> void:
 	cardHoveredIndex = -1
+	cardNum.z_index = 0
 	update()
 	pass
 
@@ -163,6 +172,7 @@ func _cardDiscardAnimation(cardInstance: Card) -> void:
 	tween.tween_property(cardInstance, "position", graveyardPos, 0.2)
 	yield(tween, "finished")
 	cardInstance.queue_free()
+	emit_signal("discard_animation_finished")
 
 #plays the discard animation based on the card selected
 func disCard(cardIndex: int) -> CardData:
@@ -189,7 +199,11 @@ func _on_HoverArea_mouse_exited() -> void:
 	handArea.position = handAreaPos
 	update()
 
-
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if drawCard and Input.is_action_pressed("ui_accept"):
+			emit_signal("draw_card")
+			cardDrawn = true
 func _on_DrawButton_pressed() -> void:
 	emit_signal("draw_card")
 	cardDrawn = true

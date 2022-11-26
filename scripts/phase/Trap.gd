@@ -5,26 +5,48 @@ var opponentCard: CardData
 var modifiedCard: CardData
 
 var opponent: Player
+var player: Player
 
 onready var trapTimer: Timer = $TrapTimer
 
 func enter(_msg := {}):
-	trapTimer.start()
+	#trapTimer.start()
 	opponent = phase_manager.current_unfocused_player
 	opponent.hand.changeState(phase_manager.trapList)
+	
+	opponent.hand.enableDrawing(true)
+	
+	player = phase_manager.current_focused_player
+	player.hand.changeState(phase_manager.blacklist)
+	
 	print("Trap! " + opponent.name)
 	if _msg.has("card"):
-		selectedCard = _msg["card"]
+		selectedCard = phase_manager.card
+		phase_manager.board.newCard(phase_manager.card)
 		modifiedCard = selectedCard
 
 func update_phase(delta:float) -> void:
-#	print(trapTimer.time_left)
-	# Allow opponent to play trap card
+	if  opponent.hand.cardDrawn:
+		opponent.hand.enableDrawing(false)
+		print("Trap Draw")
+		phase_manager.transition_to("Resolve")
+		
 	if opponent.hand.cardSelected != -1:
+		
+		opponent.hand.enableDrawing(false)
 		opponentCard = opponent.hand.getSelectedCard()
+		
+		## TODO: Change phase_manager.card based on opponentCard
 		modifiedCard.SP += opponentCard.SP
 		modifiedCard.actions.append_array(opponentCard.actions)
-		phase_manager.transition_to("Resolve", {card = modifiedCard})
+		phase_manager.card = modifiedCard
+		
+		print("Trap Choose")
+		
+
+		opponent.hand.activateCard()
+		yield(opponent.hand, "discard_animation_finished")
+		phase_manager.transition_to("Resolve")
 
 func _on_TrapTimer_timeout():
-	phase_manager.transition_to("Resolve", {card = modifiedCard})
+	phase_manager.transition_to("Resolve")
