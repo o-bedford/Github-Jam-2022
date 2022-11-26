@@ -14,6 +14,7 @@ var has_drawn: bool = false
 func enter(_msg := {}):
 	has_drawn = false
 	player = phase_manager.current_focused_player
+	phase_manager.whitelist.trapTimeout += 1
 	player.hand.changeState(phase_manager.whitelist)
 	player.hand.enableDrawing(true)
 	print("Play! " + player.name)
@@ -38,24 +39,20 @@ func update_phase(delta: float) -> void:
 			print(player.hand.getSelectedCard().quip)
 			emit_signal("change_topic", player.hand.getSelectedCard().topic)
 			match player.hand.getSelectedCard().topic:
-				"action":
-					for timeout in phase_manager.trapList.timeouts:
-						if timeout != phase_manager.trapList.actionTimeout:
-							timeout += 1
 				"future":
-					for timeout in phase_manager.trapList.timeouts:
+					for timeout in phase_manager.trapList.topicTimeouts:
 						if timeout != phase_manager.trapList.futureTimeout:
 							timeout += 1
 				"intimacy":
-					for timeout in phase_manager.trapList.timeouts:
+					for timeout in phase_manager.trapList.topicTimeouts:
 						if timeout != phase_manager.trapList.intimacyTimeout:
 							timeout += 1
 				"social":
-					for timeout in phase_manager.trapList.timeouts:
+					for timeout in phase_manager.trapList.topicTimeouts:
 						if timeout != phase_manager.trapList.socialTimeout:
 							timeout += 1
 				"growth":
-					for timeout in phase_manager.trapList.timeouts:
+					for timeout in phase_manager.trapList.topicTimeouts:
 						if timeout != phase_manager.trapList.growthTimeout:
 							timeout += 1
 			phase_manager.transition_to("Trap", {card = player.hand.getSelectedCard()})
@@ -70,7 +67,7 @@ func ai_play() -> void:
 #		print(card.topic + " " + player.current_hand_topic)
 		if player.current_hand_topic in card.topic.to_lower() || player.current_hand_topic == "any":
 			cards_in_topic.append(card)
-#			print(card.quip)
+			print(card.quip)
 	
 	var previous_card: CardData = CardData.new()
 	previous_card.weight = -1.0

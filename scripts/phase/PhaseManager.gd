@@ -12,6 +12,7 @@ onready var current_phase: Phase = null
 onready var current_focused_player: Player = get_parent().get_node("Player")
 onready var current_unfocused_player: Player = get_parent().get_node("PlayerAI")
 onready var resolve_phase: Phase = $Resolve
+onready var play_phase: Phase = $Play
 
 var whitelist: CardWhitelist
 var blacklist: CardWhitelist
@@ -30,6 +31,7 @@ func _ready() -> void:
 	
 	resolve_phase.connect("add_SP", self, "_add_whitelist_SP")
 	resolve_phase.connect("change_topic", self, "_change_topic")
+	play_phase.connect("change_topic", self, "_change_topic")
 	
 	for child in get_children():
 		child.phase_manager = self

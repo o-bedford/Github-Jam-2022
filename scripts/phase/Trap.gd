@@ -21,6 +21,7 @@ func update_phase(delta:float) -> void:
 #	print(trapTimer.time_left)
 	# Allow opponent to play trap card
 	if opponent.hand.cardSelected != -1:
+		opponentCard = opponent.hand.getSelectedCard()
 		modifiedCard.SP += opponentCard.SP
 		modifiedCard.actions.append_array(opponentCard.actions)
 		phase_manager.transition_to("Resolve", {card = modifiedCard})

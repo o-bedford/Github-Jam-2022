@@ -22,9 +22,11 @@ onready var player1: Player = $Player
 onready var player2: Player = $PlayerAI
 onready var phase_manager = $PhaseManager
 onready var resolve_phase = $PhaseManager/Resolve
+onready var play_phase = $PhaseManager/Play
 
 #big boi
 func _ready() -> void:
+	play_phase.connect("change_topic", self, "_change_topic")
 	resolve_phase.connect("change_topic", self, "_change_topic")
 	resolve_phase.connect("add_SP", self, "_add_SP")
 	
@@ -58,9 +60,9 @@ func populate_deck(deck:Deck) -> void:
 	deck.shuffleDeck()
 
 func _change_topic(topic: String) -> void:
-	current_topic = topic.to_lower()
-	player1.current_hand_topic = topic.to_lower()
-	player2.current_hand_topic = topic.to_lower()
+	current_topic = topic
+	player1.current_hand_topic = topic
+	player2.current_hand_topic = topic
 	print("Current topic: " + topic)
 
 func _add_SP(amount: int) -> void:

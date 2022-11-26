@@ -42,6 +42,7 @@ func enter(_msg := {}) -> void:
 func _on_DrawTimer_timeout():
 	if player.hand.size() < player.max_hand_size:
 		player.hand.addCard(player.deck.drawCard())
+		print(player.hand.cardsInHand[player.hand.size()-1].type)
 	if opponent.hand.size() < opponent.max_hand_size:
 		opponent.hand.addCard(opponent.deck.drawCard())
 	if player.hand.size() < player.max_hand_size || opponent.hand.size() < opponent.max_hand_size:

@@ -4,7 +4,7 @@ class_name CardWhitelist
 
 #blacklist
 var blacklist: bool = false
-var allowAll: bool = true
+var allowAll: bool = false
 var trapList: bool = false
 
 #general game state
@@ -32,6 +32,7 @@ var socialTimeout: int = 0
 var growthTimeout: int = 0
 
 var timeouts:Array = [trapTimeout, actionTimeout, futureTimeout, intimacyTimeout, socialTimeout, growthTimeout]
+var topicTimeouts: Array = [futureTimeout, intimacyTimeout, socialTimeout, growthTimeout]
 
 func checkCard(card: CardData) -> bool:
 	if blacklist:
@@ -41,21 +42,19 @@ func checkCard(card: CardData) -> bool:
 		return true
 	
 	if trapList:
+#		if "trap" in card.type && (topic in card.topic || "any" in card.topic):
 		if "trap" in card.type:
 			match card.topic:
-				"action":
-					return actionTimeout > 0
 				"future":
-					return futureTimeout > 0
+					return futureTimeout == 0
 				"intimacy":
-					return intimacyTimeout > 0
+					return intimacyTimeout == 0
 				"social":
-					return socialTimeout > 0
+					return socialTimeout == 0
 				"growth":
-					return growthTimeout > 0
-				"any":
-					return trapTimeout > 0
+					return growthTimeout == 0
 		return false
+	
 	#check if the card has that topic, is in the right SP range, etc.
 	if !(topic in card.topic.to_lower()) && !(card.min_SP >= SP):
 		return false
@@ -63,8 +62,6 @@ func checkCard(card: CardData) -> bool:
 	#check if the conditions are met
 	if canPlayHand:
 		if "action" in card.type:
-			if !actionTimeout > 0:
-				return false
 			if "future" in card.topic && futureTimeout > 0:
 				return false
 			if "intimacy" in card.topic && intimacyTimeout > 0:
