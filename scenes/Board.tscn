@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/Board.gd" type="Script" id=1]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -856, -504, -361.683, -172.744, 361.683, 172.744, -352, -344, 0, 0, 0, 0, 0, -24, 0, 0, 0, 0, 0, 0 )
+}
+
+[node name="Board" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="BigCardPos" type="Position2D" parent="."]
+position = Vector2( 192, 0 )
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource( 1 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2( -856, -504 )
+rotate = false

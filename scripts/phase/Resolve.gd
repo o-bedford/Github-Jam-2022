@@ -15,7 +15,7 @@ func enter(_msg := {}):
 	player.hand.changeState(phase_manager.blacklist)
 	print("Resolve!" + player.name)
 	
-	card = _msg["card"]
+	card = phase_manager.card
 	
 	# Executes modified card actions
 	_resolve_actions(card)
@@ -24,7 +24,6 @@ func enter(_msg := {}):
 	emit_signal("add_SP", card.SP)
 	
 	player.deck.graveyard.append(card)
-	player.hand.activateCard()
 	phase_manager.transition_to("End")
 
 func update_phase(delta: float) -> void:

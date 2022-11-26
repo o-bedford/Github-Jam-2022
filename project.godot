@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node2D",
+"class": "Board",
+"language": "GDScript",
+"path": "res://scripts/Board.gd"
+}, {
+"base": "Node2D",
 "class": "Card",
 "language": "GDScript",
 "path": "res://entities/cardsystem/scripts/Card.gd"
@@ -50,6 +55,7 @@ _global_script_classes=[ {
 "path": "res://entities/player/scripts/Player.gd"
 } ]
 _global_script_class_icons={
+"Board": "",
 "Card": "",
 "CardData": "",
 "CardWhitelist": "",
