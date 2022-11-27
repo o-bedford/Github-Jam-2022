@@ -9,8 +9,9 @@ var write_rest_of_line: bool = false
 var text_place: int = 0
 
 onready var animPlayer: AnimationPlayer = $AnimationPlayer
-onready var textBox: RichTextLabel = $VBoxContainer/Background/RichTextLabel
+onready var textBox: RichTextLabel = $Background/RichTextLabel
 onready var timer: Timer = $LetterTimer
+onready var nextArrow: Label = $Background/NextArrow
 
 func _ready():
 	connect("done_writing", self, "_on_done_writing")
@@ -20,9 +21,9 @@ func _ready():
 
 func _process(delta):
 #	print(can_proceed)
-	if Input.is_action_just_pressed("ui_right") || Input.is_action_just_pressed("ui_accept") && !can_proceed:
+	if Input.is_action_just_pressed("ui_right") || Input.is_action_just_pressed("ui_accept") || Input.is_action_just_pressed("select") && !can_proceed:
 		write_rest_of_line = true
-	if Input.is_action_just_pressed("ui_right") || Input.is_action_just_pressed("ui_accept") && can_proceed:
+	if Input.is_action_just_pressed("ui_right") || Input.is_action_just_pressed("ui_accept") || Input.is_action_just_pressed("select") && can_proceed:
 		if text_place < text_queue.size():
 			textBox.clear()
 			_print_line(text_queue[text_place])
@@ -37,15 +38,17 @@ func exit() -> void:
 	animPlayer.play("exit")
 
 func _print_line(line: String) -> void:
+	nextArrow.visible = false
 	for i in line.length():
 		can_proceed = false
 		if !write_rest_of_line:
 			timer.start()
-			textBox.add_text(line[i])
+			textBox.append_bbcode(line[i])
 			yield(timer, "timeout")
 		else:
-			textBox.add_text(line.substr(i, line.length()-1))
+			textBox.append_bbcode(line.substr(i, line.length()-1))
 			break
+	nextArrow.visible = true
 	write_rest_of_line = false
 	can_proceed = true
 
