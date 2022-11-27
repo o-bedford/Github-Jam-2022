@@ -19,6 +19,8 @@ var min_SP: int = 0
 var quip: String = "Test Quip"
 
 var description: String = "Test Description. This is a long one."
+var dialog_str: String
+var dialog: Array = []
 
 var actions_str: String
 var actions: Array = []
@@ -54,6 +56,9 @@ func loadDataFromDB(data: Dictionary) -> bool:
 		actions = actions_str.split(",")
 		for i in actions.size():
 			actions[i] = actions[i].split(" ")
+	if data["Dialogue"] != null:
+		dialog_str = data["Dialogue"]
+		dialog = dialog_str.split("\\")
 	if data["Status"] != null:
 		status_effect = data["Status"]
 	

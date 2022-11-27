@@ -39,6 +39,8 @@ func update_phase(delta:float) -> void:
 		## TODO: Change phase_manager.card based on opponentCard
 		modifiedCard.SP += opponentCard.SP
 		modifiedCard.actions.append_array(opponentCard.actions)
+		if !opponentCard.dialog.empty():
+			modifiedCard.dialog = opponentCard.dialog
 		phase_manager.card = modifiedCard
 		
 		print("Trap Choose")

@@ -13,7 +13,7 @@ func enter(_msg := {}):
 	
 	player = phase_manager.current_focused_player
 	opponent = phase_manager.current_unfocused_player
-	print("End!" + opponent.name)
+	print("End! " + opponent.name)
 	player.hand.changeState(phase_manager.allowAllCards)
 	opponent.hand.changeState(phase_manager.allowAllCards)
 

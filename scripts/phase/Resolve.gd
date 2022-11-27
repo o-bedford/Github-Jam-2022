@@ -13,7 +13,7 @@ func enter(_msg := {}):
 	player = phase_manager.current_focused_player
 	opponent = phase_manager.current_unfocused_player
 	player.hand.changeState(phase_manager.blacklist)
-	print("Resolve!" + player.name)
+	print("Resolve! " + player.name)
 	
 	card = phase_manager.card
 	
@@ -24,7 +24,11 @@ func enter(_msg := {}):
 	emit_signal("add_SP", card.SP)
 	
 	player.deck.graveyard.append(card)
-	phase_manager.transition_to("End")
+	if !card.dialog.empty():
+		print(card.dialog)
+		phase_manager.transition_to("Dialogue", {dialogue = card.dialog})
+	else:
+		phase_manager.transition_to("End")
 
 func update_phase(delta: float) -> void:
 	pass
@@ -77,7 +81,7 @@ func _resolve_actions(card: CardData) -> void:
 			if "graveyardPerk" in action[0]:
 				var graveyardCards = player.deck.graveyard
 				for card in player.hand.cardsInHand:
-					if graveyardCards > 0:
+					if graveyardCards.size() > 0:
 						card.SP += 1
 						graveyardCards -= 1
 				_wait()
