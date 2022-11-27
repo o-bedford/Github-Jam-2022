@@ -23,6 +23,7 @@ onready var player2: Player = $PlayerAI
 onready var phase_manager = $PhaseManager
 onready var resolve_phase = $PhaseManager/Resolve
 onready var play_phase = $PhaseManager/Play
+onready var SPMeter = $UI/SPMeter
 
 #big boi
 func _ready() -> void:
@@ -51,6 +52,8 @@ func _process(delta) -> void:
 #	print(phase_manager.current_focused_player.name + " " + phase_manager.current_phase.name)
 	if phase_manager.current_phase.name == "Resolve":
 		print("SP: " + str(SP_meter) + " | Current Player: " + phase_manager.current_focused_player.name + " | Topic: " + current_topic)
+	if Input.is_action_just_pressed("ui_down"):
+		_add_SP(2)
 #	pass
 
 func populate_deck(deck:Deck) -> void:
@@ -73,3 +76,5 @@ func _add_SP(amount: int) -> void:
 	SP_meter += amount
 	player1.current_hand_sp_limit = SP_meter
 	player2.current_hand_sp_limit = SP_meter
+#	print(SP_meter)
+	SPMeter.set_value(SP_meter)

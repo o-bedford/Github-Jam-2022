@@ -3,7 +3,7 @@ extends Phase
 var player: Player
 var dialogue_array: Array
 
-const dialog_path: String = "res://scenes/DialogBox.tscn"
+const dialog_path: String = "res://ui/DialogBox.tscn"
 
 func enter(_msg := {}) -> void:
 	print("Dialogue!")
