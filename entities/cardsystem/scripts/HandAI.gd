@@ -7,7 +7,11 @@ the AI gets to choose their cards
 var cardCanSelect: Array = []
 var card : CardData
 
+var rng = RandomNumberGenerator.new()
+
 const cardPath: String = "res://entities/cardsystem/Card.tscn"
+
+var randomness: int = 75
 
 onready var cardPos: Vector2 = $CardPos.position
 onready var discardPos: Vector2 = $DiscardPos.position
@@ -20,15 +24,27 @@ func changeState(whitelist: CardWhitelist) -> void:
 
 ### THIS IS THE AI LOGIC IT HAS TO CHOOSE BETWEEN SELECTABLE CARDS
 func chooseCard() -> void:
+	
+	rng.randomize()
+	
+	var my_random_number = rng.randf_range(0, 100)
 	var desirable_card: int = -1
 	var previous_card: CardData = CardData.new()
 	
 	var previous_weight = -1.0
 	for i in range(cardsInHand.size()):
 		if cardCanSelect[i]: 
-			if cardsInHand[i].weight > previous_weight:
-				desirable_card = i
-				previous_weight = cardsInHand[i].weight
+			my_random_number = rng.randf_range(0, 100)
+			if (i == 0):
+				if cardsInHand[i].weight > previous_weight:
+					desirable_card = i
+					previous_weight = cardsInHand[i].weight
+			else:
+				if (my_random_number  <= 75):
+					print(my_random_number)
+					if cardsInHand[i].weight > previous_weight:
+						desirable_card = i
+						previous_weight = cardsInHand[i].weight
 	
 	
 	cardSelected = desirable_card
