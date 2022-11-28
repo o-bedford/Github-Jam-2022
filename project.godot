@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/CardWhitelist.gd"
 }, {
+"base": "Control",
+"class": "Cutscene",
+"language": "GDScript",
+"path": "res://scenes/scripts/Cutscene.gd"
+}, {
 "base": "Node2D",
 "class": "Deck",
 "language": "GDScript",
@@ -69,6 +74,7 @@ _global_script_class_icons={
 "Card": "",
 "CardData": "",
 "CardWhitelist": "",
+"Cutscene": "",
 "Deck": "",
 "DialogBox": "",
 "Hand": "",

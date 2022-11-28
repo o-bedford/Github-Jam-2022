@@ -1,18 +1,20 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://fonts/Apollo.tres" type="DynamicFont" id=1]
 [ext_resource path="res://fonts/ApolloDialogue.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scenes/scripts/PostGameStory.gd" type="Script" id=3]
 
-[node name="Screen" type="Control"]
+[node name="PostGameStory" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 3 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="Label" type="Label" parent="."]
+[node name="Dialogue" type="Label" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -38,3 +40,6 @@ custom_fonts/font = ExtResource( 1 )
 text = "^"
 align = 2
 valign = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
