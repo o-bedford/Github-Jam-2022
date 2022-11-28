@@ -14,6 +14,7 @@ onready var timer: Timer = $LetterTimer
 onready var nextArrow: Label = $Background/NextArrow
 
 func _ready():
+	text_place = 0
 	connect("done_writing", self, "_on_done_writing")
 	enter()
 	_print_line(text_queue[0])
@@ -21,9 +22,9 @@ func _ready():
 
 func _process(delta):
 #	print(can_proceed)
-	if Input.is_action_just_pressed("ui_right") || Input.is_action_just_pressed("ui_accept") || Input.is_action_just_pressed("select") && !can_proceed:
+	if Input.is_action_just_pressed("select") && !can_proceed:
 		write_rest_of_line = true
-	if Input.is_action_just_pressed("ui_right") || Input.is_action_just_pressed("ui_accept") || Input.is_action_just_pressed("select") && can_proceed:
+	if Input.is_action_just_pressed("select") && can_proceed:
 		if text_place < text_queue.size():
 			textBox.clear()
 			_print_line(text_queue[text_place])

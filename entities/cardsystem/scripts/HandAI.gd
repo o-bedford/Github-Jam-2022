@@ -37,6 +37,7 @@ func chooseCard() -> void:
 			cardDrawn = true
 	else:
 		card = cardsInHand[desirable_card]
+		card.dialog = []
 
 
 func activateCard() -> CardData:

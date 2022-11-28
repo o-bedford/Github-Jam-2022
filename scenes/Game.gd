@@ -17,13 +17,14 @@ var cardDB:SQLite = SQLite.new()
 var current_player: Player
 var current_topic: String
 var SP_meter: int = 0
+var SP_range: Array = []
 
 onready var player1: Player = $Player
 onready var player2: Player = $PlayerAI
 onready var phase_manager = $PhaseManager
 onready var resolve_phase = $PhaseManager/Resolve
 onready var play_phase = $PhaseManager/Play
-onready var SPMeter = $UI/SPMeter
+onready var SP_Meter = $UI/SPMeter
 
 #big boi
 func _ready() -> void:
@@ -77,4 +78,4 @@ func _add_SP(amount: int) -> void:
 	player1.current_hand_sp_limit = SP_meter
 	player2.current_hand_sp_limit = SP_meter
 #	print(SP_meter)
-	SPMeter.set_value(SP_meter)
+	SP_Meter.set_value(SP_meter)

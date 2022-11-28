@@ -10,6 +10,7 @@ var trapList: bool = false
 #general game state
 var SP: int = 0
 var topic: String = ""
+var SP_range: Array = []
 
 #different conditions
 var canPlayHand: bool = true
@@ -56,8 +57,12 @@ func checkCard(card: CardData) -> bool:
 		return false
 	
 	#check if the card has that topic, is in the right SP range, etc.
-	if !(topic in card.topic.to_lower()) && !(card.min_SP >= SP):
-		return false
+	if !SP_range.empty():
+		if !(topic in card.topic.to_lower()) && !(card.SP in range(SP_range)):
+			return false
+	else:
+		if !(topic in card.topic.to_lower()):
+			return false
 	
 	#check if the conditions are met
 	if canPlayHand:

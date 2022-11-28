@@ -10,7 +10,7 @@ var player: Player
 onready var trapTimer: Timer = $TrapTimer
 
 func enter(_msg := {}):
-	#trapTimer.start()
+#	trapTimer.start()
 	opponent = phase_manager.current_unfocused_player
 	opponent.hand.changeState(phase_manager.trapList)
 	
@@ -35,7 +35,6 @@ func update_phase(delta:float) -> void:
 		
 		opponent.hand.enableDrawing(false)
 		opponentCard = opponent.hand.getSelectedCard()
-		
 		## TODO: Change phase_manager.card based on opponentCard
 		modifiedCard.SP += opponentCard.SP
 		modifiedCard.actions.append_array(opponentCard.actions)
@@ -44,7 +43,6 @@ func update_phase(delta:float) -> void:
 		phase_manager.card = modifiedCard
 		
 		print("Trap Choose")
-		
 
 		opponent.hand.activateCard()
 		yield(opponent.hand, "discard_animation_finished")

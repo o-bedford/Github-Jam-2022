@@ -90,6 +90,8 @@ func _resolve_actions(card: CardData) -> void:
 					if action_arg_1 in card.topic:
 						card.SP += action_arg_2_int
 				_wait()
+			if "range" in action[0]:
+				phase_manager.whitelist.SP_range = [action_arg_1_int, action_arg_2_int]
 			if "blockSP" in action[0]:
 				card.SP = 0
 				_wait()

@@ -25,7 +25,7 @@ var dialog: Array = []
 var actions_str: String
 var actions: Array = []
 
-var status_effect: String = "Probably don't want this to be a string"
+#var status_effect: String = "Probably don't want this to be a string"
 var weight: float = 0.0
 
 ##Loads a JSON into all the fields
@@ -39,7 +39,7 @@ func deepCopy(otherCardData: CardData) -> void:
 	quip = otherCardData.quip
 	description = otherCardData.description
 	actions = otherCardData.actions
-	status_effect = otherCardData.status_effect
+#	status_effect = otherCardData.status_effect
 
 func loadDataFromDB(data: Dictionary) -> bool:
 	id = data["ID"]
@@ -59,7 +59,5 @@ func loadDataFromDB(data: Dictionary) -> bool:
 	if data["Dialogue"] != null:
 		dialog_str = data["Dialogue"]
 		dialog = dialog_str.split("\\")
-	if data["Status"] != null:
-		status_effect = data["Status"]
 	
 	return false

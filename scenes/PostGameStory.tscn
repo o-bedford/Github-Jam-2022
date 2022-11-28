@@ -1,29 +1,40 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
-
-[sub_resource type="Animation" id=1]
-resource_name = "OutroSpeech"
+[ext_resource path="res://fonts/Apollo.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/ApolloDialogue.tres" type="DynamicFont" id=2]
 
 [node name="Screen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 1 )
-stretch_mode = 1
+color = Color( 0, 0, 0, 1 )
 
-[node name="TextEdit" type="TextEdit" parent="."]
+[node name="Label" type="Label" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -442.0
-margin_top = -20.0
-margin_right = 442.0
-margin_bottom = 20.0
+margin_left = -449.0
+margin_top = -16.0
+margin_right = 449.0
+margin_bottom = 17.0
+custom_fonts/font = ExtResource( 2 )
+align = 1
+valign = 1
+autowrap = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/OutroSpeech = SubResource( 1 )
+[node name="NextArrow" type="Label" parent="."]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = 12.0
+margin_right = 261.0
+rect_rotation = 180.0
+custom_fonts/font = ExtResource( 1 )
+text = "^"
+align = 2
+valign = 1
