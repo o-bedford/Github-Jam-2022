@@ -32,7 +32,9 @@ onready var message_box: MessageBox = $UI/MessageBox
 #big boi
 func _ready() -> void:
 	draw_phase.connect("set_message_box", self, "_set_message_box")
+	play_phase.connect("set_message_box", self, "_set_message_box")
 	play_phase.connect("change_topic", self, "_change_topic")
+	trap_phase.connect("set_message_box", self, "_set_message_box")
 	resolve_phase.connect("change_topic", self, "_change_topic")
 	resolve_phase.connect("add_SP", self, "_add_SP")
 	resolve_phase.connect("change_SP_range", self, "_change_SP_range")
@@ -90,7 +92,9 @@ func _change_SP_range(new_SP_range: Array) -> void:
 
 func _set_message_box(header: String, bodyText: String) -> void:
 	if message_box.timer.is_stopped():
-		message_box.set_message(header, bodyText)
+		print("test?")
+		message_box.popup(header, bodyText)
 	else:
+		print("test??")
 		message_box.timer.stop()
-		message_box.set_message(header, bodyText)
+		message_box.popup(header, bodyText)

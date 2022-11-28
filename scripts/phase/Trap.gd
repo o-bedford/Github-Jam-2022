@@ -20,6 +20,9 @@ func enter(_msg := {}):
 	player.hand.changeState(phase_manager.blacklist)
 	
 	print("Trap! " + opponent.name)
+	if opponent.name == "Player":
+		emit_signal("set_message_box", "Trap!", "Pick a card to counteract your opponent's card!")
+	
 	if _msg.has("card"):
 		selectedCard = phase_manager.card
 		phase_manager.board.newCard(phase_manager.card)

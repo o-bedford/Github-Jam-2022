@@ -31,6 +31,12 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -8.0
+margin_top = 160.0
+margin_right = 199.0
+margin_bottom = 434.0
+
 [node name="Panel" type="Panel" parent="."]
 margin_right = 195.0
 margin_bottom = 160.0
@@ -44,6 +50,7 @@ margin_left = -80.5
 margin_top = 24.0
 margin_right = 80.5
 margin_bottom = 43.0
+custom_colors/font_color = Color( 0.505882, 0.784314, 0.905882, 1 )
 custom_colors/font_color_shadow = Color( 0.298039, 0.266667, 0.203922, 1 )
 custom_constants/shadow_offset_x = 4
 custom_constants/shadow_offset_y = 3
@@ -60,6 +67,7 @@ margin_left = -81.5
 margin_top = -13.5
 margin_right = 81.5
 margin_bottom = 68.5
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
 custom_colors/font_color_shadow = Color( 0.298039, 0.266667, 0.203922, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
@@ -72,12 +80,6 @@ autowrap = true
 wait_time = 6.0
 one_shot = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_left = -8.0
-margin_top = 160.0
-margin_right = 199.0
-margin_bottom = 434.0
-
-[connection signal="timeout" from="InitialStay" to="." method="_on_InitialStay_timeout"]
 [connection signal="mouse_entered" from="TextureRect" to="." method="_on_TextureRect_mouse_entered"]
 [connection signal="mouse_exited" from="TextureRect" to="." method="_on_TextureRect_mouse_exited"]
+[connection signal="timeout" from="InitialStay" to="." method="_on_InitialStay_timeout"]
