@@ -33,7 +33,8 @@ func _process(delta):
 			_print_line(story_text[text_place])
 			text_place += 1
 		else:
-			get_tree().change_scene(next_scene_path)
+			var next_scene = load(next_scene_path)
+			FancyFade.horizontal_paint_brush(next_scene.instance(), 1.5)
 
 func set_story_text(text: Array) -> void:
 	story_text = text
