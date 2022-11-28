@@ -18,6 +18,7 @@ func enter(_msg := {}):
 	player.hand.changeState(phase_manager.whitelist)
 	player.hand.enableDrawing(true)
 	print("Play! " + player.name)
+	emit_signal("set_message_box", "Play!", "Pick a card to put on the table, or draw another card if you can't play any!")
 	
 	if player.name == "Player":
 		is_human = true

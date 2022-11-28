@@ -5,9 +5,12 @@
 [ext_resource path="res://ui/scripts/SPMeter.gd" type="Script" id=3]
 
 [node name="SPMeter" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_right = 0.0277778
+anchor_bottom = 0.740741
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_right = 40.0

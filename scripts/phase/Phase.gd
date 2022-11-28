@@ -10,6 +10,8 @@ For example, during Phase Draw, all cards are deactivated.
 For now, use phase_manager.current_focused_player in phase scripts to access player stuff
 """
 
+signal set_message_box(header, bodyText)
+
 var phase_manager = null
 
 # Basically _ready
