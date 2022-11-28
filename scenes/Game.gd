@@ -31,11 +31,12 @@ func _ready() -> void:
 	play_phase.connect("change_topic", self, "_change_topic")
 	resolve_phase.connect("change_topic", self, "_change_topic")
 	resolve_phase.connect("add_SP", self, "_add_SP")
+	resolve_phase.connect("change_SP_range", self, "_change_SP_range")
 	
 	cardDB.path = "res://db/cards"
 	randomize()
 	
-	_change_topic("Any")
+	_change_topic("any")
 	#initializes both decks. 
 	populate_deck(player1.deck)
 	populate_deck(player2.deck)
@@ -79,3 +80,6 @@ func _add_SP(amount: int) -> void:
 	player2.current_hand_sp_limit = SP_meter
 #	print(SP_meter)
 	SP_Meter.set_value(SP_meter)
+
+func _change_SP_range(new_SP_range: Array) -> void:
+	SP_range = new_SP_range

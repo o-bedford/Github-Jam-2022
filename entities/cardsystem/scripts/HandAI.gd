@@ -38,7 +38,7 @@ func chooseCard() -> void:
 	else:
 		card = cardsInHand[desirable_card]
 		card.dialog = []
-
+		card.SP *= -1
 
 func activateCard() -> CardData:
 	_cardActivationAnimation()

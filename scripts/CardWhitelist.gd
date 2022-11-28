@@ -9,7 +9,7 @@ var trapList: bool = false
 
 #general game state
 var SP: int = 0
-var topic: String = ""
+var topic: String = "any"
 var SP_range: Array = []
 
 #different conditions
@@ -58,10 +58,11 @@ func checkCard(card: CardData) -> bool:
 	
 	#check if the card has that topic, is in the right SP range, etc.
 	if !SP_range.empty():
-		if !(topic in card.topic.to_lower()) && !(card.SP in range(SP_range)):
+		if !(topic in card.topic.to_lower()) && !(card.SP in range(SP_range[0],SP_range[1])):
 			return false
 	else:
-		if !(topic in card.topic.to_lower()):
+		if !(topic in card.topic.to_lower() || "any" in topic):
+			print("this is not supposed to happen")
 			return false
 	
 	#check if the conditions are met

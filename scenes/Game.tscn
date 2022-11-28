@@ -24,6 +24,7 @@ margin_left = 1383.0
 margin_top = 112.0
 margin_right = 1383.0
 margin_bottom = 112.0
+win_condition = 20
 
 [node name="PlayerAI" parent="." instance=ExtResource( 2 )]
 

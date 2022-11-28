@@ -35,8 +35,12 @@ func _ready():
 #call update() whenever something changes.
 func _draw():
 	if cardData:
-		spLabel.text = str(cardData.SP)
-
+		spLabel.text = str(abs(cardData.SP))
+		if cardData.SP < 0:
+			spLabel.add_color_override("font_color", Color(1,0,0,1))
+		else:
+			spLabel.add_color_override("font_color", Color(0,0,0,1))
+		
 		topicIcon.texture = load("res://icon.png") #TODO add pictures lmao
 		
 		illustration.texture = load("res://icon.png") #TODO add pictures
