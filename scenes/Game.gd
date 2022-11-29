@@ -22,13 +22,19 @@ var SP_range: Array = []
 onready var player1: Player = $Player
 onready var player2: Player = $PlayerAI
 onready var phase_manager = $PhaseManager
-onready var resolve_phase = $PhaseManager/Resolve
+onready var draw_phase = $PhaseManager/Draw
 onready var play_phase = $PhaseManager/Play
+onready var resolve_phase = $PhaseManager/Resolve
+onready var trap_phase = $PhaseManager/Trap
 onready var SP_Meter = $UI/SPMeter
+onready var message_box: MessageBox = $UI/MessageBox
 
 #big boi
 func _ready() -> void:
+	draw_phase.connect("set_message_box", self, "_set_message_box")
+	play_phase.connect("set_message_box", self, "_set_message_box")
 	play_phase.connect("change_topic", self, "_change_topic")
+	trap_phase.connect("set_message_box", self, "_set_message_box")
 	resolve_phase.connect("change_topic", self, "_change_topic")
 	resolve_phase.connect("add_SP", self, "_add_SP")
 	resolve_phase.connect("change_SP_range", self, "_change_SP_range")
@@ -83,3 +89,12 @@ func _add_SP(amount: int) -> void:
 
 func _change_SP_range(new_SP_range: Array) -> void:
 	SP_range = new_SP_range
+
+func _set_message_box(header: String, bodyText: String) -> void:
+	if message_box.timer.is_stopped():
+		print("test?")
+		message_box.popup(header, bodyText)
+	else:
+		print("test??")
+		message_box.timer.stop()
+		message_box.popup(header, bodyText)
