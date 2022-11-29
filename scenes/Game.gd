@@ -26,7 +26,7 @@ onready var draw_phase = $PhaseManager/Draw
 onready var play_phase = $PhaseManager/Play
 onready var resolve_phase = $PhaseManager/Resolve
 onready var trap_phase = $PhaseManager/Trap
-onready var SP_Meter = $UI/SPMeter
+onready var SP_Meter_node = $UI/SPMeter
 onready var message_box: MessageBox = $UI/MessageBox
 
 #big boi
@@ -85,7 +85,11 @@ func _add_SP(amount: int) -> void:
 	player1.current_hand_sp_limit = SP_meter
 	player2.current_hand_sp_limit = SP_meter
 #	print(SP_meter)
-	SP_Meter.set_value(SP_meter)
+	SP_Meter_node.set_value(SP_meter)
+	if SP_meter >= SP_Meter_node.meter.max_value:
+		phase_manager.transition_to("Win")
+	elif SP_meter <= SP_Meter_node.meter.min_value:
+		phase_manager.transition_to("Lose")
 
 func _change_SP_range(new_SP_range: Array) -> void:
 	SP_range = new_SP_range
