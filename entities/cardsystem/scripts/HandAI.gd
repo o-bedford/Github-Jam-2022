@@ -15,6 +15,10 @@ var randomness: int = 75
 
 onready var cardPos: Vector2 = $CardPos.position
 onready var discardPos: Vector2 = $DiscardPos.position
+onready var timer: Timer = $AITimer
+
+func _ready():
+	randomize()
 
 func changeState(whitelist: CardWhitelist) -> void:
 	cardCanSelect = []
@@ -24,7 +28,10 @@ func changeState(whitelist: CardWhitelist) -> void:
 
 ### THIS IS THE AI LOGIC IT HAS TO CHOOSE BETWEEN SELECTABLE CARDS
 func chooseCard() -> void:
+	timer.wait_time = rand_range(1.0, 1.9)
+	timer.start()
 	
+	yield(timer, "timeout")
 	rng.randomize()
 	
 	var my_random_number = rng.randf_range(0, 100)

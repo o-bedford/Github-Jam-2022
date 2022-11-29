@@ -28,12 +28,14 @@ onready var resolve_phase = $PhaseManager/Resolve
 onready var trap_phase = $PhaseManager/Trap
 onready var SP_Meter_node = $UI/SPMeter
 onready var message_box: MessageBox = $UI/MessageBox
+onready var skip_turn_anim_player: AnimationPlayer = $SkipTurnAnimPlayer
 
 #big boi
 func _ready() -> void:
 	draw_phase.connect("set_message_box", self, "_set_message_box")
 	play_phase.connect("set_message_box", self, "_set_message_box")
 	play_phase.connect("change_topic", self, "_change_topic")
+	play_phase.connect("turn_skipped", self, "_turn_skipped")
 	trap_phase.connect("set_message_box", self, "_set_message_box")
 	resolve_phase.connect("change_topic", self, "_change_topic")
 	resolve_phase.connect("add_SP", self, "_add_SP")
@@ -60,8 +62,6 @@ func _process(delta) -> void:
 #	print(phase_manager.current_focused_player.name + " " + phase_manager.current_phase.name)
 	if phase_manager.current_phase.name == "Resolve":
 		print("SP: " + str(SP_meter) + " | Current Player: " + phase_manager.current_focused_player.name + " | Topic: " + current_topic)
-	if Input.is_action_just_pressed("ui_down"):
-		_add_SP(2)
 #	pass
 
 func populate_deck(deck:Deck) -> void:
@@ -102,3 +102,8 @@ func _set_message_box(header: String, bodyText: String) -> void:
 		print("test??")
 		message_box.timer.stop()
 		message_box.popup(header, bodyText)
+
+func _turn_skipped() -> void:
+	skip_turn_anim_player.play("skip_turn_fade_in")
+	yield(skip_turn_anim_player, "animation_finished")
+	skip_turn_anim_player.play("skip_turn_fade_out")
