@@ -18,7 +18,7 @@ func enter(_msg := {}) -> void:
 	player.hand.enableDrawing(false)
 	opponent.hand.changeState(phase_manager.blacklist)
 	print("Draw! " + player.name)
-	emit_signal("set_message_box", "Draw!", "Draw a card! Fuel your ammunition! Speak your mind!")
+#	emit_signal("set_message_box", "Draw!", "Draw a card! Fuel your ammunition! Speak your mind!")
 	
 	draw_timer.start()
 	

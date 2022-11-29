@@ -22,6 +22,8 @@ func enter(_msg := {}):
 	print("Trap! " + opponent.name)
 	if opponent.name == "Player":
 		emit_signal("set_message_box", "Trap!", "Pick a card to counteract your opponent's card!")
+	if opponent.name == "PlayerAI":
+		emit_signal("set_message_box", "Ceighsey Trap!", "There's a chance that your card will be modified!")
 	
 	if _msg.has("card"):
 		selectedCard = phase_manager.card

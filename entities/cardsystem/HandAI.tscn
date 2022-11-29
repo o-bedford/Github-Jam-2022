@@ -9,3 +9,5 @@ script = ExtResource( 1 )
 
 [node name="DiscardPos" type="Position2D" parent="."]
 position = Vector2( -1072, -56 )
+
+[node name="AITimer" type="Timer" parent="."]
