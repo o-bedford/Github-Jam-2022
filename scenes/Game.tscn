@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://entities/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/player/PlayerAI.tscn" type="PackedScene" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://scenes/Board.tscn" type="PackedScene" id=11]
 [ext_resource path="res://ui/SPMeter.tscn" type="PackedScene" id=12]
 [ext_resource path="res://ui/MessageBox.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scripts/phase/Win.gd" type="Script" id=14]
+[ext_resource path="res://scripts/phase/Lose.gd" type="Script" id=15]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 3 )
@@ -70,6 +72,12 @@ script = ExtResource( 10 )
 
 [node name="End" type="Node2D" parent="PhaseManager"]
 script = ExtResource( 5 )
+
+[node name="Win" type="Node2D" parent="PhaseManager"]
+script = ExtResource( 14 )
+
+[node name="Lose" type="Node2D" parent="PhaseManager"]
+script = ExtResource( 15 )
 
 [connection signal="timeout" from="PhaseManager/Draw/DrawTimer" to="PhaseManager/Draw" method="_on_DrawTimer_timeout"]
 [connection signal="timeout" from="PhaseManager/Trap/TrapTimer" to="PhaseManager/Trap" method="_on_TrapTimer_timeout"]
