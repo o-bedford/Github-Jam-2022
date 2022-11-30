@@ -30,7 +30,7 @@ func resizeWindow():
 	button.rect_position.y = (get_viewport_rect().size[1] - button.rect_size.y) / 2
 
 func _button_pressed():
-	get_tree().change_scene("res://scenes/Game.tscn")
+	get_tree().change_scene("res://scenes/PreGameStory.tscn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
