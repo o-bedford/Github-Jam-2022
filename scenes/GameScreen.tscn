@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/Game.tscn" type="PackedScene" id=1]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+margin_right = 1440.0
+margin_bottom = 810.0
+
+[node name="Viewport" type="Viewport" parent="ViewportContainer"]
+size = Vector2( 1440, 810 )
+
+[node name="Game" parent="ViewportContainer/Viewport" instance=ExtResource( 1 )]

@@ -15,7 +15,7 @@ func _ready():
 	tween.set_pause_mode(SceneTreeTween.TWEEN_PAUSE_PROCESS)
 	tween.tween_property(self, "rect_position", Vector2(534, 277), 0.5)
 
-func _process(delta):
+func _process(_delta):
 	if !get_tree().paused && !button_pause && !leaving:
 		leaving = true
 		var leave_tween: SceneTreeTween = get_tree().create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUART)

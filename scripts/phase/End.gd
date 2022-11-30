@@ -17,6 +17,9 @@ func enter(_msg := {}):
 	print("End! " + opponent.name)
 	player.hand.changeState(phase_manager.allowAllCards)
 	opponent.hand.changeState(phase_manager.allowAllCards)
+	
+	if player.name == "Player":
+		emit_signal("set_message_box", "Lose a few cards!", "Get rid of a few cards to get back down to " + str(player.max_hand_size) + "!")
 
 func update_phase(delta: float) -> void:
 	# Discard cards to reach hand size

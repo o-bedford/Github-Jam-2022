@@ -5,4 +5,6 @@ font_path = "res://fonts/Apollo.ttf"
 
 [resource]
 size = 30
+use_mipmaps = true
+use_filter = true
 font_data = SubResource( 2 )

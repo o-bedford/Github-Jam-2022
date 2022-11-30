@@ -5,7 +5,7 @@ ALL THE GAME LOGIC LET'S GOOOOOO.
 
 shall we do a state machine? 
 
-The game is 
+we shall
 """
 
 const card = preload("res://entities/cardsystem/Card.tscn")
@@ -34,10 +34,11 @@ onready var dialogue_phase = $PhaseManager/Dialogue
 onready var SP_Meter_node = $UI/SPMeter
 onready var message_box: MessageBox = $UI/MessageBox
 onready var skip_turn_anim_player: AnimationPlayer = $SkipTurnAnimPlayer
-onready var opponent_char: Node2D = $Opponent/OpponentChar
+onready var opponent_char: Node2D = $OpponentChar
 
 #big boi
 func _ready() -> void:
+	print("game start")
 	draw_phase.connect("set_message_box", self, "_set_message_box")
 	play_phase.connect("set_message_box", self, "_set_message_box")
 	play_phase.connect("change_topic", self, "_change_topic")
@@ -78,6 +79,7 @@ func _process(delta) -> void:
 
 func populate_deck(deck:Deck) -> void:
 	# Probably add a check for the amount of cards of each topic type
+	cardDB.read_only = true
 	cardDB.open_db()
 	cardDB.query("select * from " + db_table + ";")
 	for i in range(0, cardDB.query_result.size()):

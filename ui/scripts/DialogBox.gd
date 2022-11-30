@@ -21,7 +21,7 @@ func _ready():
 	_print_line(text_queue[0])
 	text_place += 1
 
-func _process(delta):
+func _process(_delta):
 #	print(can_proceed)
 	if Input.is_action_just_pressed("select") && !can_proceed:
 		write_rest_of_line = true

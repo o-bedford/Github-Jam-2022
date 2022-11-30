@@ -5,6 +5,8 @@ hand visible inherited class. basically the same thing as Hand except
 it shows the cards and animations.
 """
 
+signal draw_card
+
 var cardsInstances: Array = []
 
 var cardInstanceSelected: Card
