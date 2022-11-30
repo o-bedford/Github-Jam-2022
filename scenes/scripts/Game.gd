@@ -55,7 +55,7 @@ func _ready() -> void:
 	
 	cardDB.path = "res://db/cards"
 	randomize()
-	
+	#get_tree().change_scene("res://scenes/StartScreen.tscn")
 	_change_topic("any")
 	#initializes both decks. 
 	populate_deck(player1.deck)
