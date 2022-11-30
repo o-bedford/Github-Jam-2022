@@ -7,6 +7,7 @@ var is_human: bool = false
 onready var draw_timer = $DrawTimer
 
 func enter(_msg := {}) -> void:
+	emit_signal("can_pause", true)
 	phase_manager.turn += 1
 	for timeout in phase_manager.whitelist.timeouts:
 		if timeout > 0:

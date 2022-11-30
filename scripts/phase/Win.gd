@@ -22,6 +22,7 @@ var dialogue: Array = [
 ]
 
 func enter(_msg := {}) -> void:
+	emit_signal("can_pause", true)
 	player = phase_manager.current_focused_player
 	opponent = phase_manager.current_unfocused_player
 	player.hand.changeState(phase_manager.blacklist)

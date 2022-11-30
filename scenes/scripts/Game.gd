@@ -21,6 +21,7 @@ var SP_range: Array = []
 var viable_play_anims: Array = ["smug", "angry", "default"]
 var viable_dialogue_anims: Array = ["angry", "furious", "smug"]
 var viable_trap_anims: Array = ["angry", "smug", "default"]
+var can_pause: bool = true
 
 onready var player1: Player = $Player
 onready var player2: Player = $PlayerAI
@@ -46,6 +47,9 @@ func _ready() -> void:
 	resolve_phase.connect("change_topic", self, "_change_topic")
 	resolve_phase.connect("add_SP", self, "_add_SP")
 	resolve_phase.connect("change_SP_range", self, "_change_SP_range")
+	
+	for phase in phase_manager.get_children():
+		phase.connect("can_pause", self, "_change_pausability")
 	
 	phase_manager.connect("transitioned", self, "_change_opponent_anim")
 	
@@ -132,3 +136,6 @@ func _change_opponent_anim_dialog() -> void:
 	print("test")
 	var rand_index: int = randi() % viable_dialogue_anims.size()
 	opponent_char.set_anim(viable_dialogue_anims[rand_index])
+
+func _change_pausability(_can_pause: bool) -> void:
+	can_pause = _can_pause

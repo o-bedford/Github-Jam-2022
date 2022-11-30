@@ -11,6 +11,7 @@ var dialog_instance: DialogBox
 onready var dialogBox = preload(dialog_path)
 
 func enter(_msg := {}) -> void:
+	emit_signal("can_pause", true)
 	print("Dialogue!")
 	player = phase_manager.dialogue_player
 	player.hand.changeState(phase_manager.blacklist)
