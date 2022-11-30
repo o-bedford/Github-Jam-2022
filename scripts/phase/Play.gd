@@ -13,6 +13,7 @@ var has_drawn: bool = false
 # - other player can play a card
 
 func enter(_msg := {}):
+	emit_signal("can_pause", true)
 	has_drawn = false
 	player = phase_manager.current_focused_player
 	phase_manager.whitelist.trapTimeout += 1

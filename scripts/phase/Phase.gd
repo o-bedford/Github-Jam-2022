@@ -11,6 +11,7 @@ For now, use phase_manager.current_focused_player in phase scripts to access pla
 """
 
 signal set_message_box(header, bodyText)
+signal can_pause(yesno)
 
 var phase_manager = null
 

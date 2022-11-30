@@ -1,63 +1,67 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://entities/cardsystem/scripts/Card.gd" type="Script" id=1]
+[ext_resource path="res://ASSETS/UI/card_blank1.png" type="Texture" id=2]
+[ext_resource path="res://fonts/Apollo.tres" type="DynamicFont" id=3]
+
+[sub_resource type="DynamicFontData" id=2]
+font_path = "res://fonts/Apollo.ttf"
+
+[sub_resource type="DynamicFont" id=3]
+size = 75
+font_data = SubResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 79
+font_data = SubResource( 2 )
 
 [node name="Card" type="Node2D"]
 modulate = Color( 0.5, 0.5, 0.5, 1 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
-[node name="Background" type="ColorRect" parent="."]
-margin_left = -104.0
-margin_top = -152.0
-margin_right = 96.0
-margin_bottom = 148.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorRect" type="ColorRect" parent="Background"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 6.0
-margin_top = 6.0
-margin_right = -6.0
-margin_bottom = -6.0
-color = Color( 0.960784, 0.901961, 0.831373, 1 )
+[node name="Background" type="Sprite" parent="."]
+scale = Vector2( 0.193798, 0.193798 )
+texture = ExtResource( 2 )
+centered = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Background"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer"]
-margin_right = 200.0
-margin_bottom = 14.0
+margin_right = 774.0
+margin_bottom = 52.0
 alignment = 1
 
 [node name="SPLabel" type="Label" parent="Background/VBoxContainer/HBoxContainer"]
 modulate = Color( 0, 0, 0, 1 )
 self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 98.0
-margin_right = 98.0
-margin_bottom = 14.0
+margin_left = 385.0
+margin_right = 385.0
+margin_bottom = 52.0
+custom_fonts/font = ExtResource( 3 )
+align = 1
+valign = 1
 
 [node name="TopicIcon" type="TextureRect" parent="Background/VBoxContainer/HBoxContainer"]
-margin_left = 102.0
-margin_right = 102.0
-margin_bottom = 14.0
+margin_left = 389.0
+margin_right = 389.0
+margin_bottom = 52.0
 
 [node name="Illustration" type="TextureRect" parent="Background/VBoxContainer"]
-margin_top = 18.0
-margin_right = 200.0
-margin_bottom = 148.0
+margin_top = 56.0
+margin_right = 774.0
+margin_bottom = 523.0
 size_flags_vertical = 3
 
 [node name="QuipLabel" type="Label" parent="Background/VBoxContainer"]
 modulate = Color( 0, 0, 0, 1 )
 self_modulate = Color( 0, 0, 0, 1 )
-margin_top = 152.0
-margin_right = 200.0
-margin_bottom = 166.0
+margin_top = 527.0
+margin_right = 774.0
+margin_bottom = 608.0
+custom_fonts/font = SubResource( 3 )
+text = "test"
 align = 1
 valign = 1
 autowrap = true
@@ -65,19 +69,18 @@ autowrap = true
 [node name="DescriptionLabel" type="Label" parent="Background/VBoxContainer"]
 modulate = Color( 0, 0, 0, 1 )
 self_modulate = Color( 0, 0, 0, 1 )
-margin_top = 228.0
-margin_right = 200.0
-margin_bottom = 242.0
+margin_top = 803.0
+margin_right = 774.0
+margin_bottom = 888.0
 size_flags_vertical = 6
+custom_fonts/font = SubResource( 4 )
 align = 1
 valign = 1
 autowrap = true
 
 [node name="SelectBox" type="ColorRect" parent="."]
-margin_left = -80.0
-margin_top = -200.0
-margin_right = 80.0
-margin_bottom = 300.0
+margin_right = 160.0
+margin_bottom = 500.0
 color = Color( 0.52549, 0.0627451, 0.0627451, 0 )
 
 [connection signal="gui_input" from="SelectBox" to="." method="_on_SelectBox_gui_input"]

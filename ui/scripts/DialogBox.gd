@@ -2,6 +2,7 @@ extends Control
 class_name DialogBox
 
 signal done_writing
+signal next_line
 
 var text_queue: Array = ["This is a test line", "This is a second test line"]
 var can_proceed: bool = false
@@ -25,6 +26,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("select") && !can_proceed:
 		write_rest_of_line = true
 	if Input.is_action_just_pressed("select") && can_proceed:
+		emit_signal("next_line")
 		if text_place < text_queue.size():
 			textBox.clear()
 			_print_line(text_queue[text_place])

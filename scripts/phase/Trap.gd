@@ -10,6 +10,7 @@ var player: Player
 onready var trapTimer: Timer = $TrapTimer
 
 func enter(_msg := {}):
+	emit_signal("can_pause", false)
 #	trapTimer.start()
 	opponent = phase_manager.current_unfocused_player
 	opponent.hand.changeState(phase_manager.trapList)

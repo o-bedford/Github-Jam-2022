@@ -4,6 +4,7 @@ var player: Player
 var opponent: Player
 
 func enter(_msg := {}):
+	emit_signal("can_pause", true)
 	if phase_manager.current_focused_player == phase_manager.get_parent().get_node("Player"):
 		phase_manager.current_focused_player = phase_manager.get_parent().get_node("PlayerAI")
 		phase_manager.current_unfocused_player = phase_manager.get_parent().get_node("Player")
