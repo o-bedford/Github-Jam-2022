@@ -21,6 +21,7 @@ var SP_range: Array = []
 
 onready var player1: Player = $Player
 onready var player2: Player = $PlayerAI
+
 onready var phase_manager = $PhaseManager
 onready var draw_phase = $PhaseManager/Draw
 onready var play_phase = $PhaseManager/Play
@@ -52,6 +53,8 @@ func _ready() -> void:
 	for i in range(5):
 		player1.draw()
 		player2.draw()
+	
+	
 	
 	#Testing phase manager. it works!
 	phase_manager.current_focused_player = player1
