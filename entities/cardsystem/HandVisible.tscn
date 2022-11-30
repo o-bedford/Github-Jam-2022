@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/DrawButton.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 584, 444 )
+extents = Vector2( 492, 392.5 )
 
 [sub_resource type="Curve2D" id=1]
 bake_interval = 50.0
@@ -20,11 +20,11 @@ script = ExtResource( 1 )
 position = Vector2( 0, 160 )
 
 [node name="HoverArea" type="Area2D" parent="HandArea"]
-position = Vector2( 0, 415 )
+position = Vector2( -77, 415 )
 z_index = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HandArea/HoverArea"]
-position = Vector2( 456, 342 )
+position = Vector2( 525, 401 )
 shape = SubResource( 2 )
 
 [node name="Path" type="Path2D" parent="HandArea"]
@@ -47,6 +47,9 @@ margin_left = 944.0
 margin_right = 988.0
 rect_scale = Vector2( 2.98876, 2.51989 )
 
-[connection signal="mouse_entered" from="HandArea/HoverArea" to="." method="_on_HoverArea_mouse_entered"]
-[connection signal="mouse_exited" from="HandArea/HoverArea" to="." method="_on_HoverArea_mouse_exited"]
+[node name="CheckForHover" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
 [connection signal="pressed" from="DrawButton" to="." method="_on_DrawButton_pressed"]
+[connection signal="timeout" from="CheckForHover" to="." method="_on_CheckForHover_timeout"]

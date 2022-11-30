@@ -14,10 +14,7 @@ z_index = -1
 [node name="Background" parent="." index="0"]
 use_parent_material = true
 
-[node name="ColorRect" parent="Background" index="0"]
-use_parent_material = true
-
-[node name="VBoxContainer" parent="Background" index="1"]
+[node name="VBoxContainer" parent="Background" index="0"]
 use_parent_material = true
 
 [node name="HBoxContainer" parent="Background/VBoxContainer" index="0"]

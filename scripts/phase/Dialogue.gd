@@ -22,7 +22,7 @@ func enter(_msg := {}) -> void:
 	emit_signal("new_dialog_instance")
 	
 	dialog_instance.text_queue = dialogue_array
-	add_child(dialog_instance)
+	phase_manager.ui_canvas_layer.add_child(dialog_instance)
 	dialog_instance.connect("done_writing", self, "dialog_done")
 
 func dialog_done() -> void:
