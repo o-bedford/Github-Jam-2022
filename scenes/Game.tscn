@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://entities/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/player/PlayerAI.tscn" type="PackedScene" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://fonts/ApolloMessageBoxHeader.tres" type="DynamicFont" id=17]
 [ext_resource path="res://ui/scripts/SkipTurn.gd" type="Script" id=18]
 [ext_resource path="res://entities/opponent/OpponentCharacter.tscn" type="PackedScene" id=19]
+[ext_resource path="res://scenes/Table.tscn" type="PackedScene" id=20]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -164,6 +165,8 @@ centered = false
 
 [node name="OpponentChar" parent="." instance=ExtResource( 19 )]
 z_index = -1
+
+[node name="Table" parent="." instance=ExtResource( 20 )]
 
 [node name="UI" type="CanvasLayer" parent="."]
 

@@ -8,7 +8,7 @@ shader = ExtResource( 2 )
 
 [node name="Card" instance=ExtResource( 1 )]
 material = SubResource( 1 )
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 0.5, 0.4 )
 z_index = -1
 
 [node name="Background" parent="." index="0"]
