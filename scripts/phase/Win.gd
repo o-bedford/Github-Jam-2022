@@ -22,6 +22,8 @@ var dialogue: Array = [
 ]
 
 func enter(_msg := {}) -> void:
+	player = phase_manager.current_focused_player
+	opponent = phase_manager.current_unfocused_player
 	player.hand.changeState(phase_manager.blacklist)
 	opponent.hand.changeState(phase_manager.blacklist)
 	
@@ -33,4 +35,4 @@ func enter(_msg := {}) -> void:
 
 func dialog_done() -> void:
 	var end_cutscene = preload(end_cutscene_path)
-	FancyFade.horizontal_paint_brush(end_cutscene.instance(), 3.0)
+	FancyFade.horizontal_paint_brush(end_cutscene.instance(), 4.0)
