@@ -36,23 +36,37 @@ func chooseCard() -> void:
 	
 	var my_random_number = rng.randf_range(0, 100)
 	var desirable_card: int = -1
-	var previous_card: CardData = CardData.new()
+	var max_sp: int = -1
+	var max_actions: int = -1
 	
-	var previous_weight = -1.0
+#	var previous_card: CardData = CardData.new()
+	
+#	var previous_weight = -1.0
+#	for i in range(cardCanSelect.size()):
+#		if cardCanSelect[i]:
+#			my_random_number = rng.randf_range(0, 100)
+#			if (i == 0):
+#				if cardsInHand[i].weight > previous_weight:
+#					desirable_card = i
+#					previous_weight = cardsInHand[i].weight
+#			else:
+#				if (my_random_number  <= 75):
+#					print(my_random_number)
+#					if cardsInHand[i].weight > previous_weight:
+#						desirable_card = i
+#						previous_weight = cardsInHand[i].weight
+	
+	
 	for i in range(cardCanSelect.size()):
 		if cardCanSelect[i]:
-			my_random_number = rng.randf_range(0, 100)
-			if (i == 0):
-				if cardsInHand[i].weight > previous_weight:
-					desirable_card = i
-					previous_weight = cardsInHand[i].weight
-			else:
-				if (my_random_number  <= 75):
-					print(my_random_number)
-					if cardsInHand[i].weight > previous_weight:
-						desirable_card = i
-						previous_weight = cardsInHand[i].weight
-	
+			if cardsInHand[i].SP > max_sp:
+				max_sp = cardsInHand[i].SP
+				max_actions = cardsInHand[i].actions.size()
+				desirable_card = i
+			elif cardsInHand[i].SP == max_sp and cardsInHand[i].actions.size()>max_actions:
+				max_sp = cardsInHand[i].SP
+				max_actions = cardsInHand[i].actions.size()
+				desirable_card = i
 	
 	cardSelected = desirable_card
 	if desirable_card == -1:

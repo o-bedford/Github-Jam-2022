@@ -61,8 +61,11 @@ func checkCard(card: CardData) -> bool:
 	
 	#check if the card has that topic, is in the right SP range, etc.
 	if !SP_range.empty():
-		if !(topic in card.topic.to_lower() || "any" in topic) && !(card.SP in range(SP_range[0],SP_range[1])):
-			print(str(card.SP) + " " + str(SP_range))
+		if !("any" in topic):
+			if !(topic in card.topic.to_lower()):
+				return false
+		
+		if !(card.SP in range(SP_range[0],SP_range[1]+1)):
 			return false
 	else:
 		if !(topic in card.topic.to_lower() || "any" in topic):

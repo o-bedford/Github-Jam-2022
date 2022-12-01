@@ -26,6 +26,6 @@ func update_phase(delta: float) -> void:
 	if player.hand.cardSelected != -1:
 		print("player Drew ", player.hand.cardSelected)
 		player.hand.justDiscard(player.hand.cardSelected)
-	if player.hand.size() <= player.max_hand_size && opponent.hand.size() <= opponent.max_hand_size:
+	if player.hand.size() <= player.max_hand_size:
 		phase_manager.transition_to("Draw")
 	

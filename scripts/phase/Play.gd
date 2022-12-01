@@ -17,6 +17,7 @@ func enter(_msg := {}):
 	emit_signal("can_pause", true)
 	has_drawn = false
 	player = phase_manager.current_focused_player
+	print(phase_manager.whitelist.SP_range, " ", phase_manager.whitelist.topic)
 	phase_manager.whitelist.trapTimeout += 1
 	player.hand.changeState(phase_manager.whitelist)
 	player.hand.enableDrawing(true)
