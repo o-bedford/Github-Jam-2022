@@ -39,8 +39,8 @@ func chooseCard() -> void:
 	var previous_card: CardData = CardData.new()
 	
 	var previous_weight = -1.0
-	for i in range(cardsInHand.size()):
-		if cardCanSelect[i]: 
+	for i in range(cardCanSelect.size()):
+		if cardCanSelect[i]:
 			my_random_number = rng.randf_range(0, 100)
 			if (i == 0):
 				if cardsInHand[i].weight > previous_weight:
@@ -83,7 +83,7 @@ func _cardActivationAnimation() -> void:
 	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK)
 	
 	tween.tween_property(newCard, "scale", Vector2.ONE, 0.2)
-	tween.tween_property(newCard, "position", newCard.position, 1.0)
+	tween.tween_property(newCard, "position", newCard.position, 3.0)
 	tween.tween_property(newCard, "position", discardPos, 0.5)
 	
 	yield(tween, "finished")

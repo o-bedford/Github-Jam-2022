@@ -78,10 +78,10 @@ autowrap = true
 [node name="TopicIcon" type="TextureRect" parent="Background"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -61.4286
-margin_top = -528.286
-margin_right = 64.5714
-margin_bottom = -708.286
+margin_left = -49.1427
+margin_top = -495.523
+margin_right = 76.8573
+margin_bottom = -675.523
 rect_scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 4 )
 
