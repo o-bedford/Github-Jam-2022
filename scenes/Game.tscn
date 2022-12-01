@@ -176,10 +176,10 @@ position = Vector2( 1270, 249 )
 position = Vector2( 1078, 260 )
 
 [node name="BGChar3" parent="Background" instance=ExtResource( 26 )]
-position = Vector2( 413, 263 )
+position = Vector2( 413, 266 )
 
 [node name="BGChar4" parent="Background" instance=ExtResource( 27 )]
-position = Vector2( 234, 286 )
+position = Vector2( 244, 312 )
 
 [node name="OpponentChar" parent="." instance=ExtResource( 19 )]
 z_index = -1
