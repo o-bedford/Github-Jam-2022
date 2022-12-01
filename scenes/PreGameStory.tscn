@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://fonts/Apollo.tres" type="DynamicFont" id=1]
 [ext_resource path="res://fonts/ApolloDialogue.tres" type="DynamicFont" id=2]
 [ext_resource path="res://scenes/scripts/PreGameStory.gd" type="Script" id=3]
+[ext_resource path="res://sounds/bg/OST 5 - The Establishment.ogg" type="AudioStream" id=4]
 
 [node name="PreGameStory" type="Control"]
 anchor_right = 1.0
@@ -46,3 +47,4 @@ wait_time = 0.05
 one_shot = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
