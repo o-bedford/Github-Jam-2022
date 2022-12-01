@@ -76,7 +76,7 @@ func _draw():
 
 func _getDescription() -> String:
 	
-	var description: String = ""
+	var description: String = "[center]"
 	
 	if cardData.type == "action":
 		for action in cardData.actions:
@@ -152,7 +152,7 @@ func _getDescription() -> String:
 					description += " by " + action[1] + "[/b]\n"
 				"copy":
 					description += "[b]Copy[/b] the card played\n"
-	
+	description += "[/center]"
 	return description
 
 #used for emitting signals, when the mouse hovers over the card

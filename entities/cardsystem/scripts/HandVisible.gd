@@ -99,6 +99,7 @@ func _onCardSelected(cardNum: Card) -> void:
 	cardSelectSFX.play()
 	cardSelected = cardsInstances.find(cardNum, 0)
 	cardInstanceSelected = cardNum
+	print("onCardSelected")
 
 
 func _getPointRatio(index:int, relative: int = 0) -> Array:
@@ -173,9 +174,9 @@ func _cardActivationAnimation(cardInstance: Card) -> void:
 	tween.tween_property(cardInstance, "position", cardActivatePos, 0.2)
 	tween.tween_property(cardInstance, "position", cardActivatePos, 1.3)
 	yield(tween, "finished")
-	_cardDiscardAnimation(cardInstance)
+	cardDiscardAnimation(cardInstance)
 
-func _cardDiscardAnimation(cardInstance: Card) -> void:
+func cardDiscardAnimation(cardInstance: Card) -> void:
 	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK)
 	
 	tween.tween_property(cardInstance, "position", graveyardPos, 0.4)
@@ -188,7 +189,11 @@ func disCard(cardIndex: int) -> CardData:
 	update()
 	cardsInstances.pop_at(cardIndex)
 	return .disCard(cardIndex)
-	
+
+func justDiscard(cardIndex: int) -> CardData:
+	print("justDiscard")
+	cardDiscardAnimation(cardInstanceSelected)
+	return .justDiscard(cardIndex)
 
 #do whatever animation you need to do if a card is selected
 func cardSelected(card: Card) -> void:
