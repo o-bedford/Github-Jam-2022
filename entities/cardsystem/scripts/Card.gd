@@ -44,7 +44,7 @@ func _draw():
 		if cardData.type == "trap":
 			$Background.texture = preload("res://ASSETS/UI/trap_card1.png")
 			spLabel.text = ""
-			#topicIcon.texture = preload("")
+			topicIcon.texture = preload("res://ASSETS/UI/trap_icon1.png")
 		else:
 			spLabel.text = str(abs(cardData.SP))
 			match cardData.topic:
@@ -150,6 +150,8 @@ func _getDescription() -> String:
 					else:
 						description += " decrease "
 					description += " by " + action[1] + "[/b]\n"
+				"copy":
+					description += "[b]Copy[/b] the card played\n"
 	
 	return description
 
