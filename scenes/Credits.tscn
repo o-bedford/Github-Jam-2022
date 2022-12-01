@@ -1,7 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://fonts/CreditsNames.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/assets/img/scrollbg.png" type="Texture" id=2]
+[ext_resource path="res://scenes/assets/credits/usopp-1-190x266.jpg" type="Texture" id=3]
+[ext_resource path="res://scenes/assets/credits/Death13_webp.png" type="Texture" id=4]
+[ext_resource path="res://scenes/scripts/Credits.gd" type="Script" id=5]
 
 [sub_resource type="DynamicFontData" id=2]
 font_path = "res://fonts/Apollo.ttf"
@@ -15,6 +18,7 @@ size = 94
 font_data = SubResource( 2 )
 
 [node name="Credits" type="Node2D"]
+script = ExtResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -40,12 +44,17 @@ text = "Programmers"
 [node name="Oyin" type="Label" parent="Sprite"]
 margin_left = 370.0
 margin_top = 1106.0
-margin_right = 496.0
-margin_bottom = 1197.0
+margin_right = 1216.0
+margin_bottom = 1385.0
+rect_pivot_offset = Vector2( -1, 0 )
 custom_fonts/font = ExtResource( 1 )
 text = "Oyin - Game logic
       - Scene construction
 	      - Headache reciever"
+
+[node name="Usopp-1-190X266" type="Sprite" parent="Sprite"]
+position = Vector2( 216, 1299 )
+texture = ExtResource( 3 )
 
 [node name="OyinTwitter" type="LinkButton" parent="Sprite"]
 margin_left = 292.0
@@ -63,3 +72,158 @@ margin_bottom = 1557.0
 focus_mode = 2
 custom_fonts/font = ExtResource( 1 )
 text = "Github"
+
+[node name="Hadrien" type="Label" parent="Sprite"]
+margin_left = 294.0
+margin_top = 1967.0
+margin_right = 1357.0
+margin_bottom = 2246.0
+rect_pivot_offset = Vector2( -1, 0 )
+custom_fonts/font = ExtResource( 1 )
+text = "Hadrien - Animations
+           - Card game knowledge
+		           - Code"
+
+[node name="Anish" type="Label" parent="Sprite"]
+margin_left = 249.0
+margin_top = 2370.0
+margin_right = 1312.0
+margin_bottom = 2649.0
+rect_pivot_offset = Vector2( -1, 0 )
+custom_fonts/font = ExtResource( 1 )
+text = "Anish - Opponent AI
+        - Scene connections
+		        - Also code"
+
+[node name="AHeader" type="Label" parent="Sprite"]
+margin_left = 57.0
+margin_top = 2769.0
+margin_right = 566.0
+margin_bottom = 2869.0
+custom_fonts/font = SubResource( 4 )
+text = "Artists!"
+
+[node name="Jaya" type="Label" parent="Sprite"]
+margin_left = 228.0
+margin_top = 2943.0
+margin_right = 1178.0
+margin_bottom = 3222.0
+rect_pivot_offset = Vector2( -1, 0 )
+custom_fonts/font = ExtResource( 1 )
+text = "Jaya - Character animations
+       - UI"
+
+[node name="JayaLink" type="LinkButton" parent="Sprite"]
+margin_left = 274.0
+margin_top = 3152.0
+margin_right = 531.0
+margin_bottom = 3243.0
+focus_mode = 2
+custom_fonts/font = ExtResource( 1 )
+text = "Weebly"
+
+[node name="JayaTwitter" type="LinkButton" parent="Sprite"]
+margin_left = 827.0
+margin_top = 3152.0
+margin_right = 1084.0
+margin_bottom = 3243.0
+focus_mode = 2
+custom_fonts/font = ExtResource( 1 )
+text = "Twitter"
+
+[node name="Kat" type="Label" parent="Sprite"]
+margin_left = 220.0
+margin_top = 3537.0
+margin_right = 1170.0
+margin_bottom = 3816.0
+rect_pivot_offset = Vector2( -1, 0 )
+custom_fonts/font = ExtResource( 1 )
+text = "Kat - BG design
+     - Crowd design
+	     - Table"
+
+[node name="KatLink" type="LinkButton" parent="Sprite"]
+margin_left = 976.0
+margin_top = 3621.0
+margin_right = 1233.0
+margin_bottom = 3712.0
+focus_mode = 2
+custom_fonts/font = ExtResource( 1 )
+text = "Link"
+
+[node name="Amiiku" type="Label" parent="Sprite"]
+margin_left = 210.0
+margin_top = 4138.0
+margin_right = 1160.0
+margin_bottom = 4417.0
+rect_pivot_offset = Vector2( -1, 0 )
+custom_fonts/font = ExtResource( 1 )
+text = "Amiiku - UI Design"
+
+[node name="AmiikuLink" type="LinkButton" parent="Sprite"]
+margin_left = 946.0
+margin_top = 4138.0
+margin_right = 1203.0
+margin_bottom = 4229.0
+focus_mode = 2
+custom_fonts/font = ExtResource( 1 )
+text = "Link"
+
+[node name="Alex" type="Label" parent="Sprite"]
+margin_left = 213.0
+margin_top = 4508.0
+margin_right = 1163.0
+margin_bottom = 4787.0
+rect_pivot_offset = Vector2( -1, 0 )
+custom_fonts/font = ExtResource( 1 )
+text = "Alex Stoker - Music/Sound"
+
+[node name="AlexLink2" type="LinkButton" parent="Sprite"]
+margin_left = 316.0
+margin_top = 4684.0
+margin_right = 573.0
+margin_bottom = 4775.0
+focus_mode = 2
+custom_fonts/font = ExtResource( 1 )
+text = "Twitter"
+
+[node name="AlexLink3" type="LinkButton" parent="Sprite"]
+margin_left = 813.0
+margin_top = 4684.0
+margin_right = 1070.0
+margin_bottom = 4775.0
+focus_mode = 2
+custom_fonts/font = ExtResource( 1 )
+text = "Youtube"
+
+[node name="HelpFrom" type="Label" parent="Sprite"]
+margin_left = 216.0
+margin_top = 4958.0
+margin_right = 1166.0
+margin_bottom = 5237.0
+rect_pivot_offset = Vector2( -1, 0 )
+custom_fonts/font = ExtResource( 1 )
+text = "With Help from:"
+
+[node name="HelpFromLink" type="LinkButton" parent="Sprite"]
+margin_left = 525.0
+margin_top = 5139.0
+margin_right = 790.0
+margin_bottom = 5230.0
+focus_mode = 2
+custom_fonts/font = ExtResource( 1 )
+text = "Nihilo Games"
+
+[node name="Death13Webp" type="Sprite" parent="Sprite"]
+position = Vector2( 170, 2121 )
+texture = ExtResource( 4 )
+
+[connection signal="pressed" from="Sprite/OyinTwitter" to="." method="_on_OyinTwitter_pressed"]
+[connection signal="pressed" from="Sprite/OyinGithub" to="." method="_on_OyinGithub_pressed"]
+[connection signal="pressed" from="Sprite/JayaLink" to="." method="_on_JayaLink_pressed"]
+[connection signal="pressed" from="Sprite/JayaTwitter" to="." method="_on_JayaTwitter_pressed"]
+[connection signal="pressed" from="Sprite/KatLink" to="." method="_on_KatLink_pressed"]
+[connection signal="pressed" from="Sprite/AmiikuLink" to="." method="_on_AmiikuLink_pressed"]
+[connection signal="pressed" from="Sprite/AlexLink2" to="." method="_on_AlexLink2_pressed"]
+[connection signal="pressed" from="Sprite/AlexLink3" to="." method="_on_AlexLink3_pressed"]
+[connection signal="pressed" from="Sprite/HelpFromLink" to="." method="_on_HelpFromLink_pressed"]
