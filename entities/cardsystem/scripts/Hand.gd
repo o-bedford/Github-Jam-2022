@@ -38,7 +38,11 @@ func activateCard() -> CardData:
 
 #plays the discard animation based on the card selected
 func disCard(cardIndex: int) -> CardData:
+	cardSelected = -1
 	return removeCard(cardIndex)
+
+func justDiscard(cardIndex:int) -> CardData:
+	return disCard(cardIndex)
 
 func size() -> int:
 	return cardsInHand.size()
