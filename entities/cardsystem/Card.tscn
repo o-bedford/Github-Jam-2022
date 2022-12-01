@@ -1,8 +1,24 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://entities/cardsystem/scripts/Card.gd" type="Script" id=1]
 [ext_resource path="res://ASSETS/UI/card_blank1.png" type="Texture" id=2]
 [ext_resource path="res://fonts/Apollo.tres" type="DynamicFont" id=3]
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	if (color.a == 0.){
+		COLOR = vec4(0., 0., 0.,0.);
+	}
+	else {
+		COLOR = vec4(1., 1., 1., mod(cos(TIME/2.)+UV.x+UV.y,1.0)/2.);
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
 
 [sub_resource type="DynamicFontData" id=2]
 font_path = "res://fonts/Apollo.ttf"
@@ -18,8 +34,12 @@ size = 79
 font_data = SubResource( 2 )
 
 [node name="Card" type="Node2D"]
-modulate = Color( 0.5, 0.5, 0.5, 1 )
 script = ExtResource( 1 )
+
+[node name="Glow" type="Sprite" parent="."]
+material = SubResource( 6 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 2 )
 
 [node name="Background" type="Sprite" parent="."]
 scale = Vector2( 0.244186, 0.244186 )

@@ -41,10 +41,8 @@ func changeState(whitelist: CardWhitelist) -> void:
 		if whitelist.checkCard(cardsInHand[i]):
 			canPlay = true
 			cardsInstances[i].isSelectable = true
-			cardsInstances[i].set_modulate(Color(1,1,1,1))
 		else:
 			cardsInstances[i].isSelectable = false
-			cardsInstances[i].set_modulate(Color(0.5,0.5,0.5,1))
 	
 	if !canPlay and drawCard:
 		cardDrawn = true
