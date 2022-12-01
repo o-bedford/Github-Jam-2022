@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://entities/cardsystem/scripts/HandVisible.gd" type="Script" id=1]
 [ext_resource path="res://scenes/DrawButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://sounds/sfx/01 - CARD SHUFFLE.wav" type="AudioStream" id=3]
+[ext_resource path="res://sounds/sfx/03 - CARD SELECT.wav" type="AudioStream" id=4]
+[ext_resource path="res://sounds/sfx/02 - CARD HOVER.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 584, 444 )
@@ -51,6 +54,18 @@ rect_scale = Vector2( 2.98876, 2.51989 )
 [node name="CheckForHover" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
+
+[node name="CardHoverSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+bus = "SFX"
+
+[node name="CardSelectSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+bus = "SFX"
+
+[node name="CardShuffleSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+bus = "SFX"
 
 [connection signal="pressed" from="DrawButton" to="." method="_on_DrawButton_pressed"]
 [connection signal="timeout" from="CheckForHover" to="." method="_on_CheckForHover_timeout"]

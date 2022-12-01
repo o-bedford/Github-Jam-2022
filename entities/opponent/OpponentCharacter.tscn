@@ -115,6 +115,7 @@ vframes = 4
 
 [node name="furious" type="Sprite" parent="."]
 visible = false
+position = Vector2( -146.154, -110.769 )
 texture = ExtResource( 3 )
 vframes = 4
 
