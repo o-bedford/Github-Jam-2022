@@ -13,3 +13,4 @@ enum TOPICS {
 }
 
 var escalate: bool = false
+var perk: bool = false

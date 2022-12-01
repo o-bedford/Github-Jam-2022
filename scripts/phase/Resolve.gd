@@ -70,9 +70,11 @@ func _resolve_actions(card: CardData) -> void:
 				else:
 					for card in opponent.hand.cardsInHand:
 						card.SP += action_arg_1_int
+				Global.perk = true
 			if "oppPerk" in action[0]:
 				for card in target.hand.cardsInHand:
 					card.SP += action_arg_1_int
+				Global.perk = true
 			if "ceil" in action[0]:
 				phase_manager.whitelist.SP_range = [phase_manager.card.SP-2, phase_manager.card.SP]
 			if "floor" in action[0]:

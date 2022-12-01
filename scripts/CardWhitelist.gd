@@ -56,6 +56,7 @@ func checkCard(card: CardData) -> bool:
 						if !((condition[1] in topic) or (condition[2] in topic)):
 							return false
 					return true
+			return true
 		return false
 	
 	#check if the card has that topic, is in the right SP range, etc.
