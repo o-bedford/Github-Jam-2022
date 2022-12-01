@@ -42,8 +42,10 @@ func update_phase(delta:float) -> void:
 		opponent.hand.enableDrawing(false)
 		opponentCard = opponent.hand.getSelectedCard()
 		## TODO: Change phase_manager.card based on opponentCard
-		modifiedCard.SP += opponentCard.SP
 		modifiedCard.actions.append_array(opponentCard.actions)
+		
+		collapse_actions()
+		
 		if !opponentCard.dialog.empty():
 			modifiedCard.dialog = opponentCard.dialog
 		phase_manager.card = modifiedCard
@@ -53,6 +55,21 @@ func update_phase(delta:float) -> void:
 		opponent.hand.activateCard()
 		yield(opponent.hand, "discard_animation_finished")
 		phase_manager.transition_to("Resolve")
+
+func collapse_actions() -> void:
+	var has_topic: bool = false
+	var has_topic_ender: bool = false
+	var topic_to_remove: Array = []
+	for action in modifiedCard.actions:
+		if action.has("topic"):
+			has_topic = true
+			topic_to_remove = action
+		if action.has("topicEnder"):
+			has_topic_ender = true
+		if action.has("changeTarget"):
+			modifiedCard.actions.insert(0, action)
+	if has_topic && has_topic_ender:
+		modifiedCard.actions.remove(modifiedCard.actions.find(topic_to_remove))
 
 func _on_TrapTimer_timeout():
 	phase_manager.transition_to("Resolve")

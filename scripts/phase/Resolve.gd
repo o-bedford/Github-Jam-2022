@@ -9,6 +9,7 @@ signal change_SP_range
 var card: CardData
 var player: Player
 var opponent: Player
+var target: Player = opponent
 
 func enter(_msg := {}):
 	emit_signal("can_pause", true)
@@ -40,6 +41,7 @@ func _wait() -> void:
 
 func _resolve_actions(card: CardData) -> void:
 	if !card.actions.empty():
+		var other_target: bool = false
 		for action in card.actions:
 			# Collect args
 			var action_arg_1: String = ""
@@ -52,51 +54,31 @@ func _resolve_actions(card: CardData) -> void:
 			var action_arg_2_int = action_arg_2.to_int()
 
 			# Execute actions
+			if "changeTarget" in action[0]:
+				if "self" in action_arg_1:
+					target = player
+				elif "opponent" in action_arg_1:
+					target = opponent
+			if "changeAttack" in action[0]:
+				card.SP += action_arg_1_int
 			if "selfPerk" in action[0]:
-				# Don't need to use whitelist for this?
-				for card in player.hand.cardsInHand:
-					if action_arg_1 in card.topic:
-						card.SP += action_arg_2_int
-				_wait()
-			if "disableType" in action[0]:
-				# For x turns
-				if "transition" in action_arg_1:
-					phase_manager.whitelist.transitionTimeout += action_arg_2_int
-				if "trap" in action_arg_1:
-					phase_manager.whitelist.trapTimeout += action_arg_2_int
-				if "action" in action_arg_1:
-					phase_manager.whitelist.actionTimeout += action_arg_2_int
-				_wait()
-			if "disableTopic" in action[0]:
-				# Blocks transition cards for x turns
-				if "future" in action_arg_1:
-					phase_manager.whitelist.futureTimeout += action_arg_2_int
-				if "intimacy" in action_arg_1:
-					phase_manager.whitelist.intimacyTimeout += action_arg_2_int
-				if "social" in action_arg_1:
-					phase_manager.whitelist.socialTimeout += action_arg_2_int
-				if "hobbies" in action_arg_1:
-					phase_manager.whitelist.hobbiesTimeout += action_arg_2_int
-				if "house" in action_arg_1:
-					phase_manager.whitelist.houseTimeout += action_arg_2_int
-				_wait()
-			if "graveyardPerk" in action[0]:
-				var graveyardCards = player.deck.graveyard
-				var graveyardIter = graveyardCards.size()
-				for card in player.hand.cardsInHand:
-					if graveyardCards.size() > 0:
-						card.SP += 1
-						graveyardIter -= 1
-				_wait()
+				if !other_target:
+					for card in player.hand.cardsInHand:
+						card.SP += action_arg_1_int
+				else:
+					for card in opponent.hand.cardsInHand:
+						card.SP += action_arg_1_int
 			if "oppPerk" in action[0]:
-				for card in opponent.hand.cardsInHand:
-					if action_arg_1 in card.topic:
-						card.SP += action_arg_2_int
-				_wait()
-			if "range" in action[0]:
-				var new_SP_range = [action_arg_1_int, action_arg_2_int]
-				phase_manager.whitelist.SP_range = new_SP_range
-				emit_signal("change_SP_range", new_SP_range)
-			if "blockSP" in action[0]:
-				card.SP = 0
-				_wait()
+				for card in target.hand.cardsInHand:
+					card.SP += action_arg_1_int
+			if "ceil" in action[0]:
+				phase_manager.whitelist.SP_range = [player.hand.getSelectedCard().SP-2, player.hand.getSelectedCard().SP]
+			if "floor" in action[0]:
+				phase_manager.whitelist.SP_range = [player.hand.getSelectedCard().SP, player.hand.getSelectedCard().SP+2]
+			if "changePerkTarget" in action[0]:
+				other_target = true
+			if "spClear" in action[0]:
+				phase_manager.whitelist.SP_range = []
+			if "topicEnder" in action[0]:
+				emit_signal("change_topic", "any")
+				phase_manager.whitelist.topic = "any"

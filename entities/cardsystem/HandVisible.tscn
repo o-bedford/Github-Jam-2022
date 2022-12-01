@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/DrawButton.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 492, 392.5 )
+extents = Vector2( 584, 444 )
 
 [sub_resource type="Curve2D" id=1]
 bake_interval = 50.0
