@@ -1,8 +1,24 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://entities/cardsystem/scripts/Card.gd" type="Script" id=1]
 [ext_resource path="res://ASSETS/UI/card_blank1.png" type="Texture" id=2]
 [ext_resource path="res://fonts/Apollo.tres" type="DynamicFont" id=3]
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	if (color.a == 0.){
+		COLOR = vec4(0., 0., 0.,0.);
+	}
+	else {
+		COLOR = vec4(1., 1., 1., mod(cos(TIME/2.)+UV.x+UV.y,1.0)/2.);
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
 
 [sub_resource type="DynamicFontData" id=2]
 font_path = "res://fonts/Apollo.ttf"
@@ -18,8 +34,12 @@ size = 79
 font_data = SubResource( 2 )
 
 [node name="Card" type="Node2D"]
-modulate = Color( 0.5, 0.5, 0.5, 1 )
 script = ExtResource( 1 )
+
+[node name="Glow" type="Sprite" parent="."]
+material = SubResource( 6 )
+scale = Vector2( 0.26, 0.26 )
+texture = ExtResource( 2 )
 
 [node name="Background" type="Sprite" parent="."]
 scale = Vector2( 0.244186, 0.244186 )
@@ -30,41 +50,43 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -774.0
-margin_top = -1080.0
+margin_left = -674.0
+margin_top = -1003.0
+margin_right = -100.0
+margin_bottom = -94.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer"]
-margin_right = 774.0
+margin_right = 574.0
 margin_bottom = 52.0
 alignment = 1
 
 [node name="SPLabel" type="Label" parent="Background/VBoxContainer/HBoxContainer"]
 modulate = Color( 0, 0, 0, 1 )
 self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 385.0
-margin_right = 385.0
+margin_left = 285.0
+margin_right = 285.0
 margin_bottom = 52.0
 custom_fonts/font = ExtResource( 3 )
 align = 1
 valign = 1
 
 [node name="TopicIcon" type="TextureRect" parent="Background/VBoxContainer/HBoxContainer"]
-margin_left = 389.0
-margin_right = 389.0
+margin_left = 289.0
+margin_right = 289.0
 margin_bottom = 52.0
 
 [node name="Illustration" type="TextureRect" parent="Background/VBoxContainer"]
 margin_top = 56.0
-margin_right = 774.0
-margin_bottom = 523.0
+margin_right = 574.0
+margin_bottom = 438.0
 size_flags_vertical = 3
 
 [node name="QuipLabel" type="Label" parent="Background/VBoxContainer"]
 modulate = Color( 0, 0, 0, 1 )
 self_modulate = Color( 0, 0, 0, 1 )
-margin_top = 527.0
-margin_right = 774.0
-margin_bottom = 608.0
+margin_top = 442.0
+margin_right = 574.0
+margin_bottom = 523.0
 custom_fonts/font = SubResource( 3 )
 text = "test"
 align = 1
@@ -74,9 +96,9 @@ autowrap = true
 [node name="DescriptionLabel" type="Label" parent="Background/VBoxContainer"]
 modulate = Color( 0, 0, 0, 1 )
 self_modulate = Color( 0, 0, 0, 1 )
-margin_top = 803.0
-margin_right = 774.0
-margin_bottom = 888.0
+margin_top = 675.0
+margin_right = 574.0
+margin_bottom = 760.0
 size_flags_vertical = 6
 custom_fonts/font = SubResource( 4 )
 align = 1

@@ -23,6 +23,10 @@ var viable_dialogue_anims: Array = ["angry", "furious", "smug"]
 var viable_trap_anims: Array = ["angry", "smug", "default"]
 var can_pause: bool = true
 
+var init_music = "res://sounds/bg/OST 1 - DATE START !!! (Getting the hang of it).ogg"
+var intense_music = "res://sounds/bg/OST 2 - DATE START !!! (Youre fired up).ogg"
+var intense_music_set: bool = false
+
 onready var player1: Player = $Player
 onready var player2: Player = $PlayerAI
 onready var phase_manager = $PhaseManager
@@ -38,6 +42,7 @@ onready var opponent_char: Node2D = $OpponentChar
 
 #big boi
 func _ready() -> void:
+	BgMusic.fade_in(init_music, 1.0)
 	print("game start")
 	draw_phase.connect("set_message_box", self, "_set_message_box")
 	play_phase.connect("set_message_box", self, "_set_message_box")
@@ -104,6 +109,13 @@ func _add_SP(amount: int) -> void:
 		phase_manager.transition_to("Win")
 	elif SP_meter <= SP_Meter_node.meter.min_value:
 		phase_manager.transition_to("Lose")
+	
+	if SP_meter >= SP_Meter_node.meter.max_value-3 && !intense_music_set:
+		if !BgMusic.set_sound_same_pos(intense_music):
+			BgMusic.set_sound(intense_music)
+		else:
+			print("intenser")
+			intense_music_set = true
 
 func _change_SP_range(new_SP_range: Array) -> void:
 	SP_range = new_SP_range

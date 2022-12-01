@@ -1,15 +1,15 @@
 extends Control
+
+const intro_cutscene_path = "res://scenes/PreGameStory.tscn"
+
 var time_start = 0
 var time_now = 0
 var button = Button.new()
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var music: String = "res://sounds/bg/OST 3 - Rose Wine.ogg"
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-
+	BgMusic.set_sound(music)
 
 	button.text = "CLICK HERE TO START THE GAME!"
 
@@ -30,7 +30,9 @@ func resizeWindow():
 	button.rect_position.y = (get_viewport_rect().size[1] - button.rect_size.y) / 2
 
 func _button_pressed():
-	get_tree().change_scene("res://scenes/PreGameStory.tscn")
+	var intro_cutscene = preload(intro_cutscene_path)
+	BgMusic.fade_out(3.0)
+	FancyFade.tile_reveal(intro_cutscene.instance(), 2.0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

@@ -33,6 +33,7 @@ func _process(delta):
 			_print_line(story_text[text_place])
 			text_place += 1
 		else:
+			BgMusic.fade_out(1.5)
 			var next_scene = load(next_scene_path)
 			FancyFade.horizontal_paint_brush(next_scene.instance(), 1.5)
 

@@ -1,6 +1,9 @@
 extends Cutscene
 
+var music: String = "res://sounds/bg/OST 5 - The Establishment.ogg"
+
 func _ready():
+	BgMusic.fade_in(music, 2.0)
 	set_next_scene("res://scenes/Game.tscn")
 	set_story_text([
 		"So, this is finally it.",

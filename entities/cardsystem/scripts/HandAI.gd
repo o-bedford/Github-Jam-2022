@@ -80,7 +80,7 @@ func _cardActivationAnimation() -> void:
 	
 	.add_child(newCard)
 	
-	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT)
+	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK)
 	
 	tween.tween_property(newCard, "scale", Vector2.ONE, 0.2)
 	tween.tween_property(newCard, "position", newCard.position, 1.0)

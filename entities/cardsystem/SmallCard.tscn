@@ -8,16 +8,13 @@ shader = ExtResource( 2 )
 
 [node name="Card" instance=ExtResource( 1 )]
 material = SubResource( 1 )
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 0.5, 0.4 )
 z_index = -1
 
-[node name="Background" parent="." index="0"]
+[node name="Background" parent="." index="1"]
 use_parent_material = true
 
-[node name="ColorRect" parent="Background" index="0"]
-use_parent_material = true
-
-[node name="VBoxContainer" parent="Background" index="1"]
+[node name="VBoxContainer" parent="Background" index="0"]
 use_parent_material = true
 
 [node name="HBoxContainer" parent="Background/VBoxContainer" index="0"]
@@ -32,7 +29,7 @@ use_parent_material = true
 [node name="DescriptionLabel" parent="Background/VBoxContainer" index="3"]
 use_parent_material = true
 
-[node name="SelectBox" parent="." index="1"]
+[node name="SelectBox" parent="." index="2"]
 use_parent_material = true
 margin_left = -176.0
 margin_top = -144.0

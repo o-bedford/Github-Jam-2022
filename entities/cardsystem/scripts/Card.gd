@@ -23,13 +23,21 @@ onready var illustration: TextureRect = $Background/VBoxContainer/Illustration
 onready var quipLabel: Label = $Background/VBoxContainer/QuipLabel
 onready var descriptionLabel: Label = $Background/VBoxContainer/DescriptionLabel
 
+onready var glow: Sprite = $Glow
+
 
 func _ready():
-	pass
+	glow.visible = false
 
 #func load_new_data(newCardData: CardData) -> void:
 #	cardData = newCardData
 #	update()
+
+func _process(delta: float) -> void:
+	if isSelectable:
+		glow.visible = true
+	else:
+		glow.visible = false
 
 #Goes through each CardData element and changes the children of Card based on the Data
 #call update() whenever something changes.

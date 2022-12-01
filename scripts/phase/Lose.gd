@@ -16,6 +16,7 @@ var dialogue: Array = [
 ]
 
 func enter(_msg := {}) -> void:
+	BgMusic.audio_player.stop()
 	emit_signal("can_pause", true)
 	player.hand.changeState(phase_manager.blacklist)
 	opponent.hand.changeState(phase_manager.blacklist)
