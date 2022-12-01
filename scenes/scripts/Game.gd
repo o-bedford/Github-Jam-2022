@@ -40,9 +40,13 @@ onready var message_box: MessageBox = $UI/MessageBox
 onready var skip_turn_anim_player: AnimationPlayer = $SkipTurnAnimPlayer
 onready var opponent_char: Node2D = $OpponentChar
 
+onready var SPUP_SFX: AudioStreamPlayer = $SFX/SPUP
+onready var SPDOWN_SFX: AudioStreamPlayer = $SFX/SPDOWN
+
 #big boi
 func _ready() -> void:
 	BgMusic.fade_in(init_music, 1.0)
+	BgMusic.play_ambiance()
 	print("game start")
 	draw_phase.connect("set_message_box", self, "_set_message_box")
 	play_phase.connect("set_message_box", self, "_set_message_box")
@@ -100,6 +104,10 @@ func _change_topic(topic: String) -> void:
 	print("Current topic: " + topic)
 
 func _add_SP(amount: int) -> void:
+	if amount < 0:
+		SPDOWN_SFX.play()
+	elif amount > 0:
+		SPUP_SFX.play()
 	SP_meter += amount
 	player1.current_hand_sp_limit = SP_meter
 	player2.current_hand_sp_limit = SP_meter

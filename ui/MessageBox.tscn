@@ -2,34 +2,21 @@
 
 [ext_resource path="res://fonts/ApolloMessageBoxHeader.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/scripts/MessageBox.gd" type="Script" id=2]
-
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.67451, 0.643137, 0.623529, 0.34902 )
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
+[ext_resource path="res://ui/assets/img/message_box_1.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFontData" id=2]
 font_path = "res://fonts/Apollo.ttf"
 
 [sub_resource type="DynamicFont" id=4]
-size = 18
+size = 21
 use_filter = true
 font_data = SubResource( 2 )
 
 [node name="MessageBox" type="Control"]
-anchor_right = 0.135417
-anchor_bottom = 0.197531
-margin_left = 8.0
-margin_top = -160.0
-margin_right = 8.0
-margin_bottom = -160.0
+margin_right = 268.0
+margin_bottom = 255.0
 mouse_filter = 2
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": true
-}
 
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_left = -8.0
@@ -37,38 +24,44 @@ margin_top = 160.0
 margin_right = 199.0
 margin_bottom = 434.0
 
-[node name="Panel" type="Panel" parent="."]
-margin_right = 195.0
-margin_bottom = 160.0
-mouse_filter = 2
-custom_styles/panel = SubResource( 3 )
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+margin_top = -256.0
+margin_right = 268.0
+margin_bottom = -2.0
+texture = ExtResource( 3 )
+region_rect = Rect2( 124.658, 76.7929, 683.85, 664.206 )
+patch_margin_left = 131
+patch_margin_top = 128
+patch_margin_right = 137
+patch_margin_bottom = 126
 
-[node name="PhaseLabel" type="Label" parent="Panel"]
+[node name="PhaseLabel" type="Label" parent="NinePatchRect"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -80.5
-margin_top = 24.0
-margin_right = 80.5
-margin_bottom = 43.0
-custom_colors/font_color = Color( 0.505882, 0.784314, 0.905882, 1 )
-custom_colors/font_color_shadow = Color( 0.298039, 0.266667, 0.203922, 1 )
+margin_left = -99.0
+margin_top = 45.0
+margin_right = 99.0
+margin_bottom = 99.0
+custom_colors/font_color = Color( 0.858824, 0.419608, 0.360784, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 4
 custom_constants/shadow_offset_y = 3
 custom_fonts/font = ExtResource( 1 )
 text = "DRAW!"
 align = 1
+valign = 1
 
-[node name="BodyText" type="Label" parent="Panel"]
+[node name="BodyText" type="Label" parent="NinePatchRect"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -81.5
-margin_top = -13.5
-margin_right = 81.5
-margin_bottom = 68.5
-custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
-custom_colors/font_color_shadow = Color( 0.298039, 0.266667, 0.203922, 1 )
+margin_left = -104.0
+margin_top = -13.0
+margin_right = 100.0
+margin_bottom = 79.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0.752941, 0.74902, 0.745098, 0.14902 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 custom_fonts/font = SubResource( 4 )

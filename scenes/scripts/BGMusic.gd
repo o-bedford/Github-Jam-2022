@@ -5,6 +5,7 @@ var next_sound: AudioStream
 onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
 onready var fadeOutTween: Tween = $FadeOutTween
 onready var fadeInTween: Tween = $FadeInTween
+onready var ambiance: AudioStreamPlayer = $Ambiance
 
 func set_sound(sound: String) -> void:
 	audio_player.volume_db = 0
@@ -37,3 +38,9 @@ func fade_in(sound: String, duration: float) -> void:
 	fadeInTween.start()
 	yield(fadeInTween, "tween_completed")
 	fadeOutTween.remove_all()
+
+func play_ambiance() -> void:
+	ambiance.play()
+
+func stop_ambiance() -> void:
+	ambiance.stop()

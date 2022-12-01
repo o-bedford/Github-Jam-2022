@@ -1,13 +1,17 @@
-extends Panel
+extends TextureRect
 class_name PauseScreen
 
 var start_pos: Vector2 = Vector2(534, 840)
 var button_pause: bool = false
 var leaving: bool = false
 
-onready var resume_button = $Button
+onready var resume_button = $CenterContainer/VBoxContainer/Button
+onready var music_slider = $CenterContainer/VBoxContainer/MusicSlider
+onready var sfx_slider = $CenterContainer/VBoxContainer/SFXSlider
 
 func _ready():
+	music_slider.value = db2linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Background")))
+	sfx_slider.value = db2linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX")))
 	pause_mode = PAUSE_MODE_PROCESS
 	rect_position = start_pos
 	var tween: SceneTreeTween
@@ -30,3 +34,11 @@ func _on_Button_pressed():
 	leave_tween.tween_property(self, "rect_position", start_pos, 0.5)
 	yield(leave_tween, "finished")
 	queue_free()
+
+
+func _on_MusicSlider_value_changed(value):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Background"), linear2db(value))
+
+
+func _on_SFXSlider_value_changed(value):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear2db(value))

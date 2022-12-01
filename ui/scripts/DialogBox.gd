@@ -14,6 +14,8 @@ onready var textBox: RichTextLabel = $Background/RichTextLabel
 onready var timer: Timer = $LetterTimer
 onready var nextArrow: Label = $Background/NextArrow
 
+onready var voice: AudioStreamPlayer = $Voice
+
 func _ready():
 	text_place = 0
 	connect("done_writing", self, "_on_done_writing")
@@ -25,6 +27,7 @@ func _process(_delta):
 #	print(can_proceed)
 	if Input.is_action_just_pressed("select") && !can_proceed:
 		write_rest_of_line = true
+		voice.stop()
 	if Input.is_action_just_pressed("select") && can_proceed:
 		emit_signal("next_line")
 		if text_place < text_queue.size():
@@ -48,6 +51,7 @@ func _print_line(line: String) -> void:
 			timer.start()
 			textBox.append_bbcode(line[i])
 			yield(timer, "timeout")
+			voice.play()
 		else:
 			textBox.append_bbcode(line.substr(i, line.length()-1))
 			break

@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://fonts/Apollo.tres" type="DynamicFont" id=1]
 [ext_resource path="res://fonts/ApolloDialogue.tres" type="DynamicFont" id=2]
 [ext_resource path="res://fonts/ApolloDialogueBold.tres" type="DynamicFont" id=3]
 [ext_resource path="res://ui/scripts/DialogBox.gd" type="Script" id=4]
+[ext_resource path="res://sounds/sfx/07 - VOICE 1.wav" type="AudioStream" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.133333, 0.133333, 0.133333, 0.486275 )
@@ -197,6 +198,9 @@ anims/exit = SubResource( 5 )
 [node name="LetterTimer" type="Timer" parent="."]
 wait_time = 0.05
 one_shot = true
+
+[node name="Voice" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
 
 [connection signal="done_writing" from="." to="." method="_on_DialogBox_done_writing"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://entities/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/player/PlayerAI.tscn" type="PackedScene" id=2]
@@ -20,6 +20,9 @@
 [ext_resource path="res://ui/scripts/SkipTurn.gd" type="Script" id=18]
 [ext_resource path="res://entities/opponent/OpponentCharacter.tscn" type="PackedScene" id=19]
 [ext_resource path="res://scenes/Table.tscn" type="PackedScene" id=20]
+[ext_resource path="res://sounds/sfx/04 - SP UP!.wav" type="AudioStream" id=21]
+[ext_resource path="res://sounds/sfx/05 - SP Down..wav" type="AudioStream" id=22]
+[ext_resource path="res://sounds/sfx/10 - HEARTBREAK.wav" type="AudioStream" id=23]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -237,10 +240,23 @@ script = ExtResource( 14 )
 [node name="Lose" type="Node2D" parent="PhaseManager"]
 script = ExtResource( 15 )
 
+[node name="Heartbreak" type="AudioStreamPlayer" parent="PhaseManager/Lose"]
+stream = ExtResource( 23 )
+
 [node name="SkipTurnAnimPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 1 )
 anims/skip_turn_fade_in = SubResource( 2 )
 anims/skip_turn_fade_out = SubResource( 3 )
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="SPUP" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 21 )
+bus = "SFX"
+
+[node name="SPDOWN" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 22 )
+bus = "SFX"
 
 [connection signal="timeout" from="PhaseManager/Draw/DrawTimer" to="PhaseManager/Draw" method="_on_DrawTimer_timeout"]
 [connection signal="timeout" from="PhaseManager/Trap/TrapTimer" to="PhaseManager/Trap" method="_on_TrapTimer_timeout"]

@@ -30,6 +30,10 @@ onready var handAreaPos: Vector2 = $HandArea.position
 
 onready var drawButton: Button = $DrawButton
 
+onready var cardHoverSFX: AudioStreamPlayer = $CardHoverSFX
+onready var cardSelectSFX: AudioStreamPlayer = $CardSelectSFX
+onready var cardShuffleSFX: AudioStreamPlayer = $CardShuffleSFX
+
 const cardPath: String = "res://entities/cardsystem/Card.tscn"
 
 func _ready() -> void:
@@ -78,6 +82,7 @@ func addCard(newCardData: CardData) -> void:
 	update()
 
 func _onCardHovered(cardNum: Card) -> void:
+	cardHoverSFX.play()
 	cardHoveredIndex = cardsInstances.find(cardNum, 0)
 	cardNum.z_index = 1
 	update()
@@ -91,6 +96,7 @@ func _onCardUnhovered(cardNum: Card) -> void:
 
 
 func _onCardSelected(cardNum: Card) -> void:
+	cardSelectSFX.play()
 	cardSelected = cardsInstances.find(cardNum, 0)
 	cardInstanceSelected = cardNum
 
