@@ -56,6 +56,7 @@ func loadDataFromDB(data: Dictionary) -> bool:
 		actions = actions_str.split(",")
 		for i in actions.size():
 			actions[i] = actions[i].split(" ")
+	print(str(actions))
 	if data["Dialogue"] != null:
 		dialog_str = data["Dialogue"]
 		dialog = dialog_str.split("\\")
