@@ -50,41 +50,43 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -774.0
-margin_top = -1080.0
+margin_left = -674.0
+margin_top = -1003.0
+margin_right = -100.0
+margin_bottom = -94.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer"]
-margin_right = 774.0
+margin_right = 574.0
 margin_bottom = 52.0
 alignment = 1
 
 [node name="SPLabel" type="Label" parent="Background/VBoxContainer/HBoxContainer"]
 modulate = Color( 0, 0, 0, 1 )
 self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 385.0
-margin_right = 385.0
+margin_left = 285.0
+margin_right = 285.0
 margin_bottom = 52.0
 custom_fonts/font = ExtResource( 3 )
 align = 1
 valign = 1
 
 [node name="TopicIcon" type="TextureRect" parent="Background/VBoxContainer/HBoxContainer"]
-margin_left = 389.0
-margin_right = 389.0
+margin_left = 289.0
+margin_right = 289.0
 margin_bottom = 52.0
 
 [node name="Illustration" type="TextureRect" parent="Background/VBoxContainer"]
 margin_top = 56.0
-margin_right = 774.0
-margin_bottom = 523.0
+margin_right = 574.0
+margin_bottom = 438.0
 size_flags_vertical = 3
 
 [node name="QuipLabel" type="Label" parent="Background/VBoxContainer"]
 modulate = Color( 0, 0, 0, 1 )
 self_modulate = Color( 0, 0, 0, 1 )
-margin_top = 527.0
-margin_right = 774.0
-margin_bottom = 608.0
+margin_top = 442.0
+margin_right = 574.0
+margin_bottom = 523.0
 custom_fonts/font = SubResource( 3 )
 text = "test"
 align = 1
@@ -94,9 +96,9 @@ autowrap = true
 [node name="DescriptionLabel" type="Label" parent="Background/VBoxContainer"]
 modulate = Color( 0, 0, 0, 1 )
 self_modulate = Color( 0, 0, 0, 1 )
-margin_top = 803.0
-margin_right = 774.0
-margin_bottom = 888.0
+margin_top = 675.0
+margin_right = 574.0
+margin_bottom = 760.0
 size_flags_vertical = 6
 custom_fonts/font = SubResource( 4 )
 align = 1
