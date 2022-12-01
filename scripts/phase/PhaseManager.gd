@@ -38,6 +38,8 @@ func _ready() -> void:
 	trapList.trapList = true
 	allowAllCards.allowAll = true
 	
+	whitelist.SP_range = [0,3]
+	
 	resolve_phase.connect("add_SP", self, "_add_whitelist_SP")
 	resolve_phase.connect("change_topic", self, "_change_topic")
 	play_phase.connect("change_topic", self, "_change_topic")

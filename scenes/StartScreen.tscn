@@ -1,17 +1,49 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://ASSETS/UI/start.png" type="Texture" id=1]
 [ext_resource path="res://scenes/scripts/StartScreen.gd" type="Script" id=2]
+[ext_resource path="res://fonts/CreditsNames.tres" type="DynamicFont" id=3]
+[ext_resource path="res://ui/assets/img/button1.png" type="Texture" id=4]
 
-[node name="StartScreen" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[sub_resource type="StyleBoxTexture" id=1]
+content_margin_left = 40.0
+content_margin_right = 40.0
+content_margin_top = 34.0
+content_margin_bottom = 23.0
+texture = ExtResource( 4 )
+region_rect = Rect2( 151.721, 168.392, 1608.63, 695.254 )
+margin_left = 227.207
+margin_right = 186.31
+margin_top = 172.678
+margin_bottom = 190.854
+
+[node name="StartScreen" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="Title" type="TextureRect" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -32.0
-margin_right = 32.0
-margin_bottom = 64.0
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.375, 0.375 )
 texture = ExtResource( 1 )
+centered = false
+
+[node name="Start" type="Button" parent="."]
+margin_left = 129.0
+margin_top = 343.0
+margin_right = 417.0
+margin_bottom = 491.0
+custom_fonts/font = ExtResource( 3 )
+custom_styles/normal = SubResource( 1 )
+text = "Start!"
+icon_align = 1
+
+[node name="Credits" type="Button" parent="."]
+margin_left = 541.0
+margin_top = 493.0
+margin_right = 829.0
+margin_bottom = 641.0
+custom_fonts/font = ExtResource( 3 )
+custom_styles/normal = SubResource( 1 )
+text = "Credits"
+icon_align = 1
+
+[connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="Credits" to="." method="_on_Credits_pressed"]

@@ -163,6 +163,10 @@ func _change_opponent_anim(phase_name) -> void:
 		"Trap":
 			var rand_index: int = randi() % viable_trap_anims.size()
 			opponent_char.set_anim(viable_trap_anims[rand_index])
+		"Lose":
+			opponent_char.set_anim("smug")
+		"Win":
+			opponent_char.set_anim("mortified")
 
 func _change_opponent_anim_dialog() -> void:
 	print("test")
