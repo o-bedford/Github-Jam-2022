@@ -25,6 +25,9 @@ var dialog: Array = []
 var actions_str: String
 var actions: Array = []
 
+var conditions_str: String
+var conditions: Array = []
+
 #var status_effect: String = "Probably don't want this to be a string"
 var weight: float = 0.0
 
@@ -37,8 +40,8 @@ func deepCopy(otherCardData: CardData) -> void:
 	topic = otherCardData.topic
 	SP = otherCardData.SP
 	quip = otherCardData.quip
-	description = otherCardData.description
 	actions = otherCardData.actions
+	conditions = otherCardData.conditions
 #	status_effect = otherCardData.status_effect
 
 func loadDataFromDB(data: Dictionary) -> bool:
@@ -56,7 +59,11 @@ func loadDataFromDB(data: Dictionary) -> bool:
 		actions = actions_str.split(",")
 		for i in actions.size():
 			actions[i] = actions[i].split(" ")
-	print(str(actions))
+	if data["Conditions"] != null:
+		conditions_str = data["Conditions"]
+		conditions = conditions_str.split(",")
+		for i in conditions.size():
+			conditions[i] = conditions[i].split(" ")
 	if data["Dialogue"] != null:
 		dialog_str = data["Dialogue"]
 		dialog = dialog_str.split("\\")

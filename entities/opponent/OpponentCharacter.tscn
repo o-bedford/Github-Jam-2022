@@ -48,7 +48,6 @@ tracks/2/keys = {
 resource_name = "angry"
 length = 2.0
 loop = true
-step = 0.075
 tracks/0/type = "value"
 tracks/0/path = NodePath("angry:frame")
 tracks/0/interp = 1
@@ -56,7 +55,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.075, 0.15, 0.225, 0.3 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 0 ]
@@ -66,6 +65,7 @@ tracks/0/keys = {
 resource_name = "default"
 length = 2.0
 loop = true
+step = 0.12
 tracks/0/type = "value"
 tracks/0/path = NodePath("default:frame")
 tracks/0/interp = 1
@@ -73,7 +73,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"times": PoolRealArray( 0, 0.12, 0.24, 0.36, 0.48 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 1 ]
@@ -81,8 +81,9 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=4]
 resource_name = "furious"
-length = 0.4
+length = 0.6
 loop = true
+step = 0.15
 tracks/0/type = "value"
 tracks/0/path = NodePath("furious:frame")
 tracks/0/interp = 1
@@ -90,7 +91,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
@@ -105,6 +106,7 @@ __meta__ = {
 }
 
 [node name="default" type="Sprite" parent="."]
+visible = false
 texture = ExtResource( 1 )
 vframes = 4
 
