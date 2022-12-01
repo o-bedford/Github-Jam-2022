@@ -1,8 +1,8 @@
 [gd_resource type="DynamicFont" load_steps=2 format=2]
 
-[sub_resource type="DynamicFontData" id=2]
+[sub_resource type="DynamicFontData" id=7]
 font_path = "res://fonts/Apollo.ttf"
 
 [resource]
-size = 49
-font_data = SubResource( 2 )
+size = 58
+font_data = SubResource( 7 )

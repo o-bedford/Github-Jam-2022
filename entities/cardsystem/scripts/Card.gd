@@ -15,13 +15,11 @@ var cardData: CardData = null
 var isSelected: bool = false
 var isSelectable: bool = false
 
-onready var spLabel: RichTextLabel = $Background/VBoxContainer/HBoxContainer/SPLabel
-onready var topicIcon: TextureRect = $Background/VBoxContainer/HBoxContainer/TopicIcon
-
-onready var illustration: TextureRect = $Background/VBoxContainer/Illustration
+onready var spLabel: Label = $Background/SPLabel
+onready var topicIcon: TextureRect = $Background/TopicIcon
 
 onready var quipLabel: Label = $Background/VBoxContainer/QuipLabel
-onready var descriptionLabel: Label = $Background/VBoxContainer/DescriptionLabel
+onready var descriptionLabel: RichTextLabel = $Background/VBoxContainer/DescriptionLabel
 
 onready var glow: Sprite = $Glow
 
@@ -43,7 +41,24 @@ func _process(delta: float) -> void:
 #call update() whenever something changes.
 func _draw():
 	if cardData:
-		spLabel.text = str(abs(cardData.SP))
+		if cardData.type == "trap":
+			$Background.texture = preload("res://ASSETS/UI/trap_card1.png")
+			spLabel.text = ""
+			#topicIcon.texture = preload("")
+		else:
+			spLabel.text = str(abs(cardData.SP))
+			match cardData.topic:
+				"intimacy":
+					topicIcon.texture = preload("res://ASSETS/UI/intimacy_icon1.png")
+				"future":
+					topicIcon.texture = preload("res://ASSETS/UI/future_icon1.png")
+				"growth":
+					topicIcon.texture = preload("res://ASSETS/UI/self_growth_icon1.png")
+				"social":
+					topicIcon.texture = preload("res://ASSETS/UI/social_icon1.png")
+
+		
+		
 		if cardData.SP < 0:
 			spLabel.add_color_override("font_color", Color(1,0,0))
 			update()
@@ -51,13 +66,13 @@ func _draw():
 			spLabel.add_color_override("font_color", Color(0,0,0))
 			update()
 		
-		topicIcon.texture = load("res://icon.png") #TODO add pictures lmao
 		
-		illustration.texture = load("res://icon.png") #TODO add pictures
+		#illustration.texture = load("res://icon.png") #TODO add pictures
 		
 		quipLabel.text = cardData.quip
 		
-		descriptionLabel.text = _getDescription()
+		descriptionLabel.bbcode_text = _getDescription()
+		descriptionLabel.bbcode_enabled = true
 
 func _getDescription() -> String:
 	
@@ -81,7 +96,7 @@ func _getDescription() -> String:
 						description += " increase "
 					else:
 						description += " decrease "
-					description += " by " + str(abs(int(action[1]))) + "[/b]\n"
+					description += "by " + str(abs(int(action[1]))) + "[/b]\n"
 				"oppPerk":
 					description += "Cards in the opponent's hand[b]"
 					if int(action[1]) > 0:
@@ -90,9 +105,9 @@ func _getDescription() -> String:
 						description += " decrease "
 					description += " by " + str(abs(int(action[1]))) + "[/b]\n"
 				"ceil":
-					description += "Cards cannot [b]escalate[\b]\n"
+					description += "Cards cannot [b]escalate[/b]\n"
 				"floor":
-					description += "Cards cannot [b]deescalate[\b]\n"
+					description += "Cards cannot [b]deescalate[/b]\n"
 	elif cardData.type == "trap":
 		for condition in cardData.conditions:
 			match condition[0]:
