@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://entities/cardsystem/scripts/Card.gd" type="Script" id=1]
 [ext_resource path="res://ASSETS/UI/card_blank1.png" type="Texture" id=2]
+[ext_resource path="res://fonts/Apollo.tres" type="DynamicFont" id=3]
+[ext_resource path="res://ASSETS/UI/future_icon1.png" type="Texture" id=4]
 
 [sub_resource type="Shader" id=5]
 code = "shader_type canvas_item;
@@ -20,18 +22,28 @@ void fragment() {
 resource_local_to_scene = true
 shader = SubResource( 5 )
 
+[sub_resource type="DynamicFontData" id=7]
+font_path = "res://fonts/Apollo.ttf"
+
+[sub_resource type="DynamicFont" id=10]
+size = 96
+font_data = SubResource( 7 )
+
 [sub_resource type="DynamicFontData" id=2]
 font_path = "res://fonts/Apollo.ttf"
 
-[sub_resource type="DynamicFont" id=3]
-size = 75
+[sub_resource type="DynamicFont" id=9]
+size = 80
 use_mipmaps = true
 use_filter = true
 font_data = SubResource( 2 )
 
-[sub_resource type="DynamicFont" id=4]
-size = 79
-font_data = SubResource( 2 )
+[sub_resource type="DynamicFont" id=8]
+resource_local_to_scene = true
+size = 68
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 7 )
 
 [node name="Card" type="Node2D"]
 script = ExtResource( 1 )
@@ -40,65 +52,72 @@ script = ExtResource( 1 )
 material = SubResource( 6 )
 scale = Vector2( 0.27, 0.26 )
 texture = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Background" type="Sprite" parent="."]
 scale = Vector2( 0.244186, 0.244186 )
 texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Background"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -674.0
-margin_top = -1003.0
-margin_right = -100.0
-margin_bottom = -94.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer"]
-margin_right = 574.0
-alignment = 1
-
-[node name="SPLabel" type="RichTextLabel" parent="Background/VBoxContainer/HBoxContainer"]
+[node name="SPLabel" type="Label" parent="Background"]
 modulate = Color( 0, 0, 0, 1 )
 self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 285.0
-margin_right = 285.0
-bbcode_enabled = true
+margin_left = -237.524
+margin_top = -442.286
+margin_right = -190.524
+margin_bottom = -339.286
+custom_fonts/font = SubResource( 10 )
+text = "1"
+valign = 1
+autowrap = true
 
-[node name="TopicIcon" type="TextureRect" parent="Background/VBoxContainer/HBoxContainer"]
-margin_left = 289.0
-margin_right = 289.0
+[node name="TopicIcon" type="TextureRect" parent="Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -61.4286
+margin_top = -528.286
+margin_right = 64.5714
+margin_bottom = -708.286
+rect_scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 4 )
 
-[node name="Illustration" type="TextureRect" parent="Background/VBoxContainer"]
-margin_top = 4.0
-margin_right = 574.0
-margin_bottom = 412.0
-size_flags_vertical = 3
+[node name="VBoxContainer" type="VBoxContainer" parent="Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -274.0
+margin_top = -254.0
+margin_right = -491.0
+margin_bottom = -642.0
 
 [node name="QuipLabel" type="Label" parent="Background/VBoxContainer"]
 modulate = Color( 0, 0, 0, 1 )
 self_modulate = Color( 0, 0, 0, 1 )
-margin_top = 416.0
-margin_right = 574.0
-margin_bottom = 497.0
-custom_fonts/font = SubResource( 3 )
+margin_right = 557.0
+margin_bottom = 86.0
+custom_fonts/font = SubResource( 9 )
 text = "test"
 align = 1
 valign = 1
 autowrap = true
 
-[node name="DescriptionLabel" type="Label" parent="Background/VBoxContainer"]
+[node name="DescriptionLabel" type="RichTextLabel" parent="Background/VBoxContainer"]
 modulate = Color( 0, 0, 0, 1 )
 self_modulate = Color( 0, 0, 0, 1 )
-margin_top = 662.0
-margin_right = 574.0
-margin_bottom = 747.0
+margin_top = 359.0
+margin_right = 557.0
+margin_bottom = 423.0
 size_flags_vertical = 6
-custom_fonts/font = SubResource( 4 )
-align = 1
-valign = 1
-autowrap = true
+custom_fonts/bold_font = SubResource( 8 )
+custom_fonts/normal_font = ExtResource( 3 )
+bbcode_enabled = true
+bbcode_text = "asdd"
+meta_underlined = false
+text = "asdd"
+fit_content_height = true
 
 [node name="SelectBox" type="ColorRect" parent="."]
 anchor_left = 0.5
@@ -110,6 +129,10 @@ margin_top = -139.0
 margin_right = 80.0
 margin_bottom = 250.0
 color = Color( 0.52549, 0.0627451, 0.0627451, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [connection signal="gui_input" from="SelectBox" to="." method="_on_SelectBox_gui_input"]
 [connection signal="mouse_entered" from="SelectBox" to="." method="_on_SelectBox_mouse_entered"]
