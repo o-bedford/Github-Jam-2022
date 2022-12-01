@@ -1,7 +1,7 @@
 extends TextureRect
 class_name PauseScreen
 
-var start_pos: Vector2 = Vector2(534, 840)
+var start_pos: Vector2 = Vector2(380, 840)
 var button_pause: bool = false
 var leaving: bool = false
 
@@ -17,7 +17,7 @@ func _ready():
 	var tween: SceneTreeTween
 	tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
 	tween.set_pause_mode(SceneTreeTween.TWEEN_PAUSE_PROCESS)
-	tween.tween_property(self, "rect_position", Vector2(534, 277), 0.5)
+	tween.tween_property(self, "rect_position", Vector2(380, 100), 0.5)
 
 func _process(_delta):
 	if !get_tree().paused && !button_pause && !leaving:

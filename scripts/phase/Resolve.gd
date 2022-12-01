@@ -9,18 +9,20 @@ signal change_SP_range
 var card: CardData
 var player: Player
 var opponent: Player
-var target: Player = opponent
+var target: Player
 
 func enter(_msg := {}):
 	emit_signal("can_pause", true)
 	player = phase_manager.current_focused_player
 	opponent = phase_manager.current_unfocused_player
+	target = opponent
 	player.hand.changeState(phase_manager.blacklist)
 	print("Resolve! " + player.name)
 	
 	card = phase_manager.card
 	
 	# Executes modified card actions
+	
 	_resolve_actions(card)
 	
 #	emit_signal("change_topic", card.topic)
@@ -72,9 +74,9 @@ func _resolve_actions(card: CardData) -> void:
 				for card in target.hand.cardsInHand:
 					card.SP += action_arg_1_int
 			if "ceil" in action[0]:
-				phase_manager.whitelist.SP_range = [player.hand.getSelectedCard().SP-2, player.hand.getSelectedCard().SP]
+				phase_manager.whitelist.SP_range = [phase_manager.card.SP-2, phase_manager.card.SP]
 			if "floor" in action[0]:
-				phase_manager.whitelist.SP_range = [player.hand.getSelectedCard().SP, player.hand.getSelectedCard().SP+2]
+				phase_manager.whitelist.SP_range = [phase_manager.card.SP, phase_manager.card.SP+2]
 			if "changePerkTarget" in action[0]:
 				other_target = true
 			if "spClear" in action[0]:
@@ -89,3 +91,8 @@ func _resolve_actions(card: CardData) -> void:
 				if "opponent" in action_arg_1:
 					for i in action_arg_2_int:
 						target.draw()
+			if "copy" in action[0]:
+				opponent.hand.addCard(phase_manager.card)
+			if "changeAttack" in action[0]:
+				emit_signal("add_SP", action_arg_1_int)
+			
