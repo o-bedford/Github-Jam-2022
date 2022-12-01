@@ -57,20 +57,26 @@ func newCard(newCard: CardData) -> void:
 	
 	card.position = bigCardPos
 	card.visible = false
+	card.scale = Vector2.ZERO
 	
 	.call_deferred("add_child", card)
 	
 	update()
 
 func _draw() -> void:
-	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT)
+	var tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)
 	tween.tween_property(pathFollow, "unit_offset", 1.0, 0.5)
 	
 
 func _onCardHovered() ->void:
 	card.visible = true
+	var tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	tween.tween_property(card, "scale", Vector2.ONE, 0.1)
 
 func _onCardUnhovered() ->void:
+	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
+	tween.tween_property(card, "scale", Vector2.ZERO, 0.1)
+	yield(tween, "finished")
 	card.visible = false
 
 func _ready() -> void:

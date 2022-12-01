@@ -162,7 +162,7 @@ func activateCard() -> CardData:
 func _cardActivationAnimation(cardInstance: Card) -> void:
 	cardInstance.set_modulate(Color(1,1,1,1))
 	cardInstance.z_index = 2
-	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT)
+	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK)
 	
 	tween.tween_property(cardInstance, "position", cardActivatePos, 0.2)
 	tween.tween_property(cardInstance, "position", cardActivatePos, 1.3)
@@ -170,9 +170,9 @@ func _cardActivationAnimation(cardInstance: Card) -> void:
 	_cardDiscardAnimation(cardInstance)
 
 func _cardDiscardAnimation(cardInstance: Card) -> void:
-	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT)
+	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK)
 	
-	tween.tween_property(cardInstance, "position", graveyardPos, 0.2)
+	tween.tween_property(cardInstance, "position", graveyardPos, 0.4)
 	yield(tween, "finished")
 	cardInstance.queue_free()
 	emit_signal("discard_animation_finished")

@@ -38,9 +38,10 @@ position = Vector2( 288, 536 )
 position = Vector2( 456, 296 )
 
 [node name="DeckPosition" type="Position2D" parent="."]
-position = Vector2( 992, 440 )
+position = Vector2( 1612, 558 )
 
 [node name="GraveyardPosition" type="Position2D" parent="."]
+position = Vector2( -691, -9 )
 
 [node name="DrawButton" parent="." instance=ExtResource( 2 )]
 margin_left = 944.0
