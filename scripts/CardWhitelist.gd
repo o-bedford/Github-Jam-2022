@@ -10,7 +10,7 @@ var trapList: bool = false
 #general game state
 var SP: int = 0
 var topic: String = "any"
-var SP_range: Array = [0,3]
+var SP_range: Array = [0,5]
 
 #different conditions
 var canPlayHand: bool = true
@@ -55,10 +55,11 @@ func checkCard(card: CardData) -> bool:
 					if "topic" in condition[0]:
 						if !((condition[1] in topic) or (condition[2] in topic)):
 							return false
-					return true
 			return true
 		return false
-	
+	else:
+		if "trap" in card.type:
+			return false
 	#check if the card has that topic, is in the right SP range, etc.
 	if !SP_range.empty():
 		if !("any" in topic):
@@ -69,20 +70,8 @@ func checkCard(card: CardData) -> bool:
 			return false
 	else:
 		if !(topic in card.topic.to_lower() || "any" in topic):
-			print("this is not supposed to happen")
+			print("this is not supposed to happen", card.topic)
 			return false
 	
-	#check if the conditions are met
-	if canPlayHand:
-		if "action" in card.type:
-			if "future" in card.topic && futureTimeout > 0:
-				return false
-			if "intimacy" in card.topic && intimacyTimeout > 0:
-				return false
-			if "social" in card.topic && socialTimeout > 0:
-				return false
-			if "growth" in card.topic && growthTimeout > 0:
-				return false
-		if "trap" in card.type && trapTimeout > 0:
-			return false
+
 	return true

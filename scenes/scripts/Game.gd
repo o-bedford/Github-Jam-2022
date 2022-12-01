@@ -80,13 +80,12 @@ func _ready() -> void:
 	#Testing phase manager. it works!
 	phase_manager.current_focused_player = player1
 	phase_manager.transition_to("Draw")
-	print(phase_manager.current_phase)
 
 func _process(delta) -> void:
 #	print(phase_manager.current_focused_player.name + " " + phase_manager.current_phase.name)
-	if phase_manager.current_phase.name == "Resolve":
-		print("SP: " + str(SP_meter) + " | Current Player: " + phase_manager.current_focused_player.name + " | Topic: " + current_topic)
-#	pass
+#	if phase_manager.current_phase.name == "Resolve":
+#		print("SP: " + str(SP_meter) + " | Current Player: " + phase_manager.current_focused_player.name + " | Topic: " + current_topic)
+	pass
 
 func populate_deck(deck:Deck) -> void:
 	# Probably add a check for the amount of cards of each topic type
@@ -103,7 +102,6 @@ func _change_topic(topic: String) -> void:
 	current_topic = topic
 	player1.current_hand_topic = topic
 	player2.current_hand_topic = topic
-	print("Current topic: " + topic)
 
 func _add_SP(amount: int) -> void:
 	if amount < 0:
@@ -132,7 +130,6 @@ func _add_SP(amount: int) -> void:
 		if !BgMusic.set_sound_same_pos(intense_music):
 			BgMusic.set_sound(intense_music)
 		else:
-			print("intenser")
 			intense_music_set = true
 
 func _change_SP_range(new_SP_range: Array) -> void:
@@ -140,10 +137,8 @@ func _change_SP_range(new_SP_range: Array) -> void:
 
 func _set_message_box(header: String, bodyText: String) -> void:
 	if message_box.timer.is_stopped():
-		print("test?")
 		message_box.popup(header, bodyText)
 	else:
-		print("test??")
 		message_box.timer.stop()
 		message_box.popup(header, bodyText)
 
@@ -169,7 +164,6 @@ func _change_opponent_anim(phase_name) -> void:
 			opponent_char.set_anim("mortified")
 
 func _change_opponent_anim_dialog() -> void:
-	print("test")
 	var rand_index: int = randi() % viable_dialogue_anims.size()
 	opponent_char.set_anim(viable_dialogue_anims[rand_index])
 

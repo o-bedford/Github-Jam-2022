@@ -1,12 +1,50 @@
-[gd_scene format=2]
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://ASSETS/UI/draw_icon.png" type="Texture" id=1]
+[ext_resource path="res://ui/scripts/DrawButton.gd" type="Script" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	if (color.a == 0.){
+		COLOR = vec4(0., 0., 0.,0.);
+	}
+	else {
+		COLOR = vec4(1.00000, 0.30000, 1.0, 0.2 + mod(cos(TIME/6.)+UV.x-UV.y,0.5)/2.);
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 
 [node name="DrawButton" type="Button"]
-margin_left = 1104.0
-margin_top = 648.0
-margin_right = 1148.0
-margin_bottom = 668.0
-rect_scale = Vector2( 5.88, 5.2 )
+anchor_left = 0.766667
+anchor_top = 0.8
+anchor_right = 0.876389
+anchor_bottom = 0.985185
+margin_right = 632.0
+margin_bottom = 600.0
+rect_scale = Vector2( 0.2, 0.2 )
 text = "Draw"
+icon = ExtResource( 1 )
+flat = true
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
+
+[node name="TextureRect" type="TextureRect" parent="."]
+show_behind_parent = true
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -75.0
+margin_top = -70.0
+margin_right = 90.0
+margin_bottom = 75.0
+rect_scale = Vector2( 1.2, 1.2 )
+texture = ExtResource( 1 )
+
+[connection signal="pressed" from="." to="." method="_on_DrawButton_pressed"]

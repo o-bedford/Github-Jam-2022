@@ -22,7 +22,9 @@ var whitelist: CardWhitelist
 var blacklist: CardWhitelist
 var trapList: CardWhitelist
 var allowAllCards: CardWhitelist
+
 var turn: int = 0
+var turnSinceLastPlay: int = 0
 
 var card: CardData
 var trap: CardData
@@ -38,7 +40,7 @@ func _ready() -> void:
 	trapList.trapList = true
 	allowAllCards.allowAll = true
 	
-	whitelist.SP_range = [0,3]
+	whitelist.SP_range = [0,5]
 	
 	resolve_phase.connect("add_SP", self, "_add_whitelist_SP")
 	resolve_phase.connect("change_topic", self, "_change_topic")

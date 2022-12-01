@@ -16,11 +16,13 @@ func enter(_msg := {}):
 	Global.perk = false
 	emit_signal("can_pause", true)
 	has_drawn = false
-	player = phase_manager.current_focused_player
+	
 	print(phase_manager.whitelist.SP_range, " ", phase_manager.whitelist.topic)
+	player = phase_manager.current_focused_player
 	phase_manager.whitelist.trapTimeout += 1
+	
+	player.hand.enableDrawing(true,false)
 	player.hand.changeState(phase_manager.whitelist)
-	player.hand.enableDrawing(true)
 	print("Play! " + player.name)
 	if player.name == "Player":
 		emit_signal("set_message_box", "Play!", "Pick a card to put on the table, or draw another card if you can't play any!")
@@ -31,8 +33,8 @@ func update_phase(delta: float) -> void:
 	#Able to draw card
 	if  player.hand.cardDrawn && !has_drawn:
 		player.draw()
+		player.hand.enableDrawing(false,false)
 		player.hand.changeState(phase_manager.whitelist)
-		player.hand.enableDrawing(false)
 		has_drawn = true
 		emit_signal("turn_skipped")
 		phase_manager.transition_to("End")
@@ -42,15 +44,16 @@ func update_phase(delta: float) -> void:
 	
 	if player.hand.cardSelected != -1:
 		
-		player.hand.enableDrawing(false)
+		player.hand.enableDrawing(false,false)
 		if phase_manager.card != null && player.hand.getSelectedCard().SP > phase_manager.card.SP:
 			Global.escalate = true
 		else:
 			Global.escalate = false
 		phase_manager.card = player.hand.getSelectedCard()
-		print(phase_manager.card.quip)
+		print("Played: ",phase_manager.card.quip)
 		#Change the topic in the resolve phase
 
 		player.hand.activateCard()
 		yield(player.hand, "discard_animation_finished")
+		phase_manager.turnSinceLastPlay = 0
 		phase_manager.transition_to("Trap", {card = player.hand.getSelectedCard()})

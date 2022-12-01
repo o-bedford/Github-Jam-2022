@@ -47,9 +47,11 @@ position = Vector2( 1612, 558 )
 position = Vector2( -691, -9 )
 
 [node name="DrawButton" parent="." instance=ExtResource( 2 )]
-margin_left = 944.0
-margin_right = 988.0
-rect_scale = Vector2( 2.98876, 2.51989 )
+margin_left = 997.0
+margin_top = 614.0
+margin_right = 1787.0
+margin_bottom = 1364.0
+rect_scale = Vector2( 0.1, 0.1 )
 
 [node name="CheckForHover" type="Timer" parent="."]
 wait_time = 0.1

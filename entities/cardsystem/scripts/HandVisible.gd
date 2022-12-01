@@ -52,14 +52,20 @@ func changeState(whitelist: CardWhitelist) -> void:
 		cardDrawn = true
 		emit_signal("draw_card")
 
-func enableDrawing(enable: bool) ->void:
-	.enableDrawing(enable)
+func enableDrawing(enable: bool, is_skip:bool) ->void:
+	.enableDrawing(enable,is_skip)
 	
 	if enable:
-		drawButton.modulate = Color(1, 1, 1, 1)
+		if is_skip:
+			drawButton.icon = preload("res://ASSETS/UI/skip_icon.png")
+			drawButton.texture = preload("res://ASSETS/UI/skip_icon.png")
+		else:
+			drawButton.icon = preload("res://ASSETS/UI/draw_icon.png")
+			drawButton.texture = preload("res://ASSETS/UI/draw_icon.png")
+		drawButton.visible = true
 		drawButton.disabled = false
 	else:
-		drawButton.modulate = Color(1, 1, 1, 0.5)
+		drawButton.visible = false
 		drawButton.disabled = true
 
 #instantiate a new Card as a child based on the cardData
@@ -99,7 +105,6 @@ func _onCardSelected(cardNum: Card) -> void:
 	cardSelectSFX.play()
 	cardSelected = cardsInstances.find(cardNum, 0)
 	cardInstanceSelected = cardNum
-	print("onCardSelected")
 
 
 func _getPointRatio(index:int, relative: int = 0) -> Array:
@@ -191,7 +196,6 @@ func disCard(cardIndex: int) -> CardData:
 	return .disCard(cardIndex)
 
 func justDiscard(cardIndex: int) -> CardData:
-	print("justDiscard")
 	cardDiscardAnimation(cardInstanceSelected)
 	return .justDiscard(cardIndex)
 
@@ -199,6 +203,13 @@ func justDiscard(cardIndex: int) -> CardData:
 func cardSelected(card: Card) -> void:
 	pass
 
+func perk(amount: int) -> void:
+	.perk(amount)
+	
+	for i in range(cardsInHand.size()):
+		cardsInstances[i].cardData = cardsInHand[i]
+		print(cardsInstances[i].cardData.SP, " perk")
+		cardsInstances[i].update()
 
 
 func _input(event: InputEvent) -> void:

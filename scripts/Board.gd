@@ -18,6 +18,23 @@ var oldSmallCard: Card = null
 onready var bigCardPos = $BigCardPos.position
 onready var pathFollow = $Path2D/PathFollow2D
 onready var oldCards = $OldCards
+onready var pathPos = $Path2D.position
+
+func clear() -> void:
+	var tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)
+	tween.tween_property(smallCard, "position", pathPos, 0.1)
+	
+	for child in oldCards.get_children():
+		tween.tween_property(child, "position", pathPos, 0.1)
+	
+	yield(tween,"finished")
+	
+	smallCard.queue_free()
+	smallCard = null
+	for child in oldCards.get_children():
+		child.queue_free()
+		child = null
+	numCards = 0
 
 func newCard(newCard: CardData) -> void:
 	cardData = newCard

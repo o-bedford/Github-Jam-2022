@@ -14,13 +14,18 @@ var cardSelected: int = -1
 
 var drawCard: bool = false
 var cardDrawn: bool = false
+var isSkip: bool = false
 
 func changeState(whitelist: CardWhitelist) -> void:
 	pass
 
-func enableDrawing(enable: bool) ->void:
+func enableDrawing(enable: bool, is_skip:bool) ->void:
 	cardDrawn = false
 	drawCard = enable
+
+func perk(amount: int) -> void:
+	for i in range(cardsInHand.size()):
+		cardsInHand[i].SP = clamp(cardsInHand[i].SP+amount, 0.0, 12.0)
 
 #instantiate a new Card as a child based on the cardData
 func addCard(newCardData: CardData) -> void:

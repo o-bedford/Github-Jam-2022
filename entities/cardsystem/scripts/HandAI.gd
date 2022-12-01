@@ -20,11 +20,23 @@ onready var timer: Timer = $AITimer
 func _ready():
 	randomize()
 
+
+
 func changeState(whitelist: CardWhitelist) -> void:
+	var canPlay = false
 	cardCanSelect = []
 	for i in range(cardsInHand.size()):
 		cardCanSelect.append(whitelist.checkCard(cardsInHand[i]) )
-	call_deferred("chooseCard")
+		if cardCanSelect[i]:
+			canPlay = true
+			print("can play ", cardsInHand[i].quip)
+	
+	if canPlay:
+		call_deferred("chooseCard")
+	elif drawCard:
+		cardDrawn = true
+		emit_signal("draw_card")
+	
 
 ### THIS IS THE AI LOGIC IT HAS TO CHOOSE BETWEEN SELECTABLE CARDS
 func chooseCard() -> void:
@@ -32,9 +44,7 @@ func chooseCard() -> void:
 	timer.start()
 	
 	yield(timer, "timeout")
-	rng.randomize()
 	
-	var my_random_number = rng.randf_range(0, 100)
 	var desirable_card: int = -1
 	var max_sp: int = -1
 	var max_actions: int = -1

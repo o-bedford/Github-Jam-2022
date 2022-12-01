@@ -16,6 +16,7 @@ func enter(_msg := {}):
 	player = phase_manager.current_focused_player
 	opponent = phase_manager.current_unfocused_player
 	target = opponent
+	player.hand.enableDrawing(false, false)
 	player.hand.changeState(phase_manager.blacklist)
 	print("Resolve! " + player.name)
 	
@@ -30,7 +31,6 @@ func enter(_msg := {}):
 	
 	player.deck.graveyard.append(card)
 	if !card.dialog.empty():
-		print(card.dialog)
 		phase_manager.transition_to("Dialogue", {dialogue = card.dialog})
 	else:
 		phase_manager.transition_to("End")
@@ -65,24 +65,26 @@ func _resolve_actions(card: CardData) -> void:
 				card.SP += action_arg_1_int
 			if "selfPerk" in action[0]:
 				if !other_target:
-					for card in player.hand.cardsInHand:
-						card.SP += action_arg_1_int
+					player.hand.perk(action_arg_1_int)
 				else:
-					for card in opponent.hand.cardsInHand:
-						card.SP += action_arg_1_int
+					opponent.hand.perk(action_arg_1_int)
 				Global.perk = true
 			if "oppPerk" in action[0]:
-				for card in target.hand.cardsInHand:
-					card.SP += action_arg_1_int
+				if !other_target:
+					opponent.hand.perk(action_arg_1_int)
+				else:
+					player.hand.perk(action_arg_1_int)
 				Global.perk = true
 			if "ceil" in action[0]:
-				phase_manager.whitelist.SP_range = [phase_manager.card.SP-2, phase_manager.card.SP]
+				phase_manager.whitelist.SP_range = [abs(phase_manager.card.SP)-2, abs(phase_manager.card.SP)]
 			if "floor" in action[0]:
-				phase_manager.whitelist.SP_range = [phase_manager.card.SP, phase_manager.card.SP+2]
+				phase_manager.whitelist.SP_range = [abs(phase_manager.card.SP), abs(phase_manager.card.SP)+2]
 			if "changePerkTarget" in action[0]:
 				other_target = true
 			if "spClear" in action[0]:
-				phase_manager.whitelist.SP_range = []
+				phase_manager.whitelist.SP_range = [0,9]
+			if "topic" in action[0]:
+				phase_manager.whitelist.topic = action_arg_1
 			if "topicEnder" in action[0]:
 				emit_signal("change_topic", "any")
 				phase_manager.whitelist.topic = "any"
@@ -97,8 +99,6 @@ func _resolve_actions(card: CardData) -> void:
 				opponent.hand.addCard(phase_manager.card)
 			if "changeAttack" in action[0]:
 				emit_signal("add_SP", action_arg_1_int)
-			if "topic" in action[0]:
-				phase_manager.whitelist.topic = action_arg_1
 			if "SP" in action[0]:
-				phase_manager.whitelist.SP_range = [phase_manager.card.SP-2, phase_manager.card.SP+2]
+				phase_manager.whitelist.SP_range = [abs(phase_manager.card.SP)-2, abs(phase_manager.card.SP)+2]
 			

@@ -14,6 +14,7 @@ func enter(_msg := {}) -> void:
 	emit_signal("can_pause", true)
 	print("Dialogue!")
 	player = phase_manager.dialogue_player
+	player.hand.enableDrawing(false, false)
 	player.hand.changeState(phase_manager.blacklist)
 	assert(_msg.has("dialogue"))
 	dialogue_array = _msg["dialogue"]

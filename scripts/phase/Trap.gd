@@ -13,11 +13,12 @@ func enter(_msg := {}):
 	emit_signal("can_pause", false)
 #	trapTimer.start()
 	opponent = phase_manager.current_unfocused_player
+	
+	opponent.hand.enableDrawing(true, true)
 	opponent.hand.changeState(phase_manager.trapList)
 	
-	opponent.hand.enableDrawing(true)
-	
 	player = phase_manager.current_focused_player
+	player.hand.enableDrawing(false, false)
 	player.hand.changeState(phase_manager.blacklist)
 	
 	print("Trap! " + opponent.name)
@@ -33,13 +34,12 @@ func enter(_msg := {}):
 
 func update_phase(delta:float) -> void:
 	if  opponent.hand.cardDrawn:
-		opponent.hand.enableDrawing(false)
-		print("Trap Draw")
+		opponent.hand.enableDrawing(false,false)
 		phase_manager.transition_to("Resolve")
 		
 	if opponent.hand.cardSelected != -1:
 		
-		opponent.hand.enableDrawing(false)
+		opponent.hand.enableDrawing(false,false)
 		opponentCard = opponent.hand.getSelectedCard()
 		## TODO: Change phase_manager.card based on opponentCard
 		modifiedCard.actions.append_array(opponentCard.actions)
@@ -50,8 +50,6 @@ func update_phase(delta:float) -> void:
 			modifiedCard.dialog = opponentCard.dialog
 		phase_manager.card = modifiedCard
 		
-		print("Trap Choose")
-
 		opponent.hand.activateCard()
 		yield(opponent.hand, "discard_animation_finished")
 		phase_manager.transition_to("Resolve")

@@ -15,8 +15,10 @@ func enter(_msg := {}) -> void:
 	
 	player = phase_manager.current_focused_player
 	opponent = phase_manager.current_unfocused_player
+	
+	player.hand.enableDrawing(false,false)
 	player.hand.changeState(phase_manager.blacklist)
-	player.hand.enableDrawing(false)
+	opponent.hand.enableDrawing(false,false)
 	opponent.hand.changeState(phase_manager.blacklist)
 	print("Draw! " + player.name)
 #	emit_signal("set_message_box", "Draw!", "Draw a card! Fuel your ammunition! Speak your mind!")
@@ -44,7 +46,6 @@ func enter(_msg := {}) -> void:
 func _on_DrawTimer_timeout():
 	if player.hand.size() < player.max_hand_size:
 		player.draw()
-		print(player.hand.cardsInHand[player.hand.size()-1].type)
 		phase_manager.transition_to("Play")
 	else:
 		phase_manager.transition_to("Play")
