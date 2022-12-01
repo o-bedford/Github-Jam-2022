@@ -15,7 +15,7 @@
 [ext_resource path="res://ui/MessageBox.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scripts/phase/Win.gd" type="Script" id=14]
 [ext_resource path="res://scripts/phase/Lose.gd" type="Script" id=15]
-[ext_resource path="res://ASSETS/temp_bg2.png" type="Texture" id=16]
+[ext_resource path="res://ASSETS/background.png" type="Texture" id=16]
 [ext_resource path="res://fonts/ApolloMessageBoxHeader.tres" type="DynamicFont" id=17]
 [ext_resource path="res://ui/scripts/SkipTurn.gd" type="Script" id=18]
 [ext_resource path="res://entities/opponent/OpponentCharacter.tscn" type="PackedScene" id=19]
@@ -161,7 +161,7 @@ tracks/3/keys = {
 script = ExtResource( 3 )
 
 [node name="Background" type="Sprite" parent="."]
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 1.40667, 1.40667 )
 z_index = -1
 texture = ExtResource( 16 )
 centered = false

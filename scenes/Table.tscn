@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/assets/temp_table.png" type="Texture" id=1]
-[ext_resource path="res://ASSETS/table/table.png" type="Texture" id=2]
+[ext_resource path="res://ASSETS/table_scenes/table_bigger.png" type="Texture" id=2]
 
 [node name="Table" type="Node2D"]
 
@@ -13,7 +13,6 @@ texture = ExtResource( 1 )
 centered = false
 
 [node name="Sprite2" type="Sprite" parent="."]
-scale = Vector2( 1.40667, 1.40667 )
 z_index = -1
 texture = ExtResource( 2 )
 centered = false
