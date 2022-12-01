@@ -15,7 +15,7 @@ var cardData: CardData = null
 var isSelected: bool = false
 var isSelectable: bool = false
 
-onready var spLabel: Label = $Background/VBoxContainer/HBoxContainer/SPLabel
+onready var spLabel: RichTextLabel = $Background/VBoxContainer/HBoxContainer/SPLabel
 onready var topicIcon: TextureRect = $Background/VBoxContainer/HBoxContainer/TopicIcon
 
 onready var illustration: TextureRect = $Background/VBoxContainer/Illustration
@@ -57,7 +57,86 @@ func _draw():
 		
 		quipLabel.text = cardData.quip
 		
-		descriptionLabel.text = cardData.description
+		descriptionLabel.text = _getDescription()
+
+func _getDescription() -> String:
+	
+	var description: String = ""
+	
+	if cardData.type == "action":
+		for action in cardData.actions:
+			match action[0]:
+				"SP":
+					pass
+				"topic":
+					if action[1] != cardData.topic:
+						description += "[b]Change topic[/b] to " + action[1] + "\n"
+				"spClear":
+					description += "Cards of [b]any SP[/b] can be played on top of this card\n"
+				"topicEnder":
+					description += "[b]Any[/b] topic can be played on top of this card\n"
+				"selfPerk":
+					description += "Cards in the player's hand[b]"
+					if int(action[1]) > 0:
+						description += " increase "
+					else:
+						description += " decrease "
+					description += " by " + str(abs(int(action[1]))) + "[/b]\n"
+				"oppPerk":
+					description += "Cards in the opponent's hand[b]"
+					if int(action[1]) > 0:
+						description += " increase "
+					else:
+						description += " decrease "
+					description += " by " + str(abs(int(action[1]))) + "[/b]\n"
+				"ceil":
+					description += "Cards cannot [b]escalate[\b]\n"
+				"floor":
+					description += "Cards cannot [b]deescalate[\b]\n"
+	elif cardData.type == "trap":
+		for condition in cardData.conditions:
+			match condition[0]:
+				"escalate":
+					description += "Only play after a card [b]escalates[/b]\n"
+				"deescalate":
+					description += "Only play after a card [b]deescalates[/b]\n"
+				"perk":
+					description += "Only play after a [b]perk[/b] card\n"
+				"topic":
+					description += "Only play after a [b]" + condition[1] + "[/b] or [b]" +condition[2] + "[/b] card\n"
+		for action in cardData.actions:
+			match action[0]:
+				"spClear":
+					description += "[b]Any SP[/b] can be played on this card\n"
+				"topicEnder":
+					description += "[b]Any topic[/b] can be played on this card\n"
+				"selfPerk":
+					description += "Cards in the opponent's hand will [b]"
+					if int(action[1]) > 0:
+						description += " increase "
+					else:
+						description += " decrease "
+					description += " by " + str(abs(int(action[1]))) + "[/b]\n"
+				"oppPerk":
+					description += "Cards in the player's hand will [b]"
+					if int(action[1]) > 0:
+						description += " increase "
+					else:
+						description += " decrease "
+					description += " by " + str(abs(int(action[1]))) + "[/b]\n"
+				"changePerkTarget":
+					description += "Change the target of a [b]perk[/b] card\n"
+				"changeTarget":
+					description += "The SP attack will be returned to its owner\n"
+				"changeAttack":
+					description += "The SP attack will [b]"
+					if int(action[1]) > 0:
+						description += " increase "
+					else:
+						description += " decrease "
+					description += " by " + action[1] + "[/b]\n"
+	
+	return description
 
 #used for emitting signals, when the mouse hovers over the card
 func _on_SelectBox_mouse_entered() -> void:
