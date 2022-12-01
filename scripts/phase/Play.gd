@@ -42,7 +42,7 @@ func update_phase(delta: float) -> void:
 		
 		player.hand.enableDrawing(false)
 		if phase_manager.card != null && player.hand.getSelectedCard().SP > phase_manager.card.SP:
-			phase_manager.escalate = true
+			Global.escalate = true
 		phase_manager.card = player.hand.getSelectedCard()
 		print(phase_manager.card.quip)
 		#Change the topic in the resolve phase

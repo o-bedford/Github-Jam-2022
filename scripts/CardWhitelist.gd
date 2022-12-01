@@ -44,7 +44,18 @@ func checkCard(card: CardData) -> bool:
 	
 	if trapList:
 		if "trap" in card.type:
-			pass
+			if !card.conditions.empty():
+				for condition in card.conditions:
+					if "escalate" in condition[0]:
+						if !Global.escalate:
+							return false
+					if "perk" in condition[0]:
+						if !Global.perk:
+							return false
+					if "topic" in condition[0]:
+						if !((condition[1] in topic) or (condition[2] in topic)):
+							return false
+					return true
 		return false
 	
 	#check if the card has that topic, is in the right SP range, etc.
