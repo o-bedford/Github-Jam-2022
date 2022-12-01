@@ -7,9 +7,9 @@ var initial_enter: bool = true
 var enter_finished: bool = false
 var exit_finished: bool = false
 
-onready var panel = $Panel
-onready var headingLabel = $Panel/PhaseLabel
-onready var bodyLabel = $Panel/BodyText
+onready var panel = $NinePatchRect
+onready var headingLabel = $NinePatchRect/PhaseLabel
+onready var bodyLabel = $NinePatchRect/BodyText
 onready var timer = $InitialStay
 
 func _ready():
@@ -33,13 +33,13 @@ func set_message(_heading: String, _body_text: String) -> void:
 
 func enter_screen() -> void:
 	var tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
-	tween.tween_property(panel, "rect_position", Vector2(0, 168), 0.7)
+	tween.tween_property(panel, "rect_position", Vector2(0, 8), 0.7)
 	yield(tween, "finished")
 	enter_finished = true
 
 func exit_screen() -> void:
 	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUART)
-	tween.tween_property(panel, "rect_position", Vector2(0, 0), 0.4)
+	tween.tween_property(panel, "rect_position", Vector2(0, -256), 0.4)
 	yield(tween, "finished")
 	exit_finished = true
 

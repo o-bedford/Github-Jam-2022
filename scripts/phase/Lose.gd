@@ -15,8 +15,12 @@ var dialogue: Array = [
 	"It's not me, it's you."
 ]
 
+onready var heartbreak: AudioStreamPlayer = $Heartbreak
+
 func enter(_msg := {}) -> void:
 	BgMusic.audio_player.stop()
+	BgMusic.stop_ambiance()
+	heartbreak.play()
 	emit_signal("can_pause", true)
 	player.hand.changeState(phase_manager.blacklist)
 	opponent.hand.changeState(phase_manager.blacklist)

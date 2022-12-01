@@ -46,6 +46,7 @@ onready var SPDOWN_SFX: AudioStreamPlayer = $SFX/SPDOWN
 #big boi
 func _ready() -> void:
 	BgMusic.fade_in(init_music, 1.0)
+	BgMusic.play_ambiance()
 	print("game start")
 	draw_phase.connect("set_message_box", self, "_set_message_box")
 	play_phase.connect("set_message_box", self, "_set_message_box")
