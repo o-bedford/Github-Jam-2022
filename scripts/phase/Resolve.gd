@@ -97,4 +97,6 @@ func _resolve_actions(card: CardData) -> void:
 				opponent.hand.addCard(phase_manager.card)
 			if "changeAttack" in action[0]:
 				emit_signal("add_SP", action_arg_1_int)
+			if "topic" in action[0]:
+				phase_manager.whitelist.topic = action_arg_1
 			

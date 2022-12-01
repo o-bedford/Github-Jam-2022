@@ -1,3 +1,65 @@
-[gd_scene format=2]
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://fonts/CreditsNames.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scenes/assets/img/scrollbg.png" type="Texture" id=2]
+
+[sub_resource type="DynamicFontData" id=2]
+font_path = "res://fonts/Apollo.ttf"
+
+[sub_resource type="DynamicFont" id=3]
+size = 121
+font_data = SubResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 94
+font_data = SubResource( 2 )
 
 [node name="Credits" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Label" type="Label" parent="Sprite"]
+margin_left = 211.0
+margin_top = 151.0
+margin_right = 1204.0
+margin_bottom = 280.0
+rect_rotation = -3.8
+custom_fonts/font = SubResource( 3 )
+text = "Click any link you see!"
+
+[node name="PHeader" type="Label" parent="Sprite"]
+margin_left = 53.0
+margin_top = 990.0
+margin_right = 562.0
+margin_bottom = 1090.0
+custom_fonts/font = SubResource( 4 )
+text = "Programmers"
+
+[node name="Oyin" type="Label" parent="Sprite"]
+margin_left = 370.0
+margin_top = 1106.0
+margin_right = 496.0
+margin_bottom = 1197.0
+custom_fonts/font = ExtResource( 1 )
+text = "Oyin - Game logic
+      - Scene construction
+	      - Headache reciever"
+
+[node name="OyinTwitter" type="LinkButton" parent="Sprite"]
+margin_left = 292.0
+margin_top = 1466.0
+margin_right = 549.0
+margin_bottom = 1557.0
+custom_fonts/font = ExtResource( 1 )
+text = "Twitter"
+
+[node name="OyinGithub" type="LinkButton" parent="Sprite"]
+margin_left = 845.0
+margin_top = 1466.0
+margin_right = 1102.0
+margin_bottom = 1557.0
+focus_mode = 2
+custom_fonts/font = ExtResource( 1 )
+text = "Github"
