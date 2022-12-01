@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://entities/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/player/PlayerAI.tscn" type="PackedScene" id=2]
@@ -23,6 +23,10 @@
 [ext_resource path="res://sounds/sfx/04 - SP UP!.wav" type="AudioStream" id=21]
 [ext_resource path="res://sounds/sfx/05 - SP Down..wav" type="AudioStream" id=22]
 [ext_resource path="res://sounds/sfx/10 - HEARTBREAK.wav" type="AudioStream" id=23]
+[ext_resource path="res://entities/crowd/BGChar1.tscn" type="PackedScene" id=24]
+[ext_resource path="res://entities/crowd/BGChar2.tscn" type="PackedScene" id=25]
+[ext_resource path="res://entities/crowd/BGChar3.tscn" type="PackedScene" id=26]
+[ext_resource path="res://entities/crowd/BGChar4.tscn" type="PackedScene" id=27]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -164,6 +168,18 @@ script = ExtResource( 3 )
 z_index = -1
 texture = ExtResource( 16 )
 centered = false
+
+[node name="BGChar1" parent="Background" instance=ExtResource( 24 )]
+position = Vector2( 1270, 249 )
+
+[node name="BGChar2" parent="Background" instance=ExtResource( 25 )]
+position = Vector2( 1078, 260 )
+
+[node name="BGChar3" parent="Background" instance=ExtResource( 26 )]
+position = Vector2( 413, 263 )
+
+[node name="BGChar4" parent="Background" instance=ExtResource( 27 )]
+position = Vector2( 234, 286 )
 
 [node name="OpponentChar" parent="." instance=ExtResource( 19 )]
 z_index = -1

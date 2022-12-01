@@ -11,3 +11,6 @@ enum TOPICS {
 	FUTURE,
 	
 }
+
+var escalate: bool = false
+var perk: bool = false

@@ -43,17 +43,20 @@ func checkCard(card: CardData) -> bool:
 		return true
 	
 	if trapList:
-#		if "trap" in card.type && (topic in card.topic || "any" in card.topic):
 		if "trap" in card.type:
-			match card.topic:
-				"future":
-					return futureTimeout == 0
-				"intimacy":
-					return intimacyTimeout == 0
-				"social":
-					return socialTimeout == 0
-				"growth":
-					return growthTimeout == 0
+			if !card.conditions.empty():
+				for condition in card.conditions:
+					if "escalate" in condition[0]:
+						if !Global.escalate:
+							return false
+					if "perk" in condition[0]:
+						if !Global.perk:
+							return false
+					if "topic" in condition[0]:
+						if !((condition[1] in topic) or (condition[2] in topic)):
+							return false
+					return true
+			return true
 		return false
 	
 	#check if the card has that topic, is in the right SP range, etc.

@@ -43,6 +43,8 @@ onready var opponent_char: Node2D = $OpponentChar
 onready var SPUP_SFX: AudioStreamPlayer = $SFX/SPUP
 onready var SPDOWN_SFX: AudioStreamPlayer = $SFX/SPDOWN
 
+onready var crowd: Array = $Background.get_children()
+
 #big boi
 func _ready() -> void:
 	BgMusic.fade_in(init_music, 1.0)
@@ -109,6 +111,14 @@ func _add_SP(amount: int) -> void:
 	elif amount > 0:
 		SPUP_SFX.play()
 	SP_meter += amount
+	if abs(SP_meter) > SP_Meter_node.meter.max_value/3:
+		var crowd_member: AnimatedSprite = crowd[randi() % crowd.size()]
+		if crowd_member.frame < crowd_member.frames.get_frame_count("default"):
+			crowd_member.frame += 1
+	if !Global.escalate:
+		var crowd_member: AnimatedSprite = crowd[randi() % crowd.size()]
+		if crowd_member.frame > 0:
+			crowd_member.frame -= 1
 	player1.current_hand_sp_limit = SP_meter
 	player2.current_hand_sp_limit = SP_meter
 #	print(SP_meter)

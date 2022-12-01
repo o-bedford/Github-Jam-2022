@@ -106,7 +106,6 @@ __meta__ = {
 }
 
 [node name="default" type="Sprite" parent="."]
-visible = false
 texture = ExtResource( 1 )
 vframes = 4
 

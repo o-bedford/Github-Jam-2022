@@ -13,6 +13,7 @@ var has_drawn: bool = false
 # - other player can play a card
 
 func enter(_msg := {}):
+	Global.perk = false
 	emit_signal("can_pause", true)
 	has_drawn = false
 	player = phase_manager.current_focused_player
@@ -41,6 +42,10 @@ func update_phase(delta: float) -> void:
 	if player.hand.cardSelected != -1:
 		
 		player.hand.enableDrawing(false)
+		if phase_manager.card != null && player.hand.getSelectedCard().SP > phase_manager.card.SP:
+			Global.escalate = true
+		else:
+			Global.escalate = false
 		phase_manager.card = player.hand.getSelectedCard()
 		print(phase_manager.card.quip)
 		#Change the topic in the resolve phase

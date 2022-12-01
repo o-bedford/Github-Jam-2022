@@ -27,6 +27,8 @@ var turn: int = 0
 var card: CardData
 var trap: CardData
 
+var escalate: bool = false
+
 func _ready() -> void:
 	whitelist = CardWhitelist.new()
 	blacklist = CardWhitelist.new()
