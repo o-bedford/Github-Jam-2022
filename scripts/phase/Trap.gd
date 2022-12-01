@@ -7,12 +7,18 @@ var modifiedCard: CardData
 var opponent: Player
 var player: Player
 
+var hasDrawn
 onready var trapTimer: Timer = $TrapTimer
 
 func enter(_msg := {}):
 	emit_signal("can_pause", false)
 #	trapTimer.start()
+	hasDrawn = false
 	opponent = phase_manager.current_unfocused_player
+	
+	opponent.hand.cardDrawn = false
+	
+	opponent.hand.cardSelected == -1
 	
 	opponent.hand.enableDrawing(true, true)
 	opponent.hand.changeState(phase_manager.trapList)
@@ -27,15 +33,15 @@ func enter(_msg := {}):
 	if opponent.name == "PlayerAI":
 		emit_signal("set_message_box", "Ceighsey Trap!", "There's a chance that your card will be modified!")
 	
-	if _msg.has("card"):
-		selectedCard = phase_manager.card
-		phase_manager.board.newCard(phase_manager.card)
-		modifiedCard = selectedCard
+	
+	phase_manager.board.newCard(phase_manager.card)
+	modifiedCard = phase_manager.card
 
 func update_phase(delta:float) -> void:
-	if  opponent.hand.cardDrawn:
+	if  opponent.hand.cardDrawn and !hasDrawn:
 		opponent.hand.enableDrawing(false,false)
 		phase_manager.transition_to("Resolve")
+		hasDrawn = true
 		
 	if opponent.hand.cardSelected != -1:
 		

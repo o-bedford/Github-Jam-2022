@@ -56,7 +56,8 @@ func checkCard(card: CardData) -> bool:
 						if !((condition[1] in topic) or (condition[2] in topic)):
 							return false
 			return true
-		return false
+		else:
+			return false
 	else:
 		if "trap" in card.type:
 			return false

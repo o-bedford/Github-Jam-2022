@@ -88,7 +88,7 @@ func _resolve_actions(card: CardData) -> void:
 			if "topicEnder" in action[0]:
 				emit_signal("change_topic", "any")
 				phase_manager.whitelist.topic = "any"
-			if "draw" in action[0]:
+			if action[0]=="draw":
 				if "self" in action_arg_1:
 					for i in action_arg_2_int:
 						player.draw()

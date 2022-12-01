@@ -16,4 +16,5 @@ onready var hand: Hand = $Hand
 onready var deck: Deck = $Deck
 
 func draw() -> void:
+	print("draw")
 	hand.addCard(deck.deck.pop_front())

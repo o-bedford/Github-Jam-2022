@@ -21,6 +21,7 @@ func enter(_msg := {}):
 	
 	player = phase_manager.current_focused_player
 	opponent = phase_manager.current_unfocused_player
+	
 	print("End! " + opponent.name)
 	if player.hand.size() > player.max_hand_size:
 		player.hand.enableDrawing(false, false)
@@ -28,6 +29,9 @@ func enter(_msg := {}):
 	else:
 		player.hand.enableDrawing(false, false)
 		player.hand.changeState(phase_manager.blacklist)
+	
+	opponent.hand.enableDrawing(false, false)
+	opponent.hand.changeState(phase_manager.blacklist)
 	
 	player.hand.cardSelected = -1
 	if player.name == "Player":

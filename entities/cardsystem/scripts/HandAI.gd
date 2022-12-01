@@ -26,6 +26,8 @@ func changeState(whitelist: CardWhitelist) -> void:
 	var canPlay = false
 	cardCanSelect = []
 	for i in range(cardsInHand.size()):
+		
+		print("can you play ", cardsInHand[i].quip)
 		cardCanSelect.append(whitelist.checkCard(cardsInHand[i]) )
 		if cardCanSelect[i]:
 			canPlay = true
@@ -40,10 +42,6 @@ func changeState(whitelist: CardWhitelist) -> void:
 
 ### THIS IS THE AI LOGIC IT HAS TO CHOOSE BETWEEN SELECTABLE CARDS
 func chooseCard() -> void:
-	timer.wait_time = rand_range(1.0, 1.9)
-	timer.start()
-	
-	yield(timer, "timeout")
 	
 	var desirable_card: int = -1
 	var max_sp: int = -1

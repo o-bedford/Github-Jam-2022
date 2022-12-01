@@ -9,6 +9,7 @@ onready var draw_timer = $DrawTimer
 func enter(_msg := {}) -> void:
 	emit_signal("can_pause", true)
 	phase_manager.turn += 1
+	
 	for timeout in phase_manager.whitelist.timeouts:
 		if timeout > 0:
 			timeout -= 1
@@ -46,14 +47,4 @@ func enter(_msg := {}) -> void:
 func _on_DrawTimer_timeout():
 	if player.hand.size() < player.max_hand_size:
 		player.draw()
-		phase_manager.transition_to("Play")
-	else:
-		phase_manager.transition_to("Play")
-	#Only the current player should draw a card
-	
-	#if opponent.hand.size() < opponent.max_hand_size:
-	#	opponent.hand.addCard(opponent.deck.drawCard())
-	#if player.hand.size() < player.max_hand_size || opponent.hand.size() < opponent.max_hand_size:
-	#	draw_timer.start()
-	#if player.hand.size() == player.max_hand_size && opponent.hand.size() == opponent.max_hand_size:
-	#	phase_manager.transition_to("Play")
+	phase_manager.transition_to("Play")

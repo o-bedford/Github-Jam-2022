@@ -54,6 +54,11 @@ func newCard(newCard: CardData) -> void:
 	
 	var newCardPackedScene = preload(smallCardPath)
 	smallCard = newCardPackedScene.instance()
+	
+	for i in range(newCard.actions.size()):
+		if newCard.actions[i][0] == "topic":
+			newCard.topic = newCard.actions[i][1]
+	
 	smallCard.cardData = newCard
 	
 	smallCard.rotation = rand_range(-PI/36,PI/36)
