@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://entities/opponent/assets/img/1 - DEFAULT/defaultatlas.png" type="Texture" id=1]
 [ext_resource path="res://entities/opponent/scripts/OpponentCharacter.gd" type="Script" id=2]
 [ext_resource path="res://entities/opponent/assets/img/3 - FURIOUS/furiousatlas.png" type="Texture" id=3]
 [ext_resource path="res://entities/opponent/assets/img/2 - ANGRY/angryatlas.png" type="Texture" id=4]
+[ext_resource path="res://entities/opponent/assets/img/4 - SMUG/smugatlas.png" type="Texture" id=5]
+[ext_resource path="res://entities/opponent/assets/img/5 - MORTIFIED/mortifiedatlas.png" type="Texture" id=6]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -43,6 +45,30 @@ tracks/2/keys = {
 "update": 0,
 "values": [ 0 ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("smug:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("mortified:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "angry"
@@ -73,10 +99,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.12, 0.24, 0.36, 0.48 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 1 ]
+"times": PoolRealArray( 0, 0.12, 0.24 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 1, 2 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -97,6 +123,39 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
+[sub_resource type="Animation" id=6]
+resource_name = "mortified"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("mortified:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "smug"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("smug:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
 [node name="OpponentChar" type="Node2D"]
 position = Vector2( 848, 345 )
 scale = Vector2( 0.65, 0.65 )
@@ -106,6 +165,7 @@ __meta__ = {
 }
 
 [node name="default" type="Sprite" parent="."]
+visible = false
 texture = ExtResource( 1 )
 vframes = 4
 
@@ -122,12 +182,11 @@ vframes = 4
 
 [node name="smug" type="Sprite" parent="."]
 visible = false
-texture = ExtResource( 1 )
-vframes = 4
+texture = ExtResource( 5 )
+vframes = 2
 
 [node name="mortified" type="Sprite" parent="."]
-visible = false
-texture = ExtResource( 1 )
+texture = ExtResource( 6 )
 vframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -135,3 +194,5 @@ anims/RESET = SubResource( 1 )
 anims/angry = SubResource( 3 )
 anims/default = SubResource( 2 )
 anims/furious = SubResource( 4 )
+anims/mortified = SubResource( 6 )
+anims/smug = SubResource( 5 )
