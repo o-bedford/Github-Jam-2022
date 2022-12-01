@@ -10,7 +10,7 @@ var trapList: bool = false
 #general game state
 var SP: int = 0
 var topic: String = "any"
-var SP_range: Array = []
+var SP_range: Array = [0,3]
 
 #different conditions
 var canPlayHand: bool = true
