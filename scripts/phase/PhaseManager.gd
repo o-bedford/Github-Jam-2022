@@ -13,6 +13,7 @@ onready var current_focused_player: Player = get_parent().get_node("Player")
 onready var current_unfocused_player: Player = get_parent().get_node("PlayerAI")
 onready var dialogue_player: Player = get_parent().get_node("Player")
 onready var board: Board = get_parent().get_node("Board")
+onready var ui_canvas_layer: CanvasLayer = get_parent().get_node("UI")
 
 onready var resolve_phase: Phase = $Resolve
 onready var play_phase: Phase = $Play

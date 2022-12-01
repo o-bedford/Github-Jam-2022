@@ -14,6 +14,9 @@ var cardInstanceSelected: Card
 var enabled: bool = true
 var cardHoveredIndex: int = -1
 var bufferCard: int = 2 #how many invisible cards the hovered card will have around it
+
+var isMouseInHoverArea = false
+
 onready var path: Path2D = $HandArea/Path
 onready var curve: Curve2D = path.get_curve()
 onready var cardHoverHeight: float = $CardHoverHeight.position.y
@@ -38,10 +41,8 @@ func changeState(whitelist: CardWhitelist) -> void:
 		if whitelist.checkCard(cardsInHand[i]):
 			canPlay = true
 			cardsInstances[i].isSelectable = true
-			cardsInstances[i].set_modulate(Color(1,1,1,1))
 		else:
 			cardsInstances[i].isSelectable = false
-			cardsInstances[i].set_modulate(Color(0.5,0.5,0.5,1))
 	
 	if !canPlay and drawCard:
 		cardDrawn = true
@@ -161,7 +162,7 @@ func activateCard() -> CardData:
 func _cardActivationAnimation(cardInstance: Card) -> void:
 	cardInstance.set_modulate(Color(1,1,1,1))
 	cardInstance.z_index = 2
-	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT)
+	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK)
 	
 	tween.tween_property(cardInstance, "position", cardActivatePos, 0.2)
 	tween.tween_property(cardInstance, "position", cardActivatePos, 1.3)
@@ -169,9 +170,9 @@ func _cardActivationAnimation(cardInstance: Card) -> void:
 	_cardDiscardAnimation(cardInstance)
 
 func _cardDiscardAnimation(cardInstance: Card) -> void:
-	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT)
+	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK)
 	
-	tween.tween_property(cardInstance, "position", graveyardPos, 0.2)
+	tween.tween_property(cardInstance, "position", graveyardPos, 0.4)
 	yield(tween, "finished")
 	cardInstance.queue_free()
 	emit_signal("discard_animation_finished")
@@ -188,24 +189,26 @@ func cardSelected(card: Card) -> void:
 	pass
 
 
-func _on_HoverArea_mouse_entered() -> void:
-	handArea.position = Vector2.ZERO
-	update()
-
-
-func _on_HoverArea_mouse_exited() -> void:
-	var mouse_position = get_viewport().get_mouse_position()
-	var rect: Rect2 = Rect2(handAreaRect.position, handAreaRect.shape.extents)
-	if rect.has_point(mouse_position):
-		return
-	handArea.position = handAreaPos
-	update()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if drawCard and Input.is_action_pressed("ui_accept"):
 			emit_signal("draw_card")
 			cardDrawn = true
+
 func _on_DrawButton_pressed() -> void:
 	emit_signal("draw_card")
 	cardDrawn = true
+
+
+func _on_CheckForHover_timeout() -> void:
+	var mouse_position = get_viewport().get_mouse_position()
+	var rect: Rect2 = Rect2(handAreaRect.global_position-handAreaRect.shape.extents, handAreaRect.shape.extents*2)
+	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT)
+	if rect.has_point(mouse_position) and !isMouseInHoverArea:
+		tween.tween_property(handArea, "position", Vector2.ZERO, 0.1)
+		isMouseInHoverArea = true
+	elif ! rect.has_point(mouse_position) and isMouseInHoverArea:
+		tween.tween_property(handArea, "position", handAreaPos, 0.1)
+		isMouseInHoverArea = false
+	update()

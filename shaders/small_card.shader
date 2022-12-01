@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-const float ratio = 0.3;
+const float ratio = 0.15;
 
 vec2 deform(vec2 coord) {
 	coord.x -= 10.;
