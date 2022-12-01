@@ -1,6 +1,13 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/assets/img/winscene.png" type="Texture" id=1]
 
 [node name="Node2D" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.503704, 0.503704 )
+texture = ExtResource( 1 )
+centered = false
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 anchor_left = 0.5
@@ -20,5 +27,3 @@ margin_bottom = 20.0
 margin_top = 24.0
 margin_right = 40.0
 margin_bottom = 44.0
-
-[node name="Sprite" type="Sprite" parent="."]
