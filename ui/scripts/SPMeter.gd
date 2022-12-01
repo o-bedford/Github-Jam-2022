@@ -8,6 +8,7 @@ export var win_condition: int = 12
 var SP_value: int
 
 onready var meter: TextureProgress = $Meter
+onready var labelSPLevel: Label = $LabelSPLevel
 
 func _ready() -> void:
 	meter.min_value = -win_condition
@@ -20,4 +21,5 @@ func _process(delta: float) -> void:
 
 func set_value(value: int) -> void:
 	SP_value = value
+	labelSPLevel.text = str(value)
 #	print(SP_value)
