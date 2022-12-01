@@ -99,4 +99,6 @@ func _resolve_actions(card: CardData) -> void:
 				emit_signal("add_SP", action_arg_1_int)
 			if "topic" in action[0]:
 				phase_manager.whitelist.topic = action_arg_1
+			if "SP" in action[0]:
+				phase_manager.whitelist.SP_range = [phase_manager.card.SP-2, phase_manager.card.SP+2]
 			
