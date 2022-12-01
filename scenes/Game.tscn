@@ -189,9 +189,9 @@ z_index = -1
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="SPMeter" parent="UI" instance=ExtResource( 12 )]
-margin_left = 1383.0
+margin_left = 1356.0
 margin_top = 112.0
-margin_right = 1383.0
+margin_right = 1356.0
 margin_bottom = 112.0
 win_condition = 16
 
